@@ -65,7 +65,7 @@ bool JSFinalizationRegistry::Unregister(
 
 template <typename GCNotifyUpdatedSlotCallback>
 bool JSFinalizationRegistry::RemoveUnregisterToken(
-    HeapObject unregister_token, Isolate* isolate,
+    JSReceiver unregister_token, Isolate* isolate,
     RemoveUnregisterTokenMode removal_mode,
     GCNotifyUpdatedSlotCallback gc_notify_updated_slot) {
   // This method is called from both FinalizationRegistry#unregister and for

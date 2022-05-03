@@ -49,7 +49,7 @@ class JSFinalizationRegistry
   };
   template <typename GCNotifyUpdatedSlotCallback>
   inline bool RemoveUnregisterToken(
-      HeapObject unregister_token, Isolate* isolate,
+      JSReceiver unregister_token, Isolate* isolate,
       RemoveUnregisterTokenMode removal_mode,
       GCNotifyUpdatedSlotCallback gc_notify_updated_slot);
 

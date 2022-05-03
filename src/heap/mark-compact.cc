@@ -3529,7 +3529,7 @@ void MarkCompactCollector::ClearJSWeakRefs() {
       JSFinalizationRegistry finalization_registry =
           JSFinalizationRegistry::cast(weak_cell.finalization_registry());
       finalization_registry.RemoveUnregisterToken(
-          unregister_token, isolate(),
+          JSReceiver::cast(unregister_token), isolate(),
           JSFinalizationRegistry::kKeepMatchedCellsInRegistry,
           gc_notify_updated_slot);
     } else {
