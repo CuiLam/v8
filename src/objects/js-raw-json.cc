@@ -33,7 +33,7 @@ MaybeHandle<JSRawJson> JSRawJson::Create(Isolate* isolate,
   }
   Handle<JSObject> result =
       isolate->factory()->NewJSObjectFromMap(isolate->js_raw_json_map());
-  result->InObjectPropertyAtPut(JSRawJson::kRawJsonIndex, *json_string);
+  result->InObjectPropertyAtPut(JSRawJson::kRawJsonInitialIndex, *json_string);
   JSObject::SetIntegrityLevel(result, FROZEN, kThrowOnError).Check();
   return Handle<JSRawJson>::cast(result);
 }
