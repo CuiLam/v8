@@ -1364,7 +1364,6 @@ struct MachineOperatorGlobalCache {
   StackPointerGreaterThan##Kind##Operator kStackPointerGreaterThan##Kind;
 
   STACK_POINTER_GREATER_THAN(JSFunctionEntry)
-  STACK_POINTER_GREATER_THAN(JSIterationBody)
   STACK_POINTER_GREATER_THAN(CodeStubAssembler)
   STACK_POINTER_GREATER_THAN(Wasm)
 #undef STACK_POINTER_GREATER_THAN
@@ -1705,12 +1704,12 @@ const Operator* MachineOperatorBuilder::StackPointerGreaterThan(
   switch (kind) {
     case StackCheckKind::kJSFunctionEntry:
       return &cache_.kStackPointerGreaterThanJSFunctionEntry;
-    case StackCheckKind::kJSIterationBody:
-      return &cache_.kStackPointerGreaterThanJSIterationBody;
     case StackCheckKind::kCodeStubAssembler:
       return &cache_.kStackPointerGreaterThanCodeStubAssembler;
     case StackCheckKind::kWasm:
       return &cache_.kStackPointerGreaterThanWasm;
+    case StackCheckKind::kJSIterationBody:
+      UNREACHABLE();
   }
   UNREACHABLE();
 }
