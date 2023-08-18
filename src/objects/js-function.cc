@@ -672,9 +672,9 @@ void SetInstancePrototype(Isolate* isolate, Handle<JSFunction> function,
       // At that point, a new initial map is created and the prototype is put
       // into the initial map where it belongs.
       function->set_prototype_or_initial_map(*value, kReleaseStore);
-      if (value->IsJSObjectThatCanBeTrackedAsPrototype()) {
-        // Optimize as prototype to detach it from its transition tree.
-        JSObject::OptimizeAsPrototype(Handle<JSObject>::cast(value));
+//      if (value->IsJSObjectThatCanBeTrackedAsPrototype()) {
+//         Optimize as prototype to detach it from its transition tree.
+//        JSObject::OptimizeAsPrototype(Handle<JSObject>::cast(value));
       }
     } else {
       Handle<Map> new_map =
