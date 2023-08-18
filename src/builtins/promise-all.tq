@@ -331,7 +331,8 @@ Reject(JSAny) {
 transitioning macro GeneratePromiseAll<F1: type, F2: type>(
     implicit context: Context)(
     receiver: JSAny, iterable: JSAny, createResolveElementFunctor: F1,
-    createRejectElementFunctor: F2, message: constexpr string): JSAny {
+    createRejectElementFunctor: F2, message: constexpr string,
+    hasResolveAndRejectClosures: constexpr bool): JSAny {
   const nativeContext = LoadNativeContext(context);
   // Let C be the this value.
   // If Type(C) is not Object, throw a TypeError exception.
