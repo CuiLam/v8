@@ -365,7 +365,8 @@ transitioning macro GeneratePromiseAll<F1: type, F2: type>(
     //    IfAbruptRejectPromise(result, promiseCapability).
     return PerformPromiseAll(
         nativeContext, i, constructor, capability, promiseResolveFunction,
-        createResolveElementFunctor, createRejectElementFunctor)
+        createResolveElementFunctor, createRejectElementFunctor,
+        hasResolveAndRejectClosures)
         otherwise Reject;
   } catch (e, _message) deferred {
     goto Reject(e);
