@@ -398,51 +398,8 @@ Handle<FixedArray> GetFastEnumPropertyKeys(Isolate* isolate,
     return ReduceFixedArrayTo(isolate, keys, enum_length);
   }
 
-  Handle<DescriptorArray> descriptors =
-      Handle<DescriptorArray>(map->instance_descriptors(isolate), isolate);
-  isolate->counters()->enum_cache_misses()->Increment();
-
-  // Create the keys array.
-  int index = 0;
-  bool fields_only = true;
-  keys = isolate->factory()->NewFixedArray(enum_length);
-  for (InternalIndex i : map->IterateOwnDescriptors()) {
-    DisallowGarbageCollection no_gc;
-    PropertyDetails details = descriptors->GetDetails(i);
-    if (details.IsDontEnum()) continue;
-    Object key = descriptors->GetKey(i);
-    if (key.IsSymbol()) continue;
-    keys->set(index, key);
-    if (details.location() != PropertyLocation::kField) fields_only = false;
-    index++;
-  }
-  DCHECK_EQ(index, keys->length());
-
-  // Optionally also create the indices array.
-  Handle<FixedArray> indices = isolate->factory()->empty_fixed_array();
-  if (fields_only) {
-    indices = isolate->factory()->NewFixedArray(enum_length);
-    index = 0;
-    for (InternalIndex i : map->IterateOwnDescriptors()) {
-      DisallowGarbageCollection no_gc;
-      PropertyDetails details = descriptors->GetDetails(i);
-      if (details.IsDontEnum()) continue;
-      Object key = descriptors->GetKey(i);
-      if (key.IsSymbol()) continue;
-      DCHECK_EQ(PropertyKind::kData, details.kind());
-      DCHECK_EQ(PropertyLocation::kField, details.location());
-      FieldIndex field_index = FieldIndex::ForDescriptor(*map, i);
-      indices->set(index, Smi::FromInt(field_index.GetLoadByFieldIndex()));
-      index++;
-    }
-    DCHECK_EQ(index, indices->length());
-  }
-
-  DescriptorArray::InitializeOrChangeEnumCache(descriptors, isolate, keys,
-                                               indices);
-  if (map->OnlyHasSimpleProperties()) map->SetEnumLength(enum_length);
-
-  return keys;
+  return FastKeyAccumulator::InitializeFastPropertyEnumCache(isolate, map,
+                                                             enum_length);
 }
 
 template <bool fast_properties>
@@ -574,25 +531,22 @@ Handle<FixedArray> FastKeyAccumulator::InitializeFastPropertyEnumCache(
     indices = isolate->factory()->NewFixedArray(enum_length, allocation);
     index = 0;
     DisallowGarbageCollection no_gc;
-    Tagged<Map> raw_map = *map;
-    Tagged<FixedArray> raw_indices = *indices;
-    Tagged<DescriptorArray> raw_descriptors = *descriptors;
-    for (InternalIndex i : raw_map->IterateOwnDescriptors()) {
-      PropertyDetails details = raw_descriptors->GetDetails(i);
+    for (InternalIndex i : map->IterateOwnDescriptors()) {
+      PropertyDetails details = descriptors->GetDetails(i);
       if (details.IsDontEnum()) continue;
-      Object key = raw_descriptors->GetKey(i);
+      Object key = descriptors->GetKey(i);
       if (key.IsSymbol()) continue;
       DCHECK_EQ(PropertyKind::kData, details.kind());
       DCHECK_EQ(PropertyLocation::kField, details.location());
-      FieldIndex field_index = FieldIndex::ForDetails(raw_map, i);
-      raw_indices->set(index, Smi::FromInt(field_index.GetLoadByFieldIndex()));
+      FieldIndex field_index = FieldIndex::ForDescriptor(*map, i);
+      indices->set(index, Smi::FromInt(field_index.GetLoadByFieldIndex()));
       index++;
     }
     DCHECK_EQ(index, indices->length());
   }
 
   DescriptorArray::InitializeOrChangeEnumCache(descriptors, isolate, keys,
-                                               indices, allocation);
+                                               indices);
   if (map->OnlyHasSimpleProperties()) map->SetEnumLength(enum_length);
   return keys;
 }
