@@ -1,0 +1,110 @@
+defines = -DUSE_UDEV -DUSE_AURA=1 -DUSE_OZONE=1 -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_GNU_SOURCE -DCR_CLANG_REVISION=\"llvmorg-16-init-6084-g2f3d7c2c-1\" -DCOMPONENT_BUILD -DCR_LIBCXX_REVISION=2e919977e0030ce61bd19c40cefe31b995f1e2d4 -DCR_SYSROOT_HASH=af39443b6101f4c417bb83113a306fc028d2b665 -D_DEBUG -DDYNAMIC_ANNOTATIONS_ENABLED=1 -DCPPGC_VERIFY_HEAP -DENABLE_DISASSEMBLER -DV8_TYPED_ARRAY_MAX_SIZE_IN_HEAP=64 -DOBJECT_PRINT -DVERIFY_HEAP -DV8_TRACE_MAPS -DV8_ENABLE_ALLOCATION_TIMEOUT -DV8_ENABLE_FORCE_SLOW_PATH -DV8_ENABLE_DOUBLE_CONST_STORE_CHECK -DV8_INTL_SUPPORT -DENABLE_HANDLE_ZAPPING -DV8_CODE_COMMENTS -DV8_ENABLE_DEBUG_CODE -DV8_ENABLE_HEAP_SNAPSHOT_VERIFY -DV8_SNAPSHOT_NATIVE_CODE_COUNTERS -DV8_USE_EXTERNAL_STARTUP_DATA -DV8_ATOMIC_OBJECT_FIELD_WRITES -DV8_ENABLE_LAZY_SOURCE_POSITIONS -DV8_SHARED_RO_HEAP -DV8_WIN64_UNWINDING_INFO -DV8_ENABLE_REGEXP_INTERPRETER_THREADED_DISPATCH -DV8_SNAPSHOT_COMPRESSION -DV8_ENABLE_WEBASSEMBLY -DV8_ALLOCATION_FOLDING -DV8_ALLOCATION_SITE_TRACKING -DV8_ADVANCED_BIGINT_ALGORITHMS -DV8_USE_ZLIB -DV8_ENABLE_CHECKS -DV8_DEPRECATION_WARNINGS -DV8_IMMINENT_DEPRECATION_WARNINGS -DV8_TARGET_ARCH_ARM -DCAN_USE_ARMV7_INSTRUCTIONS -DCAN_USE_VFP3_INSTRUCTIONS -DCAN_USE_VFP32DREGS -DCAN_USE_NEON -DUSE_EABI_HARDFLOAT=0 -DV8_HAVE_TARGET_OS -DV8_TARGET_OS_ANDROID -DDEBUG -DBUILDING_V8_SHARED -DUSING_V8_BASE_SHARED
+include_dirs = -I.. -Iclang_x86_v8_arm/gen -I../buildtools/third_party/libc++ -I../include -Iclang_x86_v8_arm/gen/include
+cflags = -Wall -Werror -Wextra -Wimplicit-fallthrough -Wextra-semi -Wunreachable-code-aggressive -Wthread-safety -Wno-missing-field-initializers -Wno-unused-parameter -Wloop-analysis -Wno-unneeded-internal-declaration -Wenum-compare-conditional -Wno-psabi -Wno-ignored-pragma-optimize -Wno-deprecated-builtins -Wno-bitfield-constant-conversion -Wshadow -fno-delete-null-pointer-checks -fno-ident -fno-strict-aliasing --param=ssp-buffer-size=4 -fstack-protector -funwind-tables -fPIC -pthread -fcolor-diagnostics -fmerge-all-constants -fcrash-diagnostics-dir=../tools/clang/crashreports -mllvm -instcombine-lower-dbg-declare=0 -ffp-contract=off -fcomplete-member-pointers -m32 -mfpmath=sse -msse3 -Wno-builtin-macro-redefined -D__DATE__= -D__TIME__= -D__TIMESTAMP__= -ffile-compilation-dir=. -no-canonical-prefixes -ftrivial-auto-var-init=pattern -fno-omit-frame-pointer -momit-leaf-frame-pointer -gdwarf-4 -g2 -gdwarf-aranges -gsplit-dwarf -Xclang -fuse-ctor-homing -fvisibility=hidden -Wheader-hygiene -Wstring-conversion -Wtautological-overlap-compare -Wmissing-field-initializers -Wunreachable-code -Wctad-maybe-unsupported -Wno-shadow -O3 -fdata-sections -ffunction-sections -fno-unique-section-names -Wexit-time-destructors
+cflags_cc = -Wno-undefined-bool-conversion -Wno-tautological-undefined-compare -std=c++17 -Wno-trigraphs -fno-exceptions -fno-rtti -nostdinc++ -isystem../buildtools/third_party/libc++/trunk/include -isystem../buildtools/third_party/libc++abi/trunk/include --sysroot=../build/linux/debian_bullseye_i386-sysroot -fvisibility-inlines-hidden
+label_name = inspector
+target_out_dir = clang_x86_v8_arm/obj/src/inspector
+target_output_name = inspector
+
+build clang_x86_v8_arm/obj/src/inspector/inspector.inputdeps.stamp: clang_x86_v8_arm_stamp clang_x86_v8_arm/obj/generate_bytecode_builtins_list.stamp clang_x86_v8_arm/obj/run_torque.stamp clang_x86_v8_arm/obj/src/inspector/protocol_generated_sources.stamp clang_x86_v8_arm/obj/third_party/icu/icudata.stamp
+build clang_x86_v8_arm/obj/src/inspector/inspector/Protocol.o: clang_x86_v8_arm_cxx clang_x86_v8_arm/gen/src/inspector/protocol/Protocol.cpp || clang_x86_v8_arm/obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = Protocol.cpp
+  source_name_part = Protocol
+build clang_x86_v8_arm/obj/src/inspector/inspector/Console.o: clang_x86_v8_arm_cxx clang_x86_v8_arm/gen/src/inspector/protocol/Console.cpp || clang_x86_v8_arm/obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = Console.cpp
+  source_name_part = Console
+build clang_x86_v8_arm/obj/src/inspector/inspector/Debugger.o: clang_x86_v8_arm_cxx clang_x86_v8_arm/gen/src/inspector/protocol/Debugger.cpp || clang_x86_v8_arm/obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = Debugger.cpp
+  source_name_part = Debugger
+build clang_x86_v8_arm/obj/src/inspector/inspector/HeapProfiler.o: clang_x86_v8_arm_cxx clang_x86_v8_arm/gen/src/inspector/protocol/HeapProfiler.cpp || clang_x86_v8_arm/obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = HeapProfiler.cpp
+  source_name_part = HeapProfiler
+build clang_x86_v8_arm/obj/src/inspector/inspector/Profiler.o: clang_x86_v8_arm_cxx clang_x86_v8_arm/gen/src/inspector/protocol/Profiler.cpp || clang_x86_v8_arm/obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = Profiler.cpp
+  source_name_part = Profiler
+build clang_x86_v8_arm/obj/src/inspector/inspector/Runtime.o: clang_x86_v8_arm_cxx clang_x86_v8_arm/gen/src/inspector/protocol/Runtime.cpp || clang_x86_v8_arm/obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = Runtime.cpp
+  source_name_part = Runtime
+build clang_x86_v8_arm/obj/src/inspector/inspector/Schema.o: clang_x86_v8_arm_cxx clang_x86_v8_arm/gen/src/inspector/protocol/Schema.cpp || clang_x86_v8_arm/obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = Schema.cpp
+  source_name_part = Schema
+build clang_x86_v8_arm/obj/src/inspector/inspector/custom-preview.o: clang_x86_v8_arm_cxx ../src/inspector/custom-preview.cc || clang_x86_v8_arm/obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = custom-preview.cc
+  source_name_part = custom-preview
+build clang_x86_v8_arm/obj/src/inspector/inspector/injected-script.o: clang_x86_v8_arm_cxx ../src/inspector/injected-script.cc || clang_x86_v8_arm/obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = injected-script.cc
+  source_name_part = injected-script
+build clang_x86_v8_arm/obj/src/inspector/inspector/inspected-context.o: clang_x86_v8_arm_cxx ../src/inspector/inspected-context.cc || clang_x86_v8_arm/obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = inspected-context.cc
+  source_name_part = inspected-context
+build clang_x86_v8_arm/obj/src/inspector/inspector/remote-object-id.o: clang_x86_v8_arm_cxx ../src/inspector/remote-object-id.cc || clang_x86_v8_arm/obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = remote-object-id.cc
+  source_name_part = remote-object-id
+build clang_x86_v8_arm/obj/src/inspector/inspector/search-util.o: clang_x86_v8_arm_cxx ../src/inspector/search-util.cc || clang_x86_v8_arm/obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = search-util.cc
+  source_name_part = search-util
+build clang_x86_v8_arm/obj/src/inspector/inspector/string-16.o: clang_x86_v8_arm_cxx ../src/inspector/string-16.cc || clang_x86_v8_arm/obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = string-16.cc
+  source_name_part = string-16
+build clang_x86_v8_arm/obj/src/inspector/inspector/string-util.o: clang_x86_v8_arm_cxx ../src/inspector/string-util.cc || clang_x86_v8_arm/obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = string-util.cc
+  source_name_part = string-util
+build clang_x86_v8_arm/obj/src/inspector/inspector/test-interface.o: clang_x86_v8_arm_cxx ../src/inspector/test-interface.cc || clang_x86_v8_arm/obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = test-interface.cc
+  source_name_part = test-interface
+build clang_x86_v8_arm/obj/src/inspector/inspector/v8-console-agent-impl.o: clang_x86_v8_arm_cxx ../src/inspector/v8-console-agent-impl.cc || clang_x86_v8_arm/obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = v8-console-agent-impl.cc
+  source_name_part = v8-console-agent-impl
+build clang_x86_v8_arm/obj/src/inspector/inspector/v8-console-message.o: clang_x86_v8_arm_cxx ../src/inspector/v8-console-message.cc || clang_x86_v8_arm/obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = v8-console-message.cc
+  source_name_part = v8-console-message
+build clang_x86_v8_arm/obj/src/inspector/inspector/v8-console.o: clang_x86_v8_arm_cxx ../src/inspector/v8-console.cc || clang_x86_v8_arm/obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = v8-console.cc
+  source_name_part = v8-console
+build clang_x86_v8_arm/obj/src/inspector/inspector/v8-debugger-agent-impl.o: clang_x86_v8_arm_cxx ../src/inspector/v8-debugger-agent-impl.cc || clang_x86_v8_arm/obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = v8-debugger-agent-impl.cc
+  source_name_part = v8-debugger-agent-impl
+build clang_x86_v8_arm/obj/src/inspector/inspector/v8-debugger-id.o: clang_x86_v8_arm_cxx ../src/inspector/v8-debugger-id.cc || clang_x86_v8_arm/obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = v8-debugger-id.cc
+  source_name_part = v8-debugger-id
+build clang_x86_v8_arm/obj/src/inspector/inspector/v8-debugger-script.o: clang_x86_v8_arm_cxx ../src/inspector/v8-debugger-script.cc || clang_x86_v8_arm/obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = v8-debugger-script.cc
+  source_name_part = v8-debugger-script
+build clang_x86_v8_arm/obj/src/inspector/inspector/v8-debugger.o: clang_x86_v8_arm_cxx ../src/inspector/v8-debugger.cc || clang_x86_v8_arm/obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = v8-debugger.cc
+  source_name_part = v8-debugger
+build clang_x86_v8_arm/obj/src/inspector/inspector/v8-heap-profiler-agent-impl.o: clang_x86_v8_arm_cxx ../src/inspector/v8-heap-profiler-agent-impl.cc || clang_x86_v8_arm/obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = v8-heap-profiler-agent-impl.cc
+  source_name_part = v8-heap-profiler-agent-impl
+build clang_x86_v8_arm/obj/src/inspector/inspector/v8-inspector-impl.o: clang_x86_v8_arm_cxx ../src/inspector/v8-inspector-impl.cc || clang_x86_v8_arm/obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = v8-inspector-impl.cc
+  source_name_part = v8-inspector-impl
+build clang_x86_v8_arm/obj/src/inspector/inspector/v8-inspector-session-impl.o: clang_x86_v8_arm_cxx ../src/inspector/v8-inspector-session-impl.cc || clang_x86_v8_arm/obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = v8-inspector-session-impl.cc
+  source_name_part = v8-inspector-session-impl
+build clang_x86_v8_arm/obj/src/inspector/inspector/v8-profiler-agent-impl.o: clang_x86_v8_arm_cxx ../src/inspector/v8-profiler-agent-impl.cc || clang_x86_v8_arm/obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = v8-profiler-agent-impl.cc
+  source_name_part = v8-profiler-agent-impl
+build clang_x86_v8_arm/obj/src/inspector/inspector/v8-regex.o: clang_x86_v8_arm_cxx ../src/inspector/v8-regex.cc || clang_x86_v8_arm/obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = v8-regex.cc
+  source_name_part = v8-regex
+build clang_x86_v8_arm/obj/src/inspector/inspector/v8-runtime-agent-impl.o: clang_x86_v8_arm_cxx ../src/inspector/v8-runtime-agent-impl.cc || clang_x86_v8_arm/obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = v8-runtime-agent-impl.cc
+  source_name_part = v8-runtime-agent-impl
+build clang_x86_v8_arm/obj/src/inspector/inspector/v8-schema-agent-impl.o: clang_x86_v8_arm_cxx ../src/inspector/v8-schema-agent-impl.cc || clang_x86_v8_arm/obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = v8-schema-agent-impl.cc
+  source_name_part = v8-schema-agent-impl
+build clang_x86_v8_arm/obj/src/inspector/inspector/v8-stack-trace-impl.o: clang_x86_v8_arm_cxx ../src/inspector/v8-stack-trace-impl.cc || clang_x86_v8_arm/obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = v8-stack-trace-impl.cc
+  source_name_part = v8-stack-trace-impl
+build clang_x86_v8_arm/obj/src/inspector/inspector/v8-value-utils.o: clang_x86_v8_arm_cxx ../src/inspector/v8-value-utils.cc || clang_x86_v8_arm/obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = v8-value-utils.cc
+  source_name_part = v8-value-utils
+build clang_x86_v8_arm/obj/src/inspector/inspector/v8-webdriver-serializer.o: clang_x86_v8_arm_cxx ../src/inspector/v8-webdriver-serializer.cc || clang_x86_v8_arm/obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = v8-webdriver-serializer.cc
+  source_name_part = v8-webdriver-serializer
+build clang_x86_v8_arm/obj/src/inspector/inspector/value-mirror.o: clang_x86_v8_arm_cxx ../src/inspector/value-mirror.cc || clang_x86_v8_arm/obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = value-mirror.cc
+  source_name_part = value-mirror
+
+build clang_x86_v8_arm/obj/src/inspector/inspector.stamp: clang_x86_v8_arm_stamp clang_x86_v8_arm/obj/src/inspector/inspector/Protocol.o clang_x86_v8_arm/obj/src/inspector/inspector/Console.o clang_x86_v8_arm/obj/src/inspector/inspector/Debugger.o clang_x86_v8_arm/obj/src/inspector/inspector/HeapProfiler.o clang_x86_v8_arm/obj/src/inspector/inspector/Profiler.o clang_x86_v8_arm/obj/src/inspector/inspector/Runtime.o clang_x86_v8_arm/obj/src/inspector/inspector/Schema.o clang_x86_v8_arm/obj/src/inspector/inspector/custom-preview.o clang_x86_v8_arm/obj/src/inspector/inspector/injected-script.o clang_x86_v8_arm/obj/src/inspector/inspector/inspected-context.o clang_x86_v8_arm/obj/src/inspector/inspector/remote-object-id.o clang_x86_v8_arm/obj/src/inspector/inspector/search-util.o clang_x86_v8_arm/obj/src/inspector/inspector/string-16.o clang_x86_v8_arm/obj/src/inspector/inspector/string-util.o clang_x86_v8_arm/obj/src/inspector/inspector/test-interface.o clang_x86_v8_arm/obj/src/inspector/inspector/v8-console-agent-impl.o clang_x86_v8_arm/obj/src/inspector/inspector/v8-console-message.o clang_x86_v8_arm/obj/src/inspector/inspector/v8-console.o clang_x86_v8_arm/obj/src/inspector/inspector/v8-debugger-agent-impl.o clang_x86_v8_arm/obj/src/inspector/inspector/v8-debugger-id.o clang_x86_v8_arm/obj/src/inspector/inspector/v8-debugger-script.o clang_x86_v8_arm/obj/src/inspector/inspector/v8-debugger.o clang_x86_v8_arm/obj/src/inspector/inspector/v8-heap-profiler-agent-impl.o clang_x86_v8_arm/obj/src/inspector/inspector/v8-inspector-impl.o clang_x86_v8_arm/obj/src/inspector/inspector/v8-inspector-session-impl.o clang_x86_v8_arm/obj/src/inspector/inspector/v8-profiler-agent-impl.o clang_x86_v8_arm/obj/src/inspector/inspector/v8-regex.o clang_x86_v8_arm/obj/src/inspector/inspector/v8-runtime-agent-impl.o clang_x86_v8_arm/obj/src/inspector/inspector/v8-schema-agent-impl.o clang_x86_v8_arm/obj/src/inspector/inspector/v8-stack-trace-impl.o clang_x86_v8_arm/obj/src/inspector/inspector/v8-value-utils.o clang_x86_v8_arm/obj/src/inspector/inspector/v8-webdriver-serializer.o clang_x86_v8_arm/obj/src/inspector/inspector/value-mirror.o || clang_x86_v8_arm/obj/src/inspector/inspector_test_headers.stamp clang_x86_v8_arm/obj/src/inspector/protocol_generated_sources.stamp clang_x86_v8_arm/libv8_libbase.cr.so.TOC clang_x86_v8_arm/obj/src/inspector/inspector_string_conversions.stamp clang_x86_v8_arm/obj/v8_tracing.stamp clang_x86_v8_arm/obj/v8_version.stamp clang_x86_v8_arm/obj/third_party/inspector_protocol/crdtp.stamp clang_x86_v8_arm/obj/v8_headers.stamp clang_x86_v8_arm/obj/v8_config_headers.stamp clang_x86_v8_arm/obj/cppgc_headers.stamp clang_x86_v8_arm/libv8_libplatform.cr.so.TOC clang_x86_v8_arm/obj/third_party/inspector_protocol/crdtp_platform.stamp clang_x86_v8_arm/obj/v8_internal_headers.stamp clang_x86_v8_arm/obj/torque_runtime_support.stamp clang_x86_v8_arm/obj/v8_flags.stamp clang_x86_v8_arm/obj/v8_shared_internal_headers.stamp clang_x86_v8_arm/libicui18n.cr.so.TOC clang_x86_v8_arm/libicuuc.cr.so.TOC clang_x86_v8_arm/obj/v8_heap_base_headers.stamp

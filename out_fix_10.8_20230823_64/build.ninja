@@ -1,0 +1,546 @@
+ninja_required_version = 1.7.2
+
+rule gn
+  command = ../buildtools/linux64/gn --root=./.. -q --regeneration gen .
+  pool = console
+  description = Regenerating ninja files
+
+# The 'gn' rule also writes build.ninja, unbeknownst to ninja. The
+# build.ninja edge is separate to prevent ninja from deleting it
+# (due to depfile usage) if interrupted. gn uses atomic writes to
+# ensure that build.ninja is always valid even if interrupted.
+build build.ninja.stamp: gn
+  generator = 1
+  depfile = build.ninja.d
+
+build build.ninja: phony build.ninja.stamp
+  generator = 1
+
+pool build_toolchain_action_pool
+  depth = 8
+
+pool build_toolchain_link_pool
+  depth = 3
+
+subninja toolchain.ninja
+subninja clang_x64_v8_arm64/toolchain.ninja
+
+build cppgc: phony obj/cppgc.stamp
+build cppgc_base: phony obj/libcppgc_base.a
+build cppgc_headers: phony obj/cppgc_headers.stamp
+build fuzzer_support: phony obj/libfuzzer_support.a
+build generate_bytecode_builtins_list: phony obj/generate_bytecode_builtins_list.stamp
+build gn_all: phony obj/gn_all.stamp
+build inspector_fuzzer: phony obj/libinspector_fuzzer.a
+build json_fuzzer: phony obj/libjson_fuzzer.a
+build lib_wasm_fuzzer_common: phony obj/lib_wasm_fuzzer_common.a
+build multi_return_fuzzer: phony obj/libmulti_return_fuzzer.a
+build parser_fuzzer: phony obj/libparser_fuzzer.a
+build postmortem-metadata: phony obj/postmortem-metadata.stamp
+build regexp_builtins_fuzzer: phony obj/libregexp_builtins_fuzzer.a
+build regexp_fuzzer: phony obj/libregexp_fuzzer.a
+build run_mksnapshot_default: phony obj/run_mksnapshot_default.stamp
+build run_torque: phony obj/run_torque.stamp
+build torque_base: phony obj/libtorque_base.a
+build torque_generated_definitions: phony obj/libtorque_generated_definitions.a
+build torque_generated_initializers: phony obj/libtorque_generated_initializers.a
+build torque_ls_base: phony obj/libtorque_ls_base.a
+build torque_runtime_support: phony obj/torque_runtime_support.stamp
+build v8: phony obj/v8.stamp
+build v8_archive: phony obj/v8_archive.stamp
+build v8_base: phony obj/v8_base.stamp
+build v8_base_without_compiler: phony obj/libv8_base_without_compiler.a
+build v8_bigint: phony obj/libv8_bigint.a
+build v8_clusterfuzz: phony obj/v8_clusterfuzz.stamp
+build v8_compiler: phony obj/libv8_compiler.a
+build v8_compiler_for_mksnapshot: phony obj/v8_compiler_for_mksnapshot.stamp
+build v8_compiler_opt: phony obj/libv8_compiler_opt.a
+build v8_config_headers: phony obj/v8_config_headers.stamp
+build v8_dump_build_config: phony obj/v8_dump_build_config.stamp
+build v8_flags: phony obj/v8_flags.stamp
+build v8_for_testing: phony obj/v8_for_testing.stamp
+build v8_fuzzers: phony obj/v8_fuzzers.stamp
+build v8_gcc_light: phony obj/v8_gcc_light.stamp
+build v8_generated_cc_files: phony obj/v8_generated_cc_files.stamp
+build v8_headers: phony obj/v8_headers.stamp
+build v8_heap_base: phony obj/libv8_heap_base.a
+build v8_heap_base_for_testing: phony obj/v8_heap_base_for_testing.stamp
+build v8_heap_base_headers: phony obj/v8_heap_base_headers.stamp
+build v8_init: phony obj/libv8_init.a
+build v8_initializers: phony obj/libv8_initializers.a
+build v8_internal_headers: phony obj/v8_internal_headers.stamp
+build v8_libbase: phony obj/libv8_libbase.a
+build v8_libplatform: phony obj/libv8_libplatform.a
+build v8_maybe_icu: phony obj/v8_maybe_icu.stamp
+build v8_monolith: phony obj/libv8_monolith.a
+build v8_python_base: phony obj/v8_python_base.stamp
+build v8_shared_internal_headers: phony obj/v8_shared_internal_headers.stamp
+build v8_snapshot: phony obj/libv8_snapshot.a
+build v8_tracing: phony obj/v8_tracing.stamp
+build v8_turboshaft: phony obj/libv8_turboshaft.a
+build v8_version: phony obj/v8_version.stamp
+build wasm_async_fuzzer: phony obj/libwasm_async_fuzzer.a
+build wasm_code_fuzzer: phony obj/libwasm_code_fuzzer.a
+build wasm_compile_fuzzer: phony obj/libwasm_compile_fuzzer.a
+build wasm_fuzzer: phony obj/libwasm_fuzzer.a
+build wasm_streaming_fuzzer: phony obj/libwasm_streaming_fuzzer.a
+build wasm_test_common: phony obj/libwasm_test_common.a
+build wee8: phony obj/libwee8.a
+build apk_installer_data: phony obj/build/android/apk_installer_data.stamp
+build apk_operations_py: phony obj/build/android/apk_operations_py.stamp
+build branding_buildflags: phony obj/build/branding_buildflags.stamp
+build buildflag_header_h: phony obj/build/buildflag_header_h.stamp
+build cctest_headers: phony obj/test/cctest/cctest_headers.stamp
+build cctest_sources: phony obj/test/cctest/libcctest_sources.a
+build chromecast_buildflags: phony obj/build/chromecast_buildflags.stamp
+build chromeos_buildflags: phony obj/build/chromeos_buildflags.stamp
+build common_deps: phony obj/build/config/common_deps.stamp
+build common_test_headers: phony obj/test/common_test_headers.stamp
+build compiler_buildflags: phony obj/build/config/compiler/compiler_buildflags.stamp
+build compression_utils_portable: phony obj/third_party/zlib/google/libcompression_utils_portable.a
+build convert_chart_json: phony obj/third_party/catapult/tracing/convert_chart_json.stamp
+build cppgc_unittests_sources: phony obj/test/unittests/libcppgc_unittests_sources.a
+build cpu_features: phony obj/third_party/android_ndk/cpu_features.stamp
+build crdtp: phony obj/third_party/inspector_protocol/libcrdtp.a
+build crdtp_platform: phony obj/third_party/inspector_protocol/libcrdtp_platform.a
+build crdtp_test: phony obj/third_party/inspector_protocol/libcrdtp_test.a
+build crdtp_test_platform: phony obj/third_party/inspector_protocol/libcrdtp_test_platform.a
+build default_exe_manifest: phony obj/build/win/default_exe_manifest.stamp
+build deps: phony obj/build/config/sanitizers/deps.stamp
+build devil_chromium_py: phony obj/build/android/devil_chromium_py.stamp
+build executable_deps: phony obj/build/config/executable_deps.stamp
+build gen_heap_constants: phony obj/tools/debug_helper/gen_heap_constants.stamp
+build generate_about_tracing: phony obj/third_party/catapult/tracing/generate_about_tracing.stamp
+build inspector: phony obj/src/inspector/libinspector.a
+build inspector_string_conversions: phony obj/src/inspector/libinspector_string_conversions.a
+build inspector_test: phony obj/test/inspector/libinspector_test.a
+build inspector_test_headers: phony obj/src/inspector/inspector_test_headers.stamp
+build inspector_unittests_sources: phony obj/test/unittests/libinspector_unittests_sources.a
+build llvm-symbolizer_data: phony obj/build/config/clang/llvm-symbolizer_data.stamp
+build loadable_module_deps: phony obj/build/config/loadable_module_deps.stamp
+build logdog_wrapper_py: phony obj/build/android/logdog_wrapper_py.stamp
+build minizip: phony obj/third_party/zlib/libminizip.a
+build options_sources: phony obj/build/config/sanitizers/liboptions_sources.a
+build posix: phony obj/build/config/posix/posix.stamp
+build protocol_compatibility: phony obj/src/inspector/protocol_compatibility.stamp
+build protocol_generated_sources: phony obj/src/inspector/protocol_generated_sources.stamp
+build resource_sizes_py: phony obj/build/android/resource_sizes_py.stamp
+build run_mkgrokdump: phony obj/tools/debug_helper/run_mkgrokdump.stamp
+build shared_library_deps: phony obj/build/config/shared_library_deps.stamp
+build stack_tools: phony obj/build/android/stack_tools.stamp
+build test_result_presentations_py: phony obj/build/android/test_result_presentations_py.stamp
+build test_runner_core_py: phony obj/build/android/test_runner_core_py.stamp
+build test_runner_device_support: phony obj/build/android/test_runner_device_support.stamp
+build test_runner_py: phony obj/build/android/test_runner_py.stamp
+build tracing_common: phony obj/third_party/catapult/tracing/tracing_common.stamp
+build unittests_sources: phony obj/test/unittests/libunittests_sources.a
+build v8_android_test_runner_deps: phony obj/tools/v8_android_test_runner_deps.stamp
+build v8_benchmarks: phony obj/test/benchmarks/v8_benchmarks.stamp
+build v8_bot_default: phony obj/test/v8_bot_default.stamp
+build v8_check_static_initializers: phony obj/tools/v8_check_static_initializers.stamp
+build v8_clusterfuzz_resources: phony obj/tools/clusterfuzz/trials/v8_clusterfuzz_resources.stamp
+build v8_d8_default: phony obj/test/v8_d8_default.stamp
+build v8_debug_helper: phony obj/tools/debug_helper/libv8_debug_helper.a
+build v8_debugger: phony obj/test/debugger/v8_debugger.stamp
+build v8_default: phony obj/test/v8_default.stamp
+build v8_fuzzer: phony obj/test/fuzzer/v8_fuzzer.stamp
+build v8_gcmole_files: phony obj/tools/gcmole/v8_gcmole_files.stamp
+build v8_heap_base_unittests_sources: phony obj/test/unittests/libv8_heap_base_unittests_sources.a
+build v8_intl: phony obj/test/intl/v8_intl.stamp
+build v8_jsfunfuzz: phony obj/tools/jsfunfuzz/v8_jsfunfuzz.stamp
+build v8_message: phony obj/test/message/v8_message.stamp
+build v8_mjsunit: phony obj/test/mjsunit/v8_mjsunit.stamp
+build v8_mozilla: phony obj/test/mozilla/v8_mozilla.stamp
+build v8_optimize_for_size: phony obj/test/v8_optimize_for_size.stamp
+build v8_perf: phony obj/test/v8_perf.stamp
+build v8_run_num_fuzzer: phony obj/test/v8_run_num_fuzzer.stamp
+build v8_test262: phony obj/test/test262/v8_test262.stamp
+build v8_testrunner: phony obj/tools/v8_testrunner.stamp
+build v8_wasm_js: phony obj/test/wasm-js/v8_wasm_js.stamp
+build v8_wasm_spec_tests: phony obj/test/wasm-spec-tests/v8_wasm_spec_tests.stamp
+build v8_webkit: phony obj/test/webkit/v8_webkit.stamp
+build vinn: phony obj/third_party/catapult/third_party/vinn/vinn.stamp
+build zlib: phony obj/third_party/zlib/libchrome_zlib.a
+build zlib_adler32_simd: phony obj/third_party/zlib/zlib_adler32_simd.stamp
+build zlib_arm_crc32: phony obj/third_party/zlib/zlib_arm_crc32.stamp
+build zlib_common_headers: phony obj/third_party/zlib/zlib_common_headers.stamp
+build zlib_crc32_simd: phony obj/third_party/zlib/zlib_crc32_simd.stamp
+build zlib_inflate_chunk_simd: phony obj/third_party/zlib/zlib_inflate_chunk_simd.stamp
+build zlib_slide_hash_simd: phony obj/third_party/zlib/zlib_slide_hash_simd.stamp
+build $:cppgc: phony obj/cppgc.stamp
+build $:cppgc_base: phony obj/libcppgc_base.a
+build $:cppgc_headers: phony obj/cppgc_headers.stamp
+build $:cppgc_hello_world: phony ./cppgc_hello_world
+build $:d8: phony ./d8
+build $:fuzzer_support: phony obj/libfuzzer_support.a
+build $:generate_bytecode_builtins_list: phony obj/generate_bytecode_builtins_list.stamp
+build $:gn_all: phony obj/gn_all.stamp
+build $:inspector_fuzzer: phony obj/libinspector_fuzzer.a
+build $:json_fuzzer: phony obj/libjson_fuzzer.a
+build $:lib_wasm_fuzzer_common: phony obj/lib_wasm_fuzzer_common.a
+build $:multi_return_fuzzer: phony obj/libmulti_return_fuzzer.a
+build $:parser_fuzzer: phony obj/libparser_fuzzer.a
+build $:postmortem-metadata: phony obj/postmortem-metadata.stamp
+build $:regexp_builtins_fuzzer: phony obj/libregexp_builtins_fuzzer.a
+build $:regexp_fuzzer: phony obj/libregexp_fuzzer.a
+build $:run_mksnapshot_default: phony obj/run_mksnapshot_default.stamp
+build $:run_torque: phony obj/run_torque.stamp
+build $:torque-language-server: phony ./torque-language-server
+build $:torque_base: phony obj/libtorque_base.a
+build $:torque_generated_definitions: phony obj/libtorque_generated_definitions.a
+build $:torque_generated_initializers: phony obj/libtorque_generated_initializers.a
+build $:torque_ls_base: phony obj/libtorque_ls_base.a
+build $:torque_runtime_support: phony obj/torque_runtime_support.stamp
+build $:v8: phony obj/v8.stamp
+build $:v8_archive: phony obj/v8_archive.stamp
+build $:v8_base: phony obj/v8_base.stamp
+build $:v8_base_without_compiler: phony obj/libv8_base_without_compiler.a
+build $:v8_bigint: phony obj/libv8_bigint.a
+build $:v8_clusterfuzz: phony obj/v8_clusterfuzz.stamp
+build $:v8_compiler: phony obj/libv8_compiler.a
+build $:v8_compiler_for_mksnapshot: phony obj/v8_compiler_for_mksnapshot.stamp
+build $:v8_compiler_opt: phony obj/libv8_compiler_opt.a
+build $:v8_config_headers: phony obj/v8_config_headers.stamp
+build $:v8_dump_build_config: phony obj/v8_dump_build_config.stamp
+build $:v8_flags: phony obj/v8_flags.stamp
+build $:v8_for_testing: phony obj/v8_for_testing.stamp
+build $:v8_fuzzers: phony obj/v8_fuzzers.stamp
+build $:v8_gcc_light: phony obj/v8_gcc_light.stamp
+build $:v8_generated_cc_files: phony obj/v8_generated_cc_files.stamp
+build $:v8_headers: phony obj/v8_headers.stamp
+build $:v8_heap_base: phony obj/libv8_heap_base.a
+build $:v8_heap_base_for_testing: phony obj/v8_heap_base_for_testing.stamp
+build $:v8_heap_base_headers: phony obj/v8_heap_base_headers.stamp
+build $:v8_hello_world: phony ./v8_hello_world
+build $:v8_init: phony obj/libv8_init.a
+build $:v8_initializers: phony obj/libv8_initializers.a
+build $:v8_internal_headers: phony obj/v8_internal_headers.stamp
+build $:v8_libbase: phony obj/libv8_libbase.a
+build $:v8_libplatform: phony obj/libv8_libplatform.a
+build $:v8_maybe_icu: phony obj/v8_maybe_icu.stamp
+build $:v8_monolith: phony obj/libv8_monolith.a
+build $:v8_python_base: phony obj/v8_python_base.stamp
+build $:v8_sample_process: phony ./v8_sample_process
+build $:v8_shared_internal_headers: phony obj/v8_shared_internal_headers.stamp
+build $:v8_simple_inspector_fuzzer: phony ./v8_simple_inspector_fuzzer
+build $:v8_simple_json_fuzzer: phony ./v8_simple_json_fuzzer
+build $:v8_simple_multi_return_fuzzer: phony ./v8_simple_multi_return_fuzzer
+build $:v8_simple_parser_fuzzer: phony ./v8_simple_parser_fuzzer
+build $:v8_simple_regexp_builtins_fuzzer: phony ./v8_simple_regexp_builtins_fuzzer
+build $:v8_simple_regexp_fuzzer: phony ./v8_simple_regexp_fuzzer
+build $:v8_simple_wasm_async_fuzzer: phony ./v8_simple_wasm_async_fuzzer
+build $:v8_simple_wasm_code_fuzzer: phony ./v8_simple_wasm_code_fuzzer
+build $:v8_simple_wasm_compile_fuzzer: phony ./v8_simple_wasm_compile_fuzzer
+build $:v8_simple_wasm_fuzzer: phony ./v8_simple_wasm_fuzzer
+build $:v8_simple_wasm_streaming_fuzzer: phony ./v8_simple_wasm_streaming_fuzzer
+build $:v8_snapshot: phony obj/libv8_snapshot.a
+build $:v8_tracing: phony obj/v8_tracing.stamp
+build $:v8_turboshaft: phony obj/libv8_turboshaft.a
+build $:v8_version: phony obj/v8_version.stamp
+build $:wasm_async_fuzzer: phony obj/libwasm_async_fuzzer.a
+build $:wasm_code_fuzzer: phony obj/libwasm_code_fuzzer.a
+build $:wasm_compile_fuzzer: phony obj/libwasm_compile_fuzzer.a
+build $:wasm_fuzzer: phony obj/libwasm_fuzzer.a
+build $:wasm_streaming_fuzzer: phony obj/libwasm_streaming_fuzzer.a
+build $:wasm_test_common: phony obj/libwasm_test_common.a
+build $:wee8: phony obj/libwee8.a
+build build$:branding_buildflags: phony obj/build/branding_buildflags.stamp
+build build$:buildflag_header_h: phony obj/build/buildflag_header_h.stamp
+build build$:chromecast_buildflags: phony obj/build/chromecast_buildflags.stamp
+build build$:chromeos_buildflags: phony obj/build/chromeos_buildflags.stamp
+build build/android$:apk_installer_data: phony obj/build/android/apk_installer_data.stamp
+build build/android$:apk_operations_py: phony obj/build/android/apk_operations_py.stamp
+build build/android$:devil_chromium_py: phony obj/build/android/devil_chromium_py.stamp
+build build/android$:logdog_wrapper_py: phony obj/build/android/logdog_wrapper_py.stamp
+build build/android$:resource_sizes_py: phony obj/build/android/resource_sizes_py.stamp
+build build/android$:stack_tools: phony obj/build/android/stack_tools.stamp
+build build/android$:test_result_presentations_py: phony obj/build/android/test_result_presentations_py.stamp
+build build/android$:test_runner_core_py: phony obj/build/android/test_runner_core_py.stamp
+build build/android$:test_runner_device_support: phony obj/build/android/test_runner_device_support.stamp
+build build/android$:test_runner_py: phony obj/build/android/test_runner_py.stamp
+build build/config$:common_deps: phony obj/build/config/common_deps.stamp
+build build/config$:executable_deps: phony obj/build/config/executable_deps.stamp
+build build/config$:loadable_module_deps: phony obj/build/config/loadable_module_deps.stamp
+build build/config$:shared_library_deps: phony obj/build/config/shared_library_deps.stamp
+build build/config/clang$:llvm-symbolizer_data: phony obj/build/config/clang/llvm-symbolizer_data.stamp
+build build/config/compiler$:compiler_buildflags: phony obj/build/config/compiler/compiler_buildflags.stamp
+build build/config/posix$:posix: phony obj/build/config/posix/posix.stamp
+build build/config/posix: phony obj/build/config/posix/posix.stamp
+build build/config/sanitizers$:deps: phony obj/build/config/sanitizers/deps.stamp
+build build/config/sanitizers$:options_sources: phony obj/build/config/sanitizers/liboptions_sources.a
+build build/win$:default_exe_manifest: phony obj/build/win/default_exe_manifest.stamp
+build src/inspector$:inspector: phony obj/src/inspector/libinspector.a
+build src/inspector: phony obj/src/inspector/libinspector.a
+build src/inspector$:inspector_string_conversions: phony obj/src/inspector/libinspector_string_conversions.a
+build src/inspector$:inspector_test_headers: phony obj/src/inspector/inspector_test_headers.stamp
+build src/inspector$:protocol_compatibility: phony obj/src/inspector/protocol_compatibility.stamp
+build src/inspector$:protocol_generated_sources: phony obj/src/inspector/protocol_generated_sources.stamp
+build src/inspector$:v8_generated_cc_files: phony obj/src/inspector/v8_generated_cc_files.stamp
+build test$:common_test_headers: phony obj/test/common_test_headers.stamp
+build test$:gn_all: phony obj/test/gn_all.stamp
+build test$:v8_bot_default: phony obj/test/v8_bot_default.stamp
+build test$:v8_d8_default: phony obj/test/v8_d8_default.stamp
+build test$:v8_default: phony obj/test/v8_default.stamp
+build test$:v8_optimize_for_size: phony obj/test/v8_optimize_for_size.stamp
+build test$:v8_perf: phony obj/test/v8_perf.stamp
+build test$:v8_run_num_fuzzer: phony obj/test/v8_run_num_fuzzer.stamp
+build test/benchmarks$:v8_benchmarks: phony obj/test/benchmarks/v8_benchmarks.stamp
+build test/benchmarks/cpp$:gn_all: phony obj/test/benchmarks/cpp/gn_all.stamp
+build test/bigint$:bigint_shell: phony ./bigint_shell
+build test/cctest$:cctest: phony ./cctest
+build test/cctest: phony ./cctest
+build test/cctest$:cctest_headers: phony obj/test/cctest/cctest_headers.stamp
+build test/cctest$:cctest_sources: phony obj/test/cctest/libcctest_sources.a
+build test/debugger$:v8_debugger: phony obj/test/debugger/v8_debugger.stamp
+build test/fuzzer$:v8_fuzzer: phony obj/test/fuzzer/v8_fuzzer.stamp
+build test/inspector$:inspector-test: phony ./inspector-test
+build test/inspector$:inspector_test: phony obj/test/inspector/libinspector_test.a
+build test/intl$:v8_intl: phony obj/test/intl/v8_intl.stamp
+build test/message$:v8_message: phony obj/test/message/v8_message.stamp
+build test/mjsunit$:v8_mjsunit: phony obj/test/mjsunit/v8_mjsunit.stamp
+build test/mkgrokdump$:mkgrokdump: phony ./mkgrokdump
+build test/mkgrokdump: phony ./mkgrokdump
+build test/mozilla$:v8_mozilla: phony obj/test/mozilla/v8_mozilla.stamp
+build test/test262$:v8_test262: phony obj/test/test262/v8_test262.stamp
+build test/unittests$:cppgc_unittests_sources: phony obj/test/unittests/libcppgc_unittests_sources.a
+build test/unittests$:generate-bytecode-expectations: phony ./generate-bytecode-expectations
+build test/unittests$:inspector_unittests_sources: phony obj/test/unittests/libinspector_unittests_sources.a
+build test/unittests$:unittests: phony ./unittests
+build test/unittests: phony ./unittests
+build test/unittests$:unittests_sources: phony obj/test/unittests/libunittests_sources.a
+build test/unittests$:v8_heap_base_unittests: phony ./v8_heap_base_unittests
+build test/unittests$:v8_heap_base_unittests_sources: phony obj/test/unittests/libv8_heap_base_unittests_sources.a
+build test/wasm-api-tests$:wasm_api_tests: phony ./wasm_api_tests
+build test/wasm-js$:v8_wasm_js: phony obj/test/wasm-js/v8_wasm_js.stamp
+build test/wasm-spec-tests$:v8_wasm_spec_tests: phony obj/test/wasm-spec-tests/v8_wasm_spec_tests.stamp
+build test/webkit$:v8_webkit: phony obj/test/webkit/v8_webkit.stamp
+build testing/gmock$:gmock: phony obj/testing/gmock/gmock.stamp
+build testing/gmock: phony obj/testing/gmock/gmock.stamp
+build testing/gmock$:gmock_main: phony obj/testing/gmock/gmock_main.stamp
+build testing/gtest$:gtest: phony obj/testing/gtest/libgtest.a
+build testing/gtest: phony obj/testing/gtest/libgtest.a
+build testing/gtest$:gtest_main: phony obj/testing/gtest/gtest_main.stamp
+build third_party/android_ndk$:cpu_features: phony obj/third_party/android_ndk/cpu_features.stamp
+build third_party/catapult/third_party/vinn$:vinn: phony obj/third_party/catapult/third_party/vinn/vinn.stamp
+build third_party/catapult/third_party/vinn: phony obj/third_party/catapult/third_party/vinn/vinn.stamp
+build third_party/catapult/tracing$:convert_chart_json: phony obj/third_party/catapult/tracing/convert_chart_json.stamp
+build third_party/catapult/tracing$:generate_about_tracing: phony obj/third_party/catapult/tracing/generate_about_tracing.stamp
+build third_party/catapult/tracing$:tracing_common: phony obj/third_party/catapult/tracing/tracing_common.stamp
+build third_party/googletest$:gmock: phony obj/third_party/googletest/gmock.stamp
+build third_party/googletest$:gmock_main: phony obj/third_party/googletest/libgmock_main.a
+build third_party/googletest$:gtest: phony obj/third_party/googletest/gtest.stamp
+build third_party/googletest$:gtest_main: phony obj/third_party/googletest/gtest_main.stamp
+build third_party/inspector_protocol$:crdtp: phony obj/third_party/inspector_protocol/libcrdtp.a
+build third_party/inspector_protocol$:crdtp_platform: phony obj/third_party/inspector_protocol/libcrdtp_platform.a
+build third_party/inspector_protocol$:crdtp_test: phony obj/third_party/inspector_protocol/libcrdtp_test.a
+build third_party/inspector_protocol$:crdtp_test_platform: phony obj/third_party/inspector_protocol/libcrdtp_test_platform.a
+build third_party/zlib$:miniunz_bin: phony ./miniunz_bin
+build third_party/zlib$:minizip: phony obj/third_party/zlib/libminizip.a
+build third_party/zlib$:minizip_bin: phony ./minizip_bin
+build third_party/zlib$:zlib: phony obj/third_party/zlib/libchrome_zlib.a
+build third_party/zlib: phony obj/third_party/zlib/libchrome_zlib.a
+build third_party/zlib$:zlib_adler32_simd: phony obj/third_party/zlib/zlib_adler32_simd.stamp
+build third_party/zlib$:zlib_arm_crc32: phony obj/third_party/zlib/zlib_arm_crc32.stamp
+build third_party/zlib$:zlib_bench: phony ./zlib_bench
+build third_party/zlib$:zlib_common_headers: phony obj/third_party/zlib/zlib_common_headers.stamp
+build third_party/zlib$:zlib_crc32_simd: phony obj/third_party/zlib/zlib_crc32_simd.stamp
+build third_party/zlib$:zlib_inflate_chunk_simd: phony obj/third_party/zlib/zlib_inflate_chunk_simd.stamp
+build third_party/zlib$:zlib_slide_hash_simd: phony obj/third_party/zlib/zlib_slide_hash_simd.stamp
+build third_party/zlib/google$:compression_utils_portable: phony obj/third_party/zlib/google/libcompression_utils_portable.a
+build tools$:gn_all: phony obj/tools/gn_all.stamp
+build tools$:v8_android_test_runner_deps: phony obj/tools/v8_android_test_runner_deps.stamp
+build tools$:v8_check_static_initializers: phony obj/tools/v8_check_static_initializers.stamp
+build tools$:v8_testrunner: phony obj/tools/v8_testrunner.stamp
+build tools/clusterfuzz/trials$:v8_clusterfuzz_resources: phony obj/tools/clusterfuzz/trials/v8_clusterfuzz_resources.stamp
+build tools/debug_helper$:gen_heap_constants: phony obj/tools/debug_helper/gen_heap_constants.stamp
+build tools/debug_helper$:run_mkgrokdump: phony obj/tools/debug_helper/run_mkgrokdump.stamp
+build tools/debug_helper$:v8_debug_helper: phony obj/tools/debug_helper/libv8_debug_helper.a
+build tools/gcmole$:v8_gcmole_files: phony obj/tools/gcmole/v8_gcmole_files.stamp
+build tools/jsfunfuzz$:v8_jsfunfuzz: phony obj/tools/jsfunfuzz/v8_jsfunfuzz.stamp
+build tools/wasm$:wami: phony ./wami
+
+build all: phony $
+    obj/cppgc.stamp $
+    obj/libcppgc_base.a $
+    obj/cppgc_headers.stamp $
+    ./cppgc_hello_world $
+    ./d8 $
+    obj/libfuzzer_support.a $
+    obj/generate_bytecode_builtins_list.stamp $
+    obj/gn_all.stamp $
+    obj/libinspector_fuzzer.a $
+    obj/libjson_fuzzer.a $
+    obj/lib_wasm_fuzzer_common.a $
+    obj/libmulti_return_fuzzer.a $
+    obj/libparser_fuzzer.a $
+    obj/postmortem-metadata.stamp $
+    obj/libregexp_builtins_fuzzer.a $
+    obj/libregexp_fuzzer.a $
+    obj/run_mksnapshot_default.stamp $
+    obj/run_torque.stamp $
+    ./torque-language-server $
+    obj/libtorque_base.a $
+    obj/libtorque_generated_definitions.a $
+    obj/libtorque_generated_initializers.a $
+    obj/libtorque_ls_base.a $
+    obj/torque_runtime_support.stamp $
+    obj/v8.stamp $
+    obj/v8_archive.stamp $
+    obj/v8_base.stamp $
+    obj/libv8_base_without_compiler.a $
+    obj/libv8_bigint.a $
+    obj/v8_clusterfuzz.stamp $
+    obj/libv8_compiler.a $
+    obj/v8_compiler_for_mksnapshot.stamp $
+    obj/libv8_compiler_opt.a $
+    obj/v8_config_headers.stamp $
+    obj/v8_dump_build_config.stamp $
+    obj/v8_flags.stamp $
+    obj/v8_for_testing.stamp $
+    obj/v8_fuzzers.stamp $
+    obj/v8_gcc_light.stamp $
+    obj/v8_generated_cc_files.stamp $
+    obj/v8_headers.stamp $
+    obj/libv8_heap_base.a $
+    obj/v8_heap_base_for_testing.stamp $
+    obj/v8_heap_base_headers.stamp $
+    ./v8_hello_world $
+    obj/libv8_init.a $
+    obj/libv8_initializers.a $
+    obj/v8_internal_headers.stamp $
+    obj/libv8_libbase.a $
+    obj/libv8_libplatform.a $
+    obj/v8_maybe_icu.stamp $
+    obj/libv8_monolith.a $
+    obj/v8_python_base.stamp $
+    ./v8_sample_process $
+    obj/v8_shared_internal_headers.stamp $
+    ./v8_simple_inspector_fuzzer $
+    ./v8_simple_json_fuzzer $
+    ./v8_simple_multi_return_fuzzer $
+    ./v8_simple_parser_fuzzer $
+    ./v8_simple_regexp_builtins_fuzzer $
+    ./v8_simple_regexp_fuzzer $
+    ./v8_simple_wasm_async_fuzzer $
+    ./v8_simple_wasm_code_fuzzer $
+    ./v8_simple_wasm_compile_fuzzer $
+    ./v8_simple_wasm_fuzzer $
+    ./v8_simple_wasm_streaming_fuzzer $
+    obj/libv8_snapshot.a $
+    obj/v8_tracing.stamp $
+    obj/libv8_turboshaft.a $
+    obj/v8_version.stamp $
+    obj/libwasm_async_fuzzer.a $
+    obj/libwasm_code_fuzzer.a $
+    obj/libwasm_compile_fuzzer.a $
+    obj/libwasm_fuzzer.a $
+    obj/libwasm_streaming_fuzzer.a $
+    obj/libwasm_test_common.a $
+    obj/libwee8.a $
+    obj/build/branding_buildflags.stamp $
+    obj/build/buildflag_header_h.stamp $
+    obj/build/chromecast_buildflags.stamp $
+    obj/build/chromeos_buildflags.stamp $
+    obj/build/android/apk_installer_data.stamp $
+    obj/build/android/apk_operations_py.stamp $
+    obj/build/android/devil_chromium_py.stamp $
+    obj/build/android/logdog_wrapper_py.stamp $
+    obj/build/android/resource_sizes_py.stamp $
+    obj/build/android/stack_tools.stamp $
+    obj/build/android/test_result_presentations_py.stamp $
+    obj/build/android/test_runner_core_py.stamp $
+    obj/build/android/test_runner_device_support.stamp $
+    obj/build/android/test_runner_py.stamp $
+    obj/build/config/common_deps.stamp $
+    obj/build/config/executable_deps.stamp $
+    obj/build/config/loadable_module_deps.stamp $
+    obj/build/config/shared_library_deps.stamp $
+    obj/build/config/clang/llvm-symbolizer_data.stamp $
+    obj/build/config/compiler/compiler_buildflags.stamp $
+    obj/build/config/posix/posix.stamp $
+    obj/build/config/sanitizers/deps.stamp $
+    obj/build/config/sanitizers/liboptions_sources.a $
+    obj/build/win/default_exe_manifest.stamp $
+    obj/src/inspector/libinspector.a $
+    obj/src/inspector/libinspector_string_conversions.a $
+    obj/src/inspector/inspector_test_headers.stamp $
+    obj/src/inspector/protocol_compatibility.stamp $
+    obj/src/inspector/protocol_generated_sources.stamp $
+    obj/src/inspector/v8_generated_cc_files.stamp $
+    obj/test/common_test_headers.stamp $
+    obj/test/gn_all.stamp $
+    obj/test/v8_bot_default.stamp $
+    obj/test/v8_d8_default.stamp $
+    obj/test/v8_default.stamp $
+    obj/test/v8_optimize_for_size.stamp $
+    obj/test/v8_perf.stamp $
+    obj/test/v8_run_num_fuzzer.stamp $
+    obj/test/benchmarks/v8_benchmarks.stamp $
+    obj/test/benchmarks/cpp/gn_all.stamp $
+    ./bigint_shell $
+    ./cctest $
+    obj/test/cctest/cctest_headers.stamp $
+    obj/test/cctest/libcctest_sources.a $
+    obj/test/debugger/v8_debugger.stamp $
+    obj/test/fuzzer/v8_fuzzer.stamp $
+    ./inspector-test $
+    obj/test/inspector/libinspector_test.a $
+    obj/test/intl/v8_intl.stamp $
+    obj/test/message/v8_message.stamp $
+    obj/test/mjsunit/v8_mjsunit.stamp $
+    ./mkgrokdump $
+    obj/test/mozilla/v8_mozilla.stamp $
+    obj/test/test262/v8_test262.stamp $
+    obj/test/unittests/libcppgc_unittests_sources.a $
+    ./generate-bytecode-expectations $
+    obj/test/unittests/libinspector_unittests_sources.a $
+    ./unittests $
+    obj/test/unittests/libunittests_sources.a $
+    ./v8_heap_base_unittests $
+    obj/test/unittests/libv8_heap_base_unittests_sources.a $
+    ./wasm_api_tests $
+    obj/test/wasm-js/v8_wasm_js.stamp $
+    obj/test/wasm-spec-tests/v8_wasm_spec_tests.stamp $
+    obj/test/webkit/v8_webkit.stamp $
+    obj/testing/gmock/gmock.stamp $
+    obj/testing/gmock/gmock_main.stamp $
+    obj/testing/gtest/libgtest.a $
+    obj/testing/gtest/gtest_main.stamp $
+    obj/third_party/android_ndk/cpu_features.stamp $
+    obj/third_party/catapult/third_party/vinn/vinn.stamp $
+    obj/third_party/catapult/tracing/convert_chart_json.stamp $
+    obj/third_party/catapult/tracing/generate_about_tracing.stamp $
+    obj/third_party/catapult/tracing/tracing_common.stamp $
+    obj/third_party/googletest/gmock.stamp $
+    obj/third_party/googletest/libgmock_main.a $
+    obj/third_party/googletest/gtest.stamp $
+    obj/third_party/googletest/gtest_main.stamp $
+    obj/third_party/inspector_protocol/libcrdtp.a $
+    obj/third_party/inspector_protocol/libcrdtp_platform.a $
+    obj/third_party/inspector_protocol/libcrdtp_test.a $
+    obj/third_party/inspector_protocol/libcrdtp_test_platform.a $
+    ./miniunz_bin $
+    obj/third_party/zlib/libminizip.a $
+    ./minizip_bin $
+    obj/third_party/zlib/libchrome_zlib.a $
+    obj/third_party/zlib/zlib_adler32_simd.stamp $
+    obj/third_party/zlib/zlib_arm_crc32.stamp $
+    ./zlib_bench $
+    obj/third_party/zlib/zlib_common_headers.stamp $
+    obj/third_party/zlib/zlib_crc32_simd.stamp $
+    obj/third_party/zlib/zlib_inflate_chunk_simd.stamp $
+    obj/third_party/zlib/zlib_slide_hash_simd.stamp $
+    obj/third_party/zlib/google/libcompression_utils_portable.a $
+    obj/tools/gn_all.stamp $
+    obj/tools/v8_android_test_runner_deps.stamp $
+    obj/tools/v8_check_static_initializers.stamp $
+    obj/tools/v8_testrunner.stamp $
+    obj/tools/clusterfuzz/trials/v8_clusterfuzz_resources.stamp $
+    obj/tools/debug_helper/gen_heap_constants.stamp $
+    obj/tools/debug_helper/run_mkgrokdump.stamp $
+    obj/tools/debug_helper/libv8_debug_helper.a $
+    obj/tools/gcmole/v8_gcmole_files.stamp $
+    obj/tools/jsfunfuzz/v8_jsfunfuzz.stamp $
+    ./wami
+
+default all

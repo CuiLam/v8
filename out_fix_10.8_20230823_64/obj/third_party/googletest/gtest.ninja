@@ -1,0 +1,38 @@
+defines = -DOFFICIAL_BUILD -D_GNU_SOURCE -DANDROID -DHAVE_SYS_UIO_H -DANDROID_NDK_VERSION_ROLL=r23_1 -DCR_CLANG_REVISION=\"llvmorg-16-init-6084-g2f3d7c2c-1\" -DNDEBUG -DNVALGRIND -DDYNAMIC_ANNOTATIONS_ENABLED=0 -DGTEST_API_= -DGTEST_HAS_POSIX_RE=0 -DGTEST_LANG_CXX11=1 -DGTEST_HAS_TR1_TUPLE=0
+include_dirs = -I../third_party/googletest/src/googletest -I.. -Igen -I../third_party/googletest/custom -I../third_party/googletest/src/googletest/include
+cflags = -fno-delete-null-pointer-checks -fno-ident -fno-strict-aliasing --param=ssp-buffer-size=4 -fstack-protector -funwind-tables -fPIC -fcolor-diagnostics -fmerge-all-constants -fcrash-diagnostics-dir=../tools/clang/crashreports -mllvm -instcombine-lower-dbg-declare=0 -ffp-contract=off -ffunction-sections -fno-short-enums -mbranch-protection=standard --target=aarch64-linux-android21 -mno-outline-atomics -mno-outline -ffile-compilation-dir=. -no-canonical-prefixes -Oz -fdata-sections -ffunction-sections -fno-unique-section-names -fno-omit-frame-pointer -g0 -Wheader-hygiene -Wstring-conversion -Wtautological-overlap-compare -Wall -Wno-unused-variable -Wno-c++11-narrowing -Wno-unused-but-set-variable -Wno-misleading-indentation -Wno-missing-field-initializers -Wno-unused-parameter -Wloop-analysis -Wno-unneeded-internal-declaration -Wenum-compare-conditional -Wno-psabi -Wno-ignored-pragma-optimize -Wno-deprecated-builtins -Wno-bitfield-constant-conversion -fvisibility=default
+cflags_cc = -std=c++17 -Wno-trigraphs -fno-exceptions -fno-rtti --sysroot=../../../opt/sdk-root/ndk/25.0.8775105/toolchains/llvm/prebuilt/linux-x86_64/sysroot
+label_name = gtest
+root_out_dir = .
+target_out_dir = obj/third_party/googletest
+target_output_name = gtest
+
+build obj/third_party/googletest/gtest/gtest-assertion-result.o: cxx ../third_party/googletest/src/googletest/src/gtest-assertion-result.cc
+  source_file_part = gtest-assertion-result.cc
+  source_name_part = gtest-assertion-result
+build obj/third_party/googletest/gtest/gtest-death-test.o: cxx ../third_party/googletest/src/googletest/src/gtest-death-test.cc
+  source_file_part = gtest-death-test.cc
+  source_name_part = gtest-death-test
+build obj/third_party/googletest/gtest/gtest-filepath.o: cxx ../third_party/googletest/src/googletest/src/gtest-filepath.cc
+  source_file_part = gtest-filepath.cc
+  source_name_part = gtest-filepath
+build obj/third_party/googletest/gtest/gtest-matchers.o: cxx ../third_party/googletest/src/googletest/src/gtest-matchers.cc
+  source_file_part = gtest-matchers.cc
+  source_name_part = gtest-matchers
+build obj/third_party/googletest/gtest/gtest-port.o: cxx ../third_party/googletest/src/googletest/src/gtest-port.cc
+  source_file_part = gtest-port.cc
+  source_name_part = gtest-port
+build obj/third_party/googletest/gtest/gtest-printers.o: cxx ../third_party/googletest/src/googletest/src/gtest-printers.cc
+  source_file_part = gtest-printers.cc
+  source_name_part = gtest-printers
+build obj/third_party/googletest/gtest/gtest-test-part.o: cxx ../third_party/googletest/src/googletest/src/gtest-test-part.cc
+  source_file_part = gtest-test-part.cc
+  source_name_part = gtest-test-part
+build obj/third_party/googletest/gtest/gtest-typed-test.o: cxx ../third_party/googletest/src/googletest/src/gtest-typed-test.cc
+  source_file_part = gtest-typed-test.cc
+  source_name_part = gtest-typed-test
+build obj/third_party/googletest/gtest/gtest.o: cxx ../third_party/googletest/src/googletest/src/gtest.cc
+  source_file_part = gtest.cc
+  source_name_part = gtest
+
+build obj/third_party/googletest/gtest.stamp: stamp obj/third_party/googletest/gtest/gtest-assertion-result.o obj/third_party/googletest/gtest/gtest-death-test.o obj/third_party/googletest/gtest/gtest-filepath.o obj/third_party/googletest/gtest/gtest-matchers.o obj/third_party/googletest/gtest/gtest-port.o obj/third_party/googletest/gtest/gtest-printers.o obj/third_party/googletest/gtest/gtest-test-part.o obj/third_party/googletest/gtest/gtest-typed-test.o obj/third_party/googletest/gtest/gtest.o

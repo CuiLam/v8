@@ -1,0 +1,61 @@
+defines = -DLIBCXXABI_SILENT_TERMINATE -D_LIBCPP_CONSTINIT=constinit -DUSE_UDEV -DUSE_AURA=1 -DUSE_OZONE=1 -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_GNU_SOURCE -DCR_CLANG_REVISION=\"llvmorg-16-init-6084-g2f3d7c2c-1\" -DCOMPONENT_BUILD -DCR_LIBCXX_REVISION=2e919977e0030ce61bd19c40cefe31b995f1e2d4 -DCR_SYSROOT_HASH=af39443b6101f4c417bb83113a306fc028d2b665 -D_DEBUG -DDYNAMIC_ANNOTATIONS_ENABLED=1 -D_LIBCPP_BUILDING_LIBRARY
+include_dirs = -I../buildtools/third_party/libc++/trunk/src -I.. -Iclang_x86_v8_arm/gen -I../buildtools/third_party/libc++
+cflags = -fno-delete-null-pointer-checks -fno-ident -fno-strict-aliasing --param=ssp-buffer-size=4 -fstack-protector -funwind-tables -fPIC -pthread -fcolor-diagnostics -fmerge-all-constants -fcrash-diagnostics-dir=../tools/clang/crashreports -mllvm -instcombine-lower-dbg-declare=0 -ffp-contract=off -fcomplete-member-pointers -m32 -mfpmath=sse -msse3 -Wno-builtin-macro-redefined -D__DATE__= -D__TIME__= -D__TIMESTAMP__= -ffile-compilation-dir=. -no-canonical-prefixes -ftrivial-auto-var-init=pattern -O0 -fno-omit-frame-pointer -momit-leaf-frame-pointer -gdwarf-4 -g2 -gdwarf-aranges -gsplit-dwarf -Xclang -fuse-ctor-homing -Xclang -add-plugin -Xclang find-bad-constructs -Xclang -plugin-arg-find-bad-constructs -Xclang raw-ref-template-as-trivial-member -Xclang -plugin-arg-find-bad-constructs -Xclang check-ipc -Wheader-hygiene -Wstring-conversion -Wtautological-overlap-compare -Werror -Wall -Wno-unused-variable -Wno-c++11-narrowing -Wno-unused-but-set-variable -Wno-misleading-indentation -Wno-missing-field-initializers -Wno-unused-parameter -Wloop-analysis -Wno-unneeded-internal-declaration -Wenum-compare-conditional -Wno-psabi -Wno-ignored-pragma-optimize -Wno-deprecated-builtins -Wno-bitfield-constant-conversion -fstrict-aliasing -fPIC -fvisibility=default
+cflags_cc = -Wno-undefined-bool-conversion -Wno-tautological-undefined-compare -std=c++17 -Wno-trigraphs -nostdinc++ -isystem../buildtools/third_party/libc++/trunk/include -isystem../buildtools/third_party/libc++abi/trunk/include --sysroot=../build/linux/debian_bullseye_i386-sysroot -fexceptions -frtti -std=c++20
+label_name = libc++abi
+target_out_dir = clang_x86_v8_arm/obj/buildtools/third_party/libc++abi
+target_output_name = libc++abi
+
+build clang_x86_v8_arm/obj/buildtools/third_party/libc++abi/libc++abi/abort_message.o: clang_x86_v8_arm_cxx ../buildtools/third_party/libc++abi/trunk/src/abort_message.cpp
+  source_file_part = abort_message.cpp
+  source_name_part = abort_message
+build clang_x86_v8_arm/obj/buildtools/third_party/libc++abi/libc++abi/cxa_aux_runtime.o: clang_x86_v8_arm_cxx ../buildtools/third_party/libc++abi/trunk/src/cxa_aux_runtime.cpp
+  source_file_part = cxa_aux_runtime.cpp
+  source_name_part = cxa_aux_runtime
+build clang_x86_v8_arm/obj/buildtools/third_party/libc++abi/libc++abi/cxa_default_handlers.o: clang_x86_v8_arm_cxx ../buildtools/third_party/libc++abi/trunk/src/cxa_default_handlers.cpp
+  source_file_part = cxa_default_handlers.cpp
+  source_name_part = cxa_default_handlers
+build clang_x86_v8_arm/obj/buildtools/third_party/libc++abi/libc++abi/cxa_exception.o: clang_x86_v8_arm_cxx ../buildtools/third_party/libc++abi/trunk/src/cxa_exception.cpp
+  source_file_part = cxa_exception.cpp
+  source_name_part = cxa_exception
+build clang_x86_v8_arm/obj/buildtools/third_party/libc++abi/libc++abi/cxa_exception_storage.o: clang_x86_v8_arm_cxx ../buildtools/third_party/libc++abi/trunk/src/cxa_exception_storage.cpp
+  source_file_part = cxa_exception_storage.cpp
+  source_name_part = cxa_exception_storage
+build clang_x86_v8_arm/obj/buildtools/third_party/libc++abi/libc++abi/cxa_handlers.o: clang_x86_v8_arm_cxx ../buildtools/third_party/libc++abi/trunk/src/cxa_handlers.cpp
+  source_file_part = cxa_handlers.cpp
+  source_name_part = cxa_handlers
+build clang_x86_v8_arm/obj/buildtools/third_party/libc++abi/libc++abi/cxa_personality.o: clang_x86_v8_arm_cxx ../buildtools/third_party/libc++abi/trunk/src/cxa_personality.cpp
+  source_file_part = cxa_personality.cpp
+  source_name_part = cxa_personality
+build clang_x86_v8_arm/obj/buildtools/third_party/libc++abi/libc++abi/cxa_vector.o: clang_x86_v8_arm_cxx ../buildtools/third_party/libc++abi/trunk/src/cxa_vector.cpp
+  source_file_part = cxa_vector.cpp
+  source_name_part = cxa_vector
+build clang_x86_v8_arm/obj/buildtools/third_party/libc++abi/libc++abi/cxa_virtual.o: clang_x86_v8_arm_cxx ../buildtools/third_party/libc++abi/trunk/src/cxa_virtual.cpp
+  source_file_part = cxa_virtual.cpp
+  source_name_part = cxa_virtual
+build clang_x86_v8_arm/obj/buildtools/third_party/libc++abi/libc++abi/fallback_malloc.o: clang_x86_v8_arm_cxx ../buildtools/third_party/libc++abi/trunk/src/fallback_malloc.cpp
+  source_file_part = fallback_malloc.cpp
+  source_name_part = fallback_malloc
+build clang_x86_v8_arm/obj/buildtools/third_party/libc++abi/libc++abi/private_typeinfo.o: clang_x86_v8_arm_cxx ../buildtools/third_party/libc++abi/trunk/src/private_typeinfo.cpp
+  source_file_part = private_typeinfo.cpp
+  source_name_part = private_typeinfo
+build clang_x86_v8_arm/obj/buildtools/third_party/libc++abi/libc++abi/stdlib_exception.o: clang_x86_v8_arm_cxx ../buildtools/third_party/libc++abi/trunk/src/stdlib_exception.cpp
+  source_file_part = stdlib_exception.cpp
+  source_name_part = stdlib_exception
+build clang_x86_v8_arm/obj/buildtools/third_party/libc++abi/libc++abi/stdlib_stdexcept.o: clang_x86_v8_arm_cxx ../buildtools/third_party/libc++abi/trunk/src/stdlib_stdexcept.cpp
+  source_file_part = stdlib_stdexcept.cpp
+  source_name_part = stdlib_stdexcept
+build clang_x86_v8_arm/obj/buildtools/third_party/libc++abi/libc++abi/stdlib_typeinfo.o: clang_x86_v8_arm_cxx ../buildtools/third_party/libc++abi/trunk/src/stdlib_typeinfo.cpp
+  source_file_part = stdlib_typeinfo.cpp
+  source_name_part = stdlib_typeinfo
+build clang_x86_v8_arm/obj/buildtools/third_party/libc++abi/libc++abi/cxa_guard.o: clang_x86_v8_arm_cxx ../buildtools/third_party/libc++abi/trunk/src/cxa_guard.cpp
+  source_file_part = cxa_guard.cpp
+  source_name_part = cxa_guard
+build clang_x86_v8_arm/obj/buildtools/third_party/libc++abi/libc++abi/cxa_demangle.o: clang_x86_v8_arm_cxx ../buildtools/third_party/libc++abi/trunk/src/cxa_demangle.cpp
+  source_file_part = cxa_demangle.cpp
+  source_name_part = cxa_demangle
+build clang_x86_v8_arm/obj/buildtools/third_party/libc++abi/libc++abi/cxa_thread_atexit.o: clang_x86_v8_arm_cxx ../buildtools/third_party/libc++abi/trunk/src/cxa_thread_atexit.cpp
+  source_file_part = cxa_thread_atexit.cpp
+  source_name_part = cxa_thread_atexit
+
+build clang_x86_v8_arm/obj/buildtools/third_party/libc++abi/libc++abi.stamp: clang_x86_v8_arm_stamp clang_x86_v8_arm/obj/buildtools/third_party/libc++abi/libc++abi/abort_message.o clang_x86_v8_arm/obj/buildtools/third_party/libc++abi/libc++abi/cxa_aux_runtime.o clang_x86_v8_arm/obj/buildtools/third_party/libc++abi/libc++abi/cxa_default_handlers.o clang_x86_v8_arm/obj/buildtools/third_party/libc++abi/libc++abi/cxa_exception.o clang_x86_v8_arm/obj/buildtools/third_party/libc++abi/libc++abi/cxa_exception_storage.o clang_x86_v8_arm/obj/buildtools/third_party/libc++abi/libc++abi/cxa_handlers.o clang_x86_v8_arm/obj/buildtools/third_party/libc++abi/libc++abi/cxa_personality.o clang_x86_v8_arm/obj/buildtools/third_party/libc++abi/libc++abi/cxa_vector.o clang_x86_v8_arm/obj/buildtools/third_party/libc++abi/libc++abi/cxa_virtual.o clang_x86_v8_arm/obj/buildtools/third_party/libc++abi/libc++abi/fallback_malloc.o clang_x86_v8_arm/obj/buildtools/third_party/libc++abi/libc++abi/private_typeinfo.o clang_x86_v8_arm/obj/buildtools/third_party/libc++abi/libc++abi/stdlib_exception.o clang_x86_v8_arm/obj/buildtools/third_party/libc++abi/libc++abi/stdlib_stdexcept.o clang_x86_v8_arm/obj/buildtools/third_party/libc++abi/libc++abi/stdlib_typeinfo.o clang_x86_v8_arm/obj/buildtools/third_party/libc++abi/libc++abi/cxa_guard.o clang_x86_v8_arm/obj/buildtools/third_party/libc++abi/libc++abi/cxa_demangle.o clang_x86_v8_arm/obj/buildtools/third_party/libc++abi/libc++abi/cxa_thread_atexit.o

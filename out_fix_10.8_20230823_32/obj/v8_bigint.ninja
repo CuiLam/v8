@@ -1,0 +1,44 @@
+defines = -DOFFICIAL_BUILD -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D_FORTIFY_SOURCE=2 -D_GNU_SOURCE -DANDROID -DHAVE_SYS_UIO_H -DANDROID_NDK_VERSION_ROLL=r23_1 -DCR_CLANG_REVISION=\"llvmorg-16-init-6084-g2f3d7c2c-1\" -DNDEBUG -DNVALGRIND -DDYNAMIC_ANNOTATIONS_ENABLED=0 -DV8_TYPED_ARRAY_MAX_SIZE_IN_HEAP=64 -DV8_ATOMIC_OBJECT_FIELD_WRITES -DV8_ENABLE_LAZY_SOURCE_POSITIONS -DV8_SHARED_RO_HEAP -DV8_WIN64_UNWINDING_INFO -DV8_ENABLE_REGEXP_INTERPRETER_THREADED_DISPATCH -DV8_ENABLE_WEBASSEMBLY -DV8_ENABLE_JAVASCRIPT_PROMISE_HOOKS -DV8_ALLOCATION_FOLDING -DV8_ALLOCATION_SITE_TRACKING -DV8_USE_ZLIB -DV8_DEPRECATION_WARNINGS -DV8_IMMINENT_DEPRECATION_WARNINGS -DV8_TARGET_ARCH_ARM -DCAN_USE_ARMV7_INSTRUCTIONS -DCAN_USE_VFP3_INSTRUCTIONS -DCAN_USE_VFP32DREGS -DCAN_USE_NEON -DV8_HAVE_TARGET_OS -DV8_TARGET_OS_ANDROID
+include_dirs = -I.. -Igen -I../include -Igen/include
+cflags = -Wall -Wextra -Wimplicit-fallthrough -Wextra-semi -Wunreachable-code-aggressive -Wthread-safety -Wno-missing-field-initializers -Wno-unused-parameter -Wloop-analysis -Wno-unneeded-internal-declaration -Wenum-compare-conditional -Wno-psabi -Wno-ignored-pragma-optimize -Wno-deprecated-builtins -Wno-bitfield-constant-conversion -Wshadow -fno-delete-null-pointer-checks -fno-ident -fno-strict-aliasing --param=ssp-buffer-size=4 -fstack-protector -funwind-tables -fPIC -fcolor-diagnostics -fmerge-all-constants -fcrash-diagnostics-dir=../tools/clang/crashreports -mllvm -instcombine-lower-dbg-declare=0 -ffp-contract=off -ffunction-sections -fno-short-enums --target=arm-linux-androideabi21 -march=armv7-a -mfloat-abi=softfp -ffile-compilation-dir=. -no-canonical-prefixes -mfpu=neon -mthumb -fomit-frame-pointer -g0 -Wheader-hygiene -Wstring-conversion -Wtautological-overlap-compare -Wmissing-field-initializers -Wunreachable-code -Wctad-maybe-unsupported -Wno-shadow -O2 -fdata-sections -ffunction-sections -fno-unique-section-names -fvisibility=default -Wexit-time-destructors
+cflags_cc = -std=c++17 -Wno-trigraphs -fno-exceptions -fno-rtti --sysroot=../../../opt/sdk-root/ndk/25.0.8775105/toolchains/llvm/prebuilt/linux-x86_64/sysroot
+label_name = v8_bigint
+root_out_dir = .
+target_out_dir = obj
+target_output_name = libv8_bigint
+
+build obj/v8_bigint/bigint-internal.o: cxx ../src/bigint/bigint-internal.cc
+  source_file_part = bigint-internal.cc
+  source_name_part = bigint-internal
+build obj/v8_bigint/bitwise.o: cxx ../src/bigint/bitwise.cc
+  source_file_part = bitwise.cc
+  source_name_part = bitwise
+build obj/v8_bigint/div-burnikel.o: cxx ../src/bigint/div-burnikel.cc
+  source_file_part = div-burnikel.cc
+  source_name_part = div-burnikel
+build obj/v8_bigint/div-helpers.o: cxx ../src/bigint/div-helpers.cc
+  source_file_part = div-helpers.cc
+  source_name_part = div-helpers
+build obj/v8_bigint/div-schoolbook.o: cxx ../src/bigint/div-schoolbook.cc
+  source_file_part = div-schoolbook.cc
+  source_name_part = div-schoolbook
+build obj/v8_bigint/fromstring.o: cxx ../src/bigint/fromstring.cc
+  source_file_part = fromstring.cc
+  source_name_part = fromstring
+build obj/v8_bigint/mul-karatsuba.o: cxx ../src/bigint/mul-karatsuba.cc
+  source_file_part = mul-karatsuba.cc
+  source_name_part = mul-karatsuba
+build obj/v8_bigint/mul-schoolbook.o: cxx ../src/bigint/mul-schoolbook.cc
+  source_file_part = mul-schoolbook.cc
+  source_name_part = mul-schoolbook
+build obj/v8_bigint/tostring.o: cxx ../src/bigint/tostring.cc
+  source_file_part = tostring.cc
+  source_name_part = tostring
+build obj/v8_bigint/vector-arithmetic.o: cxx ../src/bigint/vector-arithmetic.cc
+  source_file_part = vector-arithmetic.cc
+  source_name_part = vector-arithmetic
+
+build obj/libv8_bigint.a: alink obj/v8_bigint/bigint-internal.o obj/v8_bigint/bitwise.o obj/v8_bigint/div-burnikel.o obj/v8_bigint/div-helpers.o obj/v8_bigint/div-schoolbook.o obj/v8_bigint/fromstring.o obj/v8_bigint/mul-karatsuba.o obj/v8_bigint/mul-schoolbook.o obj/v8_bigint/tostring.o obj/v8_bigint/vector-arithmetic.o
+  arflags = -T
+  output_extension = .a
+  output_dir = obj

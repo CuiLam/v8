@@ -1,0 +1,23 @@
+defines = -DUSE_FILE32API -DOFFICIAL_BUILD -D_GNU_SOURCE -DANDROID -DHAVE_SYS_UIO_H -DANDROID_NDK_VERSION_ROLL=r23_1 -DCR_CLANG_REVISION=\"llvmorg-16-init-6084-g2f3d7c2c-1\" -DNDEBUG -DNVALGRIND -DDYNAMIC_ANNOTATIONS_ENABLED=0
+include_dirs = -I.. -Igen -I../third_party/zlib
+cflags = -fno-delete-null-pointer-checks -fno-ident -fno-strict-aliasing --param=ssp-buffer-size=4 -fstack-protector -funwind-tables -fPIC -fcolor-diagnostics -fmerge-all-constants -fcrash-diagnostics-dir=../tools/clang/crashreports -mllvm -instcombine-lower-dbg-declare=0 -ffp-contract=off -ffunction-sections -fno-short-enums -mbranch-protection=standard --target=aarch64-linux-android21 -mno-outline-atomics -mno-outline -ffile-compilation-dir=. -no-canonical-prefixes -Oz -fdata-sections -ffunction-sections -fno-unique-section-names -fno-omit-frame-pointer -g0 -fvisibility=hidden -Wheader-hygiene -Wstring-conversion -Wtautological-overlap-compare -Wall -Wno-unused-variable -Wno-c++11-narrowing -Wno-unused-but-set-variable -Wno-misleading-indentation -Wno-missing-field-initializers -Wno-unused-parameter -Wloop-analysis -Wno-unneeded-internal-declaration -Wenum-compare-conditional -Wno-psabi -Wno-ignored-pragma-optimize -Wno-deprecated-builtins -Wno-bitfield-constant-conversion -Wno-parentheses-equality -Wno-deprecated-non-prototype
+cflags_c = -std=c11 --sysroot=../../../opt/sdk-root/ndk/25.0.8775105/toolchains/llvm/prebuilt/linux-x86_64/sysroot
+label_name = minizip
+root_out_dir = .
+target_out_dir = obj/third_party/zlib
+target_output_name = libminizip
+
+build obj/third_party/zlib/minizip/ioapi.o: cc ../third_party/zlib/contrib/minizip/ioapi.c
+  source_file_part = ioapi.c
+  source_name_part = ioapi
+build obj/third_party/zlib/minizip/unzip.o: cc ../third_party/zlib/contrib/minizip/unzip.c
+  source_file_part = unzip.c
+  source_name_part = unzip
+build obj/third_party/zlib/minizip/zip.o: cc ../third_party/zlib/contrib/minizip/zip.c
+  source_file_part = zip.c
+  source_name_part = zip
+
+build obj/third_party/zlib/libminizip.a: alink obj/third_party/zlib/minizip/ioapi.o obj/third_party/zlib/minizip/unzip.o obj/third_party/zlib/minizip/zip.o || obj/third_party/zlib/libchrome_zlib.a obj/third_party/zlib/zlib_adler32_simd.stamp obj/third_party/zlib/zlib_common_headers.stamp obj/third_party/zlib/zlib_inflate_chunk_simd.stamp obj/third_party/zlib/zlib_slide_hash_simd.stamp obj/third_party/zlib/zlib_arm_crc32.stamp obj/third_party/android_ndk/cpu_features.stamp
+  arflags = -T
+  output_extension = .a
+  output_dir = obj/third_party/zlib

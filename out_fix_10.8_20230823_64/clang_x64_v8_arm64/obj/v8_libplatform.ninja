@@ -1,0 +1,49 @@
+defines = -DUSE_UDEV -DUSE_AURA=1 -DUSE_OZONE=1 -DOFFICIAL_BUILD -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D_FORTIFY_SOURCE=2 -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -DNO_UNWIND_TABLES -D_GNU_SOURCE -DCR_CLANG_REVISION=\"llvmorg-16-init-6084-g2f3d7c2c-1\" -DCR_SYSROOT_HASH=393193b824afacfcd2fb53cb47fc2023740f4995 -DNDEBUG -DNVALGRIND -DDYNAMIC_ANNOTATIONS_ENABLED=0 -DV8_TYPED_ARRAY_MAX_SIZE_IN_HEAP=64 -DV8_ATOMIC_OBJECT_FIELD_WRITES -DV8_ENABLE_LAZY_SOURCE_POSITIONS -DV8_SHARED_RO_HEAP -DV8_WIN64_UNWINDING_INFO -DV8_ENABLE_REGEXP_INTERPRETER_THREADED_DISPATCH -DV8_ENABLE_CONTROL_FLOW_INTEGRITY -DV8_SHORT_BUILTIN_CALLS -DV8_EXTERNAL_CODE_SPACE -DV8_ENABLE_WEBASSEMBLY -DV8_ENABLE_JAVASCRIPT_PROMISE_HOOKS -DV8_ALLOCATION_FOLDING -DV8_ALLOCATION_SITE_TRACKING -DV8_ADVANCED_BIGINT_ALGORITHMS -DV8_USE_ZLIB -DV8_COMPRESS_POINTERS -DV8_COMPRESS_POINTERS_IN_SHARED_CAGE -DV8_31BIT_SMIS_ON_64BIT_ARCH -DV8_ENABLE_SANDBOX -DV8_DEPRECATION_WARNINGS -DV8_IMMINENT_DEPRECATION_WARNINGS -DCPPGC_CAGED_HEAP -DCPPGC_YOUNG_GENERATION -DCPPGC_POINTER_COMPRESSION -DV8_TARGET_ARCH_ARM64 -DV8_HAVE_TARGET_OS -DV8_TARGET_OS_ANDROID
+include_dirs = -I.. -Iclang_x64_v8_arm64/gen -I../include -Iclang_x64_v8_arm64/gen/include
+cflags = -Wall -Wextra -Wimplicit-fallthrough -Wextra-semi -Wunreachable-code-aggressive -Wthread-safety -Wno-missing-field-initializers -Wno-unused-parameter -Wloop-analysis -Wno-unneeded-internal-declaration -Wenum-compare-conditional -Wno-psabi -Wno-ignored-pragma-optimize -Wno-deprecated-builtins -Wno-bitfield-constant-conversion -Wshadow -fno-delete-null-pointer-checks -fno-ident -fno-strict-aliasing --param=ssp-buffer-size=4 -fstack-protector -fno-unwind-tables -fno-asynchronous-unwind-tables -fPIC -pthread -fcolor-diagnostics -fmerge-all-constants -fcrash-diagnostics-dir=../tools/clang/crashreports -mllvm -instcombine-lower-dbg-declare=0 -ffp-contract=off -m64 -msse3 -ffile-compilation-dir=. -no-canonical-prefixes -fno-omit-frame-pointer -g0 -Wheader-hygiene -Wstring-conversion -Wtautological-overlap-compare -Wmissing-field-initializers -Wunreachable-code -Wctad-maybe-unsupported -Wno-shadow -Wshorten-64-to-32 -O3 -fdata-sections -ffunction-sections -fno-unique-section-names -fvisibility=default
+cflags_cc = -std=c++17 -Wno-trigraphs -fno-exceptions -fno-rtti --sysroot=../build/linux/debian_bullseye_amd64-sysroot
+label_name = v8_libplatform
+target_out_dir = clang_x64_v8_arm64/obj
+target_output_name = libv8_libplatform
+
+build clang_x64_v8_arm64/obj/v8_libplatform/default-foreground-task-runner.o: clang_x64_v8_arm64_cxx ../src/libplatform/default-foreground-task-runner.cc
+  source_file_part = default-foreground-task-runner.cc
+  source_name_part = default-foreground-task-runner
+build clang_x64_v8_arm64/obj/v8_libplatform/default-job.o: clang_x64_v8_arm64_cxx ../src/libplatform/default-job.cc
+  source_file_part = default-job.cc
+  source_name_part = default-job
+build clang_x64_v8_arm64/obj/v8_libplatform/default-platform.o: clang_x64_v8_arm64_cxx ../src/libplatform/default-platform.cc
+  source_file_part = default-platform.cc
+  source_name_part = default-platform
+build clang_x64_v8_arm64/obj/v8_libplatform/default-worker-threads-task-runner.o: clang_x64_v8_arm64_cxx ../src/libplatform/default-worker-threads-task-runner.cc
+  source_file_part = default-worker-threads-task-runner.cc
+  source_name_part = default-worker-threads-task-runner
+build clang_x64_v8_arm64/obj/v8_libplatform/delayed-task-queue.o: clang_x64_v8_arm64_cxx ../src/libplatform/delayed-task-queue.cc
+  source_file_part = delayed-task-queue.cc
+  source_name_part = delayed-task-queue
+build clang_x64_v8_arm64/obj/v8_libplatform/task-queue.o: clang_x64_v8_arm64_cxx ../src/libplatform/task-queue.cc
+  source_file_part = task-queue.cc
+  source_name_part = task-queue
+build clang_x64_v8_arm64/obj/v8_libplatform/trace-buffer.o: clang_x64_v8_arm64_cxx ../src/libplatform/tracing/trace-buffer.cc
+  source_file_part = trace-buffer.cc
+  source_name_part = trace-buffer
+build clang_x64_v8_arm64/obj/v8_libplatform/trace-config.o: clang_x64_v8_arm64_cxx ../src/libplatform/tracing/trace-config.cc
+  source_file_part = trace-config.cc
+  source_name_part = trace-config
+build clang_x64_v8_arm64/obj/v8_libplatform/trace-object.o: clang_x64_v8_arm64_cxx ../src/libplatform/tracing/trace-object.cc
+  source_file_part = trace-object.cc
+  source_name_part = trace-object
+build clang_x64_v8_arm64/obj/v8_libplatform/trace-writer.o: clang_x64_v8_arm64_cxx ../src/libplatform/tracing/trace-writer.cc
+  source_file_part = trace-writer.cc
+  source_name_part = trace-writer
+build clang_x64_v8_arm64/obj/v8_libplatform/tracing-controller.o: clang_x64_v8_arm64_cxx ../src/libplatform/tracing/tracing-controller.cc
+  source_file_part = tracing-controller.cc
+  source_name_part = tracing-controller
+build clang_x64_v8_arm64/obj/v8_libplatform/worker-thread.o: clang_x64_v8_arm64_cxx ../src/libplatform/worker-thread.cc
+  source_file_part = worker-thread.cc
+  source_name_part = worker-thread
+
+build clang_x64_v8_arm64/obj/libv8_libplatform.a: clang_x64_v8_arm64_alink clang_x64_v8_arm64/obj/v8_libplatform/default-foreground-task-runner.o clang_x64_v8_arm64/obj/v8_libplatform/default-job.o clang_x64_v8_arm64/obj/v8_libplatform/default-platform.o clang_x64_v8_arm64/obj/v8_libplatform/default-worker-threads-task-runner.o clang_x64_v8_arm64/obj/v8_libplatform/delayed-task-queue.o clang_x64_v8_arm64/obj/v8_libplatform/task-queue.o clang_x64_v8_arm64/obj/v8_libplatform/trace-buffer.o clang_x64_v8_arm64/obj/v8_libplatform/trace-config.o clang_x64_v8_arm64/obj/v8_libplatform/trace-object.o clang_x64_v8_arm64/obj/v8_libplatform/trace-writer.o clang_x64_v8_arm64/obj/v8_libplatform/tracing-controller.o clang_x64_v8_arm64/obj/v8_libplatform/worker-thread.o || clang_x64_v8_arm64/obj/v8_config_headers.stamp clang_x64_v8_arm64/obj/libv8_libbase.a clang_x64_v8_arm64/obj/v8_tracing.stamp
+  arflags = -T
+  output_extension = .a
+  output_dir = clang_x64_v8_arm64/obj

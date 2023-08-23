@@ -1,0 +1,615 @@
+defines = -DU_COMMON_IMPLEMENTATION -DU_ICUDATAENTRY_IN_COMMON -D_GNU_SOURCE -DANDROID -DHAVE_SYS_UIO_H -DANDROID_NDK_VERSION_ROLL=r23_1 -DCR_CLANG_REVISION=\"llvmorg-16-init-6084-g2f3d7c2c-1\" -DCOMPONENT_BUILD -DCR_LIBCXX_REVISION=2e919977e0030ce61bd19c40cefe31b995f1e2d4 -D_DEBUG -DDYNAMIC_ANNOTATIONS_ENABLED=1 -DHAVE_DLOPEN=0 -DUCONFIG_ONLY_HTML_CONVERSION=1 -DUCONFIG_USE_WINDOWS_LCID_MAPPING_API=0 -DU_CHARSET_IS_UTF8=1 -DU_USING_ICU_NAMESPACE=0 -DU_ENABLE_DYLOAD=0 -DUSE_CHROMIUM_ICU=1 -DU_ENABLE_TRACING=1 -DU_ENABLE_RESOURCE_TRACING=0 -DICU_UTIL_DATA_IMPL=ICU_UTIL_DATA_FILE
+include_dirs = -I.. -Igen -I../buildtools/third_party/libc++ -I../third_party/icu/source/common -I../third_party/icu/source/i18n
+cflags = -fno-delete-null-pointer-checks -fno-ident -fno-strict-aliasing --param=ssp-buffer-size=4 -fstack-protector -funwind-tables -fPIC -fcolor-diagnostics -fmerge-all-constants -fcrash-diagnostics-dir=../tools/clang/crashreports -mllvm -instcombine-lower-dbg-declare=0 -ffp-contract=off -fcomplete-member-pointers -ffunction-sections -fno-short-enums --target=arm-linux-androideabi23 -march=armv7-a -mfloat-abi=softfp -Wno-builtin-macro-redefined -D__DATE__= -D__TIME__= -D__TIMESTAMP__= -ffile-compilation-dir=. -no-canonical-prefixes -mfpu=neon -mthumb -Oz -fdata-sections -ffunction-sections -fno-unique-section-names -fomit-frame-pointer -gdwarf-4 -g2 -gdwarf-aranges -Xclang -fuse-ctor-homing -fvisibility=hidden -Xclang -add-plugin -Xclang find-bad-constructs -Xclang -plugin-arg-find-bad-constructs -Xclang raw-ref-template-as-trivial-member -Xclang -plugin-arg-find-bad-constructs -Xclang check-ipc -Wheader-hygiene -Wstring-conversion -Wtautological-overlap-compare -Werror -Wall -Wno-unused-variable -Wno-c++11-narrowing -Wno-unused-but-set-variable -Wno-misleading-indentation -Wno-missing-field-initializers -Wno-unused-parameter -Wloop-analysis -Wno-unneeded-internal-declaration -Wenum-compare-conditional -Wno-psabi -Wno-ignored-pragma-optimize -Wno-deprecated-builtins -Wno-bitfield-constant-conversion -Wno-unused-function -Wno-parentheses -Wno-unused-function -Wno-unused-variable -Wno-ambiguous-reversed-operator -Wno-deprecated-declarations
+cflags_cc = -Wno-undefined-bool-conversion -Wno-tautological-undefined-compare -std=c++17 -Wno-trigraphs -fno-exceptions -nostdinc++ -isystem../buildtools/third_party/libc++/trunk/include -isystem../buildtools/third_party/libc++abi/trunk/include --sysroot=../third_party/android_ndk/toolchains/llvm/prebuilt/linux-x86_64/sysroot -fvisibility-inlines-hidden -frtti
+label_name = icuuc_private
+root_out_dir = .
+target_out_dir = obj/third_party/icu
+target_output_name = libicuuc
+
+build obj/third_party/icu/icuuc_private/appendable.o: cxx ../third_party/icu/source/common/appendable.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = appendable.cpp
+  source_name_part = appendable
+build obj/third_party/icu/icuuc_private/bmpset.o: cxx ../third_party/icu/source/common/bmpset.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = bmpset.cpp
+  source_name_part = bmpset
+build obj/third_party/icu/icuuc_private/brkeng.o: cxx ../third_party/icu/source/common/brkeng.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = brkeng.cpp
+  source_name_part = brkeng
+build obj/third_party/icu/icuuc_private/brkiter.o: cxx ../third_party/icu/source/common/brkiter.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = brkiter.cpp
+  source_name_part = brkiter
+build obj/third_party/icu/icuuc_private/bytesinkutil.o: cxx ../third_party/icu/source/common/bytesinkutil.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = bytesinkutil.cpp
+  source_name_part = bytesinkutil
+build obj/third_party/icu/icuuc_private/bytestream.o: cxx ../third_party/icu/source/common/bytestream.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = bytestream.cpp
+  source_name_part = bytestream
+build obj/third_party/icu/icuuc_private/bytestriebuilder.o: cxx ../third_party/icu/source/common/bytestriebuilder.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = bytestriebuilder.cpp
+  source_name_part = bytestriebuilder
+build obj/third_party/icu/icuuc_private/bytestrie.o: cxx ../third_party/icu/source/common/bytestrie.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = bytestrie.cpp
+  source_name_part = bytestrie
+build obj/third_party/icu/icuuc_private/bytestrieiterator.o: cxx ../third_party/icu/source/common/bytestrieiterator.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = bytestrieiterator.cpp
+  source_name_part = bytestrieiterator
+build obj/third_party/icu/icuuc_private/caniter.o: cxx ../third_party/icu/source/common/caniter.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = caniter.cpp
+  source_name_part = caniter
+build obj/third_party/icu/icuuc_private/characterproperties.o: cxx ../third_party/icu/source/common/characterproperties.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = characterproperties.cpp
+  source_name_part = characterproperties
+build obj/third_party/icu/icuuc_private/chariter.o: cxx ../third_party/icu/source/common/chariter.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = chariter.cpp
+  source_name_part = chariter
+build obj/third_party/icu/icuuc_private/charstr.o: cxx ../third_party/icu/source/common/charstr.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = charstr.cpp
+  source_name_part = charstr
+build obj/third_party/icu/icuuc_private/cmemory.o: cxx ../third_party/icu/source/common/cmemory.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = cmemory.cpp
+  source_name_part = cmemory
+build obj/third_party/icu/icuuc_private/cstr.o: cxx ../third_party/icu/source/common/cstr.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = cstr.cpp
+  source_name_part = cstr
+build obj/third_party/icu/icuuc_private/cstring.o: cxx ../third_party/icu/source/common/cstring.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = cstring.cpp
+  source_name_part = cstring
+build obj/third_party/icu/icuuc_private/cwchar.o: cxx ../third_party/icu/source/common/cwchar.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = cwchar.cpp
+  source_name_part = cwchar
+build obj/third_party/icu/icuuc_private/dictbe.o: cxx ../third_party/icu/source/common/dictbe.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = dictbe.cpp
+  source_name_part = dictbe
+build obj/third_party/icu/icuuc_private/dictionarydata.o: cxx ../third_party/icu/source/common/dictionarydata.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = dictionarydata.cpp
+  source_name_part = dictionarydata
+build obj/third_party/icu/icuuc_private/dtintrv.o: cxx ../third_party/icu/source/common/dtintrv.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = dtintrv.cpp
+  source_name_part = dtintrv
+build obj/third_party/icu/icuuc_private/edits.o: cxx ../third_party/icu/source/common/edits.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = edits.cpp
+  source_name_part = edits
+build obj/third_party/icu/icuuc_private/emojiprops.o: cxx ../third_party/icu/source/common/emojiprops.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = emojiprops.cpp
+  source_name_part = emojiprops
+build obj/third_party/icu/icuuc_private/errorcode.o: cxx ../third_party/icu/source/common/errorcode.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = errorcode.cpp
+  source_name_part = errorcode
+build obj/third_party/icu/icuuc_private/filteredbrk.o: cxx ../third_party/icu/source/common/filteredbrk.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = filteredbrk.cpp
+  source_name_part = filteredbrk
+build obj/third_party/icu/icuuc_private/filterednormalizer2.o: cxx ../third_party/icu/source/common/filterednormalizer2.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = filterednormalizer2.cpp
+  source_name_part = filterednormalizer2
+build obj/third_party/icu/icuuc_private/icudataver.o: cxx ../third_party/icu/source/common/icudataver.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = icudataver.cpp
+  source_name_part = icudataver
+build obj/third_party/icu/icuuc_private/icuplug.o: cxx ../third_party/icu/source/common/icuplug.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = icuplug.cpp
+  source_name_part = icuplug
+build obj/third_party/icu/icuuc_private/loadednormalizer2impl.o: cxx ../third_party/icu/source/common/loadednormalizer2impl.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = loadednormalizer2impl.cpp
+  source_name_part = loadednormalizer2impl
+build obj/third_party/icu/icuuc_private/localebuilder.o: cxx ../third_party/icu/source/common/localebuilder.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = localebuilder.cpp
+  source_name_part = localebuilder
+build obj/third_party/icu/icuuc_private/localematcher.o: cxx ../third_party/icu/source/common/localematcher.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = localematcher.cpp
+  source_name_part = localematcher
+build obj/third_party/icu/icuuc_private/localeprioritylist.o: cxx ../third_party/icu/source/common/localeprioritylist.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = localeprioritylist.cpp
+  source_name_part = localeprioritylist
+build obj/third_party/icu/icuuc_private/locavailable.o: cxx ../third_party/icu/source/common/locavailable.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = locavailable.cpp
+  source_name_part = locavailable
+build obj/third_party/icu/icuuc_private/locbased.o: cxx ../third_party/icu/source/common/locbased.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = locbased.cpp
+  source_name_part = locbased
+build obj/third_party/icu/icuuc_private/locdispnames.o: cxx ../third_party/icu/source/common/locdispnames.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = locdispnames.cpp
+  source_name_part = locdispnames
+build obj/third_party/icu/icuuc_private/locdistance.o: cxx ../third_party/icu/source/common/locdistance.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = locdistance.cpp
+  source_name_part = locdistance
+build obj/third_party/icu/icuuc_private/locdspnm.o: cxx ../third_party/icu/source/common/locdspnm.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = locdspnm.cpp
+  source_name_part = locdspnm
+build obj/third_party/icu/icuuc_private/locid.o: cxx ../third_party/icu/source/common/locid.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = locid.cpp
+  source_name_part = locid
+build obj/third_party/icu/icuuc_private/loclikely.o: cxx ../third_party/icu/source/common/loclikely.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = loclikely.cpp
+  source_name_part = loclikely
+build obj/third_party/icu/icuuc_private/loclikelysubtags.o: cxx ../third_party/icu/source/common/loclikelysubtags.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = loclikelysubtags.cpp
+  source_name_part = loclikelysubtags
+build obj/third_party/icu/icuuc_private/locmap.o: cxx ../third_party/icu/source/common/locmap.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = locmap.cpp
+  source_name_part = locmap
+build obj/third_party/icu/icuuc_private/locresdata.o: cxx ../third_party/icu/source/common/locresdata.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = locresdata.cpp
+  source_name_part = locresdata
+build obj/third_party/icu/icuuc_private/locutil.o: cxx ../third_party/icu/source/common/locutil.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = locutil.cpp
+  source_name_part = locutil
+build obj/third_party/icu/icuuc_private/lsr.o: cxx ../third_party/icu/source/common/lsr.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = lsr.cpp
+  source_name_part = lsr
+build obj/third_party/icu/icuuc_private/lstmbe.o: cxx ../third_party/icu/source/common/lstmbe.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = lstmbe.cpp
+  source_name_part = lstmbe
+build obj/third_party/icu/icuuc_private/messagepattern.o: cxx ../third_party/icu/source/common/messagepattern.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = messagepattern.cpp
+  source_name_part = messagepattern
+build obj/third_party/icu/icuuc_private/normalizer2.o: cxx ../third_party/icu/source/common/normalizer2.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = normalizer2.cpp
+  source_name_part = normalizer2
+build obj/third_party/icu/icuuc_private/normalizer2impl.o: cxx ../third_party/icu/source/common/normalizer2impl.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = normalizer2impl.cpp
+  source_name_part = normalizer2impl
+build obj/third_party/icu/icuuc_private/normlzr.o: cxx ../third_party/icu/source/common/normlzr.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = normlzr.cpp
+  source_name_part = normlzr
+build obj/third_party/icu/icuuc_private/parsepos.o: cxx ../third_party/icu/source/common/parsepos.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = parsepos.cpp
+  source_name_part = parsepos
+build obj/third_party/icu/icuuc_private/patternprops.o: cxx ../third_party/icu/source/common/patternprops.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = patternprops.cpp
+  source_name_part = patternprops
+build obj/third_party/icu/icuuc_private/pluralmap.o: cxx ../third_party/icu/source/common/pluralmap.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = pluralmap.cpp
+  source_name_part = pluralmap
+build obj/third_party/icu/icuuc_private/propname.o: cxx ../third_party/icu/source/common/propname.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = propname.cpp
+  source_name_part = propname
+build obj/third_party/icu/icuuc_private/propsvec.o: cxx ../third_party/icu/source/common/propsvec.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = propsvec.cpp
+  source_name_part = propsvec
+build obj/third_party/icu/icuuc_private/punycode.o: cxx ../third_party/icu/source/common/punycode.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = punycode.cpp
+  source_name_part = punycode
+build obj/third_party/icu/icuuc_private/putil.o: cxx ../third_party/icu/source/common/putil.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = putil.cpp
+  source_name_part = putil
+build obj/third_party/icu/icuuc_private/rbbi_cache.o: cxx ../third_party/icu/source/common/rbbi_cache.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = rbbi_cache.cpp
+  source_name_part = rbbi_cache
+build obj/third_party/icu/icuuc_private/rbbi.o: cxx ../third_party/icu/source/common/rbbi.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = rbbi.cpp
+  source_name_part = rbbi
+build obj/third_party/icu/icuuc_private/rbbidata.o: cxx ../third_party/icu/source/common/rbbidata.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = rbbidata.cpp
+  source_name_part = rbbidata
+build obj/third_party/icu/icuuc_private/rbbinode.o: cxx ../third_party/icu/source/common/rbbinode.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = rbbinode.cpp
+  source_name_part = rbbinode
+build obj/third_party/icu/icuuc_private/rbbirb.o: cxx ../third_party/icu/source/common/rbbirb.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = rbbirb.cpp
+  source_name_part = rbbirb
+build obj/third_party/icu/icuuc_private/rbbiscan.o: cxx ../third_party/icu/source/common/rbbiscan.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = rbbiscan.cpp
+  source_name_part = rbbiscan
+build obj/third_party/icu/icuuc_private/rbbisetb.o: cxx ../third_party/icu/source/common/rbbisetb.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = rbbisetb.cpp
+  source_name_part = rbbisetb
+build obj/third_party/icu/icuuc_private/rbbistbl.o: cxx ../third_party/icu/source/common/rbbistbl.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = rbbistbl.cpp
+  source_name_part = rbbistbl
+build obj/third_party/icu/icuuc_private/rbbitblb.o: cxx ../third_party/icu/source/common/rbbitblb.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = rbbitblb.cpp
+  source_name_part = rbbitblb
+build obj/third_party/icu/icuuc_private/resbund_cnv.o: cxx ../third_party/icu/source/common/resbund_cnv.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = resbund_cnv.cpp
+  source_name_part = resbund_cnv
+build obj/third_party/icu/icuuc_private/resbund.o: cxx ../third_party/icu/source/common/resbund.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = resbund.cpp
+  source_name_part = resbund
+build obj/third_party/icu/icuuc_private/resource.o: cxx ../third_party/icu/source/common/resource.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = resource.cpp
+  source_name_part = resource
+build obj/third_party/icu/icuuc_private/restrace.o: cxx ../third_party/icu/source/common/restrace.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = restrace.cpp
+  source_name_part = restrace
+build obj/third_party/icu/icuuc_private/ruleiter.o: cxx ../third_party/icu/source/common/ruleiter.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = ruleiter.cpp
+  source_name_part = ruleiter
+build obj/third_party/icu/icuuc_private/schriter.o: cxx ../third_party/icu/source/common/schriter.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = schriter.cpp
+  source_name_part = schriter
+build obj/third_party/icu/icuuc_private/serv.o: cxx ../third_party/icu/source/common/serv.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = serv.cpp
+  source_name_part = serv
+build obj/third_party/icu/icuuc_private/servlk.o: cxx ../third_party/icu/source/common/servlk.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = servlk.cpp
+  source_name_part = servlk
+build obj/third_party/icu/icuuc_private/servlkf.o: cxx ../third_party/icu/source/common/servlkf.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = servlkf.cpp
+  source_name_part = servlkf
+build obj/third_party/icu/icuuc_private/servls.o: cxx ../third_party/icu/source/common/servls.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = servls.cpp
+  source_name_part = servls
+build obj/third_party/icu/icuuc_private/servnotf.o: cxx ../third_party/icu/source/common/servnotf.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = servnotf.cpp
+  source_name_part = servnotf
+build obj/third_party/icu/icuuc_private/servrbf.o: cxx ../third_party/icu/source/common/servrbf.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = servrbf.cpp
+  source_name_part = servrbf
+build obj/third_party/icu/icuuc_private/servslkf.o: cxx ../third_party/icu/source/common/servslkf.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = servslkf.cpp
+  source_name_part = servslkf
+build obj/third_party/icu/icuuc_private/sharedobject.o: cxx ../third_party/icu/source/common/sharedobject.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = sharedobject.cpp
+  source_name_part = sharedobject
+build obj/third_party/icu/icuuc_private/simpleformatter.o: cxx ../third_party/icu/source/common/simpleformatter.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = simpleformatter.cpp
+  source_name_part = simpleformatter
+build obj/third_party/icu/icuuc_private/static_unicode_sets.o: cxx ../third_party/icu/source/common/static_unicode_sets.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = static_unicode_sets.cpp
+  source_name_part = static_unicode_sets
+build obj/third_party/icu/icuuc_private/stringpiece.o: cxx ../third_party/icu/source/common/stringpiece.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = stringpiece.cpp
+  source_name_part = stringpiece
+build obj/third_party/icu/icuuc_private/stringtriebuilder.o: cxx ../third_party/icu/source/common/stringtriebuilder.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = stringtriebuilder.cpp
+  source_name_part = stringtriebuilder
+build obj/third_party/icu/icuuc_private/uarrsort.o: cxx ../third_party/icu/source/common/uarrsort.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = uarrsort.cpp
+  source_name_part = uarrsort
+build obj/third_party/icu/icuuc_private/ubidi.o: cxx ../third_party/icu/source/common/ubidi.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = ubidi.cpp
+  source_name_part = ubidi
+build obj/third_party/icu/icuuc_private/ubidiln.o: cxx ../third_party/icu/source/common/ubidiln.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = ubidiln.cpp
+  source_name_part = ubidiln
+build obj/third_party/icu/icuuc_private/ubidi_props.o: cxx ../third_party/icu/source/common/ubidi_props.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = ubidi_props.cpp
+  source_name_part = ubidi_props
+build obj/third_party/icu/icuuc_private/ubiditransform.o: cxx ../third_party/icu/source/common/ubiditransform.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = ubiditransform.cpp
+  source_name_part = ubiditransform
+build obj/third_party/icu/icuuc_private/ubidiwrt.o: cxx ../third_party/icu/source/common/ubidiwrt.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = ubidiwrt.cpp
+  source_name_part = ubidiwrt
+build obj/third_party/icu/icuuc_private/ubrk.o: cxx ../third_party/icu/source/common/ubrk.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = ubrk.cpp
+  source_name_part = ubrk
+build obj/third_party/icu/icuuc_private/ucase.o: cxx ../third_party/icu/source/common/ucase.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = ucase.cpp
+  source_name_part = ucase
+build obj/third_party/icu/icuuc_private/ucasemap.o: cxx ../third_party/icu/source/common/ucasemap.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = ucasemap.cpp
+  source_name_part = ucasemap
+build obj/third_party/icu/icuuc_private/ucasemap_titlecase_brkiter.o: cxx ../third_party/icu/source/common/ucasemap_titlecase_brkiter.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = ucasemap_titlecase_brkiter.cpp
+  source_name_part = ucasemap_titlecase_brkiter
+build obj/third_party/icu/icuuc_private/ucat.o: cxx ../third_party/icu/source/common/ucat.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = ucat.cpp
+  source_name_part = ucat
+build obj/third_party/icu/icuuc_private/uchar.o: cxx ../third_party/icu/source/common/uchar.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = uchar.cpp
+  source_name_part = uchar
+build obj/third_party/icu/icuuc_private/ucharstriebuilder.o: cxx ../third_party/icu/source/common/ucharstriebuilder.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = ucharstriebuilder.cpp
+  source_name_part = ucharstriebuilder
+build obj/third_party/icu/icuuc_private/ucharstrie.o: cxx ../third_party/icu/source/common/ucharstrie.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = ucharstrie.cpp
+  source_name_part = ucharstrie
+build obj/third_party/icu/icuuc_private/ucharstrieiterator.o: cxx ../third_party/icu/source/common/ucharstrieiterator.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = ucharstrieiterator.cpp
+  source_name_part = ucharstrieiterator
+build obj/third_party/icu/icuuc_private/uchriter.o: cxx ../third_party/icu/source/common/uchriter.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = uchriter.cpp
+  source_name_part = uchriter
+build obj/third_party/icu/icuuc_private/ucln_cmn.o: cxx ../third_party/icu/source/common/ucln_cmn.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = ucln_cmn.cpp
+  source_name_part = ucln_cmn
+build obj/third_party/icu/icuuc_private/ucmndata.o: cxx ../third_party/icu/source/common/ucmndata.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = ucmndata.cpp
+  source_name_part = ucmndata
+build obj/third_party/icu/icuuc_private/ucnv2022.o: cxx ../third_party/icu/source/common/ucnv2022.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = ucnv2022.cpp
+  source_name_part = ucnv2022
+build obj/third_party/icu/icuuc_private/ucnv_bld.o: cxx ../third_party/icu/source/common/ucnv_bld.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = ucnv_bld.cpp
+  source_name_part = ucnv_bld
+build obj/third_party/icu/icuuc_private/ucnvbocu.o: cxx ../third_party/icu/source/common/ucnvbocu.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = ucnvbocu.cpp
+  source_name_part = ucnvbocu
+build obj/third_party/icu/icuuc_private/ucnv_cb.o: cxx ../third_party/icu/source/common/ucnv_cb.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = ucnv_cb.cpp
+  source_name_part = ucnv_cb
+build obj/third_party/icu/icuuc_private/ucnv_cnv.o: cxx ../third_party/icu/source/common/ucnv_cnv.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = ucnv_cnv.cpp
+  source_name_part = ucnv_cnv
+build obj/third_party/icu/icuuc_private/ucnv.o: cxx ../third_party/icu/source/common/ucnv.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = ucnv.cpp
+  source_name_part = ucnv
+build obj/third_party/icu/icuuc_private/ucnv_ct.o: cxx ../third_party/icu/source/common/ucnv_ct.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = ucnv_ct.cpp
+  source_name_part = ucnv_ct
+build obj/third_party/icu/icuuc_private/ucnvdisp.o: cxx ../third_party/icu/source/common/ucnvdisp.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = ucnvdisp.cpp
+  source_name_part = ucnvdisp
+build obj/third_party/icu/icuuc_private/ucnv_err.o: cxx ../third_party/icu/source/common/ucnv_err.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = ucnv_err.cpp
+  source_name_part = ucnv_err
+build obj/third_party/icu/icuuc_private/ucnv_ext.o: cxx ../third_party/icu/source/common/ucnv_ext.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = ucnv_ext.cpp
+  source_name_part = ucnv_ext
+build obj/third_party/icu/icuuc_private/ucnvhz.o: cxx ../third_party/icu/source/common/ucnvhz.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = ucnvhz.cpp
+  source_name_part = ucnvhz
+build obj/third_party/icu/icuuc_private/ucnv_io.o: cxx ../third_party/icu/source/common/ucnv_io.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = ucnv_io.cpp
+  source_name_part = ucnv_io
+build obj/third_party/icu/icuuc_private/ucnvisci.o: cxx ../third_party/icu/source/common/ucnvisci.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = ucnvisci.cpp
+  source_name_part = ucnvisci
+build obj/third_party/icu/icuuc_private/ucnvlat1.o: cxx ../third_party/icu/source/common/ucnvlat1.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = ucnvlat1.cpp
+  source_name_part = ucnvlat1
+build obj/third_party/icu/icuuc_private/ucnv_lmb.o: cxx ../third_party/icu/source/common/ucnv_lmb.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = ucnv_lmb.cpp
+  source_name_part = ucnv_lmb
+build obj/third_party/icu/icuuc_private/ucnvmbcs.o: cxx ../third_party/icu/source/common/ucnvmbcs.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = ucnvmbcs.cpp
+  source_name_part = ucnvmbcs
+build obj/third_party/icu/icuuc_private/ucnvscsu.o: cxx ../third_party/icu/source/common/ucnvscsu.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = ucnvscsu.cpp
+  source_name_part = ucnvscsu
+build obj/third_party/icu/icuuc_private/ucnvsel.o: cxx ../third_party/icu/source/common/ucnvsel.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = ucnvsel.cpp
+  source_name_part = ucnvsel
+build obj/third_party/icu/icuuc_private/ucnv_set.o: cxx ../third_party/icu/source/common/ucnv_set.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = ucnv_set.cpp
+  source_name_part = ucnv_set
+build obj/third_party/icu/icuuc_private/ucnv_u16.o: cxx ../third_party/icu/source/common/ucnv_u16.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = ucnv_u16.cpp
+  source_name_part = ucnv_u16
+build obj/third_party/icu/icuuc_private/ucnv_u32.o: cxx ../third_party/icu/source/common/ucnv_u32.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = ucnv_u32.cpp
+  source_name_part = ucnv_u32
+build obj/third_party/icu/icuuc_private/ucnv_u7.o: cxx ../third_party/icu/source/common/ucnv_u7.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = ucnv_u7.cpp
+  source_name_part = ucnv_u7
+build obj/third_party/icu/icuuc_private/ucnv_u8.o: cxx ../third_party/icu/source/common/ucnv_u8.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = ucnv_u8.cpp
+  source_name_part = ucnv_u8
+build obj/third_party/icu/icuuc_private/ucol_swp.o: cxx ../third_party/icu/source/common/ucol_swp.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = ucol_swp.cpp
+  source_name_part = ucol_swp
+build obj/third_party/icu/icuuc_private/ucptrie.o: cxx ../third_party/icu/source/common/ucptrie.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = ucptrie.cpp
+  source_name_part = ucptrie
+build obj/third_party/icu/icuuc_private/ucurr.o: cxx ../third_party/icu/source/common/ucurr.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = ucurr.cpp
+  source_name_part = ucurr
+build obj/third_party/icu/icuuc_private/udata.o: cxx ../third_party/icu/source/common/udata.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = udata.cpp
+  source_name_part = udata
+build obj/third_party/icu/icuuc_private/udatamem.o: cxx ../third_party/icu/source/common/udatamem.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = udatamem.cpp
+  source_name_part = udatamem
+build obj/third_party/icu/icuuc_private/udataswp.o: cxx ../third_party/icu/source/common/udataswp.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = udataswp.cpp
+  source_name_part = udataswp
+build obj/third_party/icu/icuuc_private/uenum.o: cxx ../third_party/icu/source/common/uenum.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = uenum.cpp
+  source_name_part = uenum
+build obj/third_party/icu/icuuc_private/uhash.o: cxx ../third_party/icu/source/common/uhash.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = uhash.cpp
+  source_name_part = uhash
+build obj/third_party/icu/icuuc_private/uhash_us.o: cxx ../third_party/icu/source/common/uhash_us.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = uhash_us.cpp
+  source_name_part = uhash_us
+build obj/third_party/icu/icuuc_private/uidna.o: cxx ../third_party/icu/source/common/uidna.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = uidna.cpp
+  source_name_part = uidna
+build obj/third_party/icu/icuuc_private/uinit.o: cxx ../third_party/icu/source/common/uinit.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = uinit.cpp
+  source_name_part = uinit
+build obj/third_party/icu/icuuc_private/uinvchar.o: cxx ../third_party/icu/source/common/uinvchar.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = uinvchar.cpp
+  source_name_part = uinvchar
+build obj/third_party/icu/icuuc_private/uiter.o: cxx ../third_party/icu/source/common/uiter.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = uiter.cpp
+  source_name_part = uiter
+build obj/third_party/icu/icuuc_private/ulist.o: cxx ../third_party/icu/source/common/ulist.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = ulist.cpp
+  source_name_part = ulist
+build obj/third_party/icu/icuuc_private/uloc.o: cxx ../third_party/icu/source/common/uloc.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = uloc.cpp
+  source_name_part = uloc
+build obj/third_party/icu/icuuc_private/uloc_keytype.o: cxx ../third_party/icu/source/common/uloc_keytype.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = uloc_keytype.cpp
+  source_name_part = uloc_keytype
+build obj/third_party/icu/icuuc_private/uloc_tag.o: cxx ../third_party/icu/source/common/uloc_tag.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = uloc_tag.cpp
+  source_name_part = uloc_tag
+build obj/third_party/icu/icuuc_private/umapfile.o: cxx ../third_party/icu/source/common/umapfile.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = umapfile.cpp
+  source_name_part = umapfile
+build obj/third_party/icu/icuuc_private/umath.o: cxx ../third_party/icu/source/common/umath.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = umath.cpp
+  source_name_part = umath
+build obj/third_party/icu/icuuc_private/umutablecptrie.o: cxx ../third_party/icu/source/common/umutablecptrie.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = umutablecptrie.cpp
+  source_name_part = umutablecptrie
+build obj/third_party/icu/icuuc_private/umutex.o: cxx ../third_party/icu/source/common/umutex.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = umutex.cpp
+  source_name_part = umutex
+build obj/third_party/icu/icuuc_private/unames.o: cxx ../third_party/icu/source/common/unames.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = unames.cpp
+  source_name_part = unames
+build obj/third_party/icu/icuuc_private/unifiedcache.o: cxx ../third_party/icu/source/common/unifiedcache.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = unifiedcache.cpp
+  source_name_part = unifiedcache
+build obj/third_party/icu/icuuc_private/unifilt.o: cxx ../third_party/icu/source/common/unifilt.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = unifilt.cpp
+  source_name_part = unifilt
+build obj/third_party/icu/icuuc_private/unifunct.o: cxx ../third_party/icu/source/common/unifunct.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = unifunct.cpp
+  source_name_part = unifunct
+build obj/third_party/icu/icuuc_private/uniset_closure.o: cxx ../third_party/icu/source/common/uniset_closure.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = uniset_closure.cpp
+  source_name_part = uniset_closure
+build obj/third_party/icu/icuuc_private/uniset.o: cxx ../third_party/icu/source/common/uniset.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = uniset.cpp
+  source_name_part = uniset
+build obj/third_party/icu/icuuc_private/uniset_props.o: cxx ../third_party/icu/source/common/uniset_props.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = uniset_props.cpp
+  source_name_part = uniset_props
+build obj/third_party/icu/icuuc_private/unisetspan.o: cxx ../third_party/icu/source/common/unisetspan.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = unisetspan.cpp
+  source_name_part = unisetspan
+build obj/third_party/icu/icuuc_private/unistr_case.o: cxx ../third_party/icu/source/common/unistr_case.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = unistr_case.cpp
+  source_name_part = unistr_case
+build obj/third_party/icu/icuuc_private/unistr_case_locale.o: cxx ../third_party/icu/source/common/unistr_case_locale.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = unistr_case_locale.cpp
+  source_name_part = unistr_case_locale
+build obj/third_party/icu/icuuc_private/unistr_cnv.o: cxx ../third_party/icu/source/common/unistr_cnv.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = unistr_cnv.cpp
+  source_name_part = unistr_cnv
+build obj/third_party/icu/icuuc_private/unistr.o: cxx ../third_party/icu/source/common/unistr.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = unistr.cpp
+  source_name_part = unistr
+build obj/third_party/icu/icuuc_private/unistr_props.o: cxx ../third_party/icu/source/common/unistr_props.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = unistr_props.cpp
+  source_name_part = unistr_props
+build obj/third_party/icu/icuuc_private/unistr_titlecase_brkiter.o: cxx ../third_party/icu/source/common/unistr_titlecase_brkiter.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = unistr_titlecase_brkiter.cpp
+  source_name_part = unistr_titlecase_brkiter
+build obj/third_party/icu/icuuc_private/unormcmp.o: cxx ../third_party/icu/source/common/unormcmp.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = unormcmp.cpp
+  source_name_part = unormcmp
+build obj/third_party/icu/icuuc_private/unorm.o: cxx ../third_party/icu/source/common/unorm.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = unorm.cpp
+  source_name_part = unorm
+build obj/third_party/icu/icuuc_private/uobject.o: cxx ../third_party/icu/source/common/uobject.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = uobject.cpp
+  source_name_part = uobject
+build obj/third_party/icu/icuuc_private/uprops.o: cxx ../third_party/icu/source/common/uprops.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = uprops.cpp
+  source_name_part = uprops
+build obj/third_party/icu/icuuc_private/uresbund.o: cxx ../third_party/icu/source/common/uresbund.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = uresbund.cpp
+  source_name_part = uresbund
+build obj/third_party/icu/icuuc_private/ures_cnv.o: cxx ../third_party/icu/source/common/ures_cnv.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = ures_cnv.cpp
+  source_name_part = ures_cnv
+build obj/third_party/icu/icuuc_private/uresdata.o: cxx ../third_party/icu/source/common/uresdata.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = uresdata.cpp
+  source_name_part = uresdata
+build obj/third_party/icu/icuuc_private/usc_impl.o: cxx ../third_party/icu/source/common/usc_impl.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = usc_impl.cpp
+  source_name_part = usc_impl
+build obj/third_party/icu/icuuc_private/uscript.o: cxx ../third_party/icu/source/common/uscript.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = uscript.cpp
+  source_name_part = uscript
+build obj/third_party/icu/icuuc_private/uscript_props.o: cxx ../third_party/icu/source/common/uscript_props.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = uscript_props.cpp
+  source_name_part = uscript_props
+build obj/third_party/icu/icuuc_private/uset.o: cxx ../third_party/icu/source/common/uset.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = uset.cpp
+  source_name_part = uset
+build obj/third_party/icu/icuuc_private/usetiter.o: cxx ../third_party/icu/source/common/usetiter.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = usetiter.cpp
+  source_name_part = usetiter
+build obj/third_party/icu/icuuc_private/uset_props.o: cxx ../third_party/icu/source/common/uset_props.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = uset_props.cpp
+  source_name_part = uset_props
+build obj/third_party/icu/icuuc_private/ushape.o: cxx ../third_party/icu/source/common/ushape.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = ushape.cpp
+  source_name_part = ushape
+build obj/third_party/icu/icuuc_private/usprep.o: cxx ../third_party/icu/source/common/usprep.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = usprep.cpp
+  source_name_part = usprep
+build obj/third_party/icu/icuuc_private/ustack.o: cxx ../third_party/icu/source/common/ustack.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = ustack.cpp
+  source_name_part = ustack
+build obj/third_party/icu/icuuc_private/ustrcase.o: cxx ../third_party/icu/source/common/ustrcase.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = ustrcase.cpp
+  source_name_part = ustrcase
+build obj/third_party/icu/icuuc_private/ustrcase_locale.o: cxx ../third_party/icu/source/common/ustrcase_locale.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = ustrcase_locale.cpp
+  source_name_part = ustrcase_locale
+build obj/third_party/icu/icuuc_private/ustr_cnv.o: cxx ../third_party/icu/source/common/ustr_cnv.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = ustr_cnv.cpp
+  source_name_part = ustr_cnv
+build obj/third_party/icu/icuuc_private/ustrenum.o: cxx ../third_party/icu/source/common/ustrenum.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = ustrenum.cpp
+  source_name_part = ustrenum
+build obj/third_party/icu/icuuc_private/ustrfmt.o: cxx ../third_party/icu/source/common/ustrfmt.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = ustrfmt.cpp
+  source_name_part = ustrfmt
+build obj/third_party/icu/icuuc_private/ustring.o: cxx ../third_party/icu/source/common/ustring.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = ustring.cpp
+  source_name_part = ustring
+build obj/third_party/icu/icuuc_private/ustr_titlecase_brkiter.o: cxx ../third_party/icu/source/common/ustr_titlecase_brkiter.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = ustr_titlecase_brkiter.cpp
+  source_name_part = ustr_titlecase_brkiter
+build obj/third_party/icu/icuuc_private/ustrtrns.o: cxx ../third_party/icu/source/common/ustrtrns.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = ustrtrns.cpp
+  source_name_part = ustrtrns
+build obj/third_party/icu/icuuc_private/ustr_wcs.o: cxx ../third_party/icu/source/common/ustr_wcs.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = ustr_wcs.cpp
+  source_name_part = ustr_wcs
+build obj/third_party/icu/icuuc_private/utext.o: cxx ../third_party/icu/source/common/utext.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = utext.cpp
+  source_name_part = utext
+build obj/third_party/icu/icuuc_private/utf_impl.o: cxx ../third_party/icu/source/common/utf_impl.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = utf_impl.cpp
+  source_name_part = utf_impl
+build obj/third_party/icu/icuuc_private/util.o: cxx ../third_party/icu/source/common/util.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = util.cpp
+  source_name_part = util
+build obj/third_party/icu/icuuc_private/util_props.o: cxx ../third_party/icu/source/common/util_props.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = util_props.cpp
+  source_name_part = util_props
+build obj/third_party/icu/icuuc_private/utrace.o: cxx ../third_party/icu/source/common/utrace.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = utrace.cpp
+  source_name_part = utrace
+build obj/third_party/icu/icuuc_private/utrie2_builder.o: cxx ../third_party/icu/source/common/utrie2_builder.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = utrie2_builder.cpp
+  source_name_part = utrie2_builder
+build obj/third_party/icu/icuuc_private/utrie2.o: cxx ../third_party/icu/source/common/utrie2.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = utrie2.cpp
+  source_name_part = utrie2
+build obj/third_party/icu/icuuc_private/utrie.o: cxx ../third_party/icu/source/common/utrie.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = utrie.cpp
+  source_name_part = utrie
+build obj/third_party/icu/icuuc_private/utrie_swap.o: cxx ../third_party/icu/source/common/utrie_swap.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = utrie_swap.cpp
+  source_name_part = utrie_swap
+build obj/third_party/icu/icuuc_private/uts46.o: cxx ../third_party/icu/source/common/uts46.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = uts46.cpp
+  source_name_part = uts46
+build obj/third_party/icu/icuuc_private/utypes.o: cxx ../third_party/icu/source/common/utypes.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = utypes.cpp
+  source_name_part = utypes
+build obj/third_party/icu/icuuc_private/uvector.o: cxx ../third_party/icu/source/common/uvector.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = uvector.cpp
+  source_name_part = uvector
+build obj/third_party/icu/icuuc_private/uvectr32.o: cxx ../third_party/icu/source/common/uvectr32.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = uvectr32.cpp
+  source_name_part = uvectr32
+build obj/third_party/icu/icuuc_private/uvectr64.o: cxx ../third_party/icu/source/common/uvectr64.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = uvectr64.cpp
+  source_name_part = uvectr64
+build obj/third_party/icu/icuuc_private/wintz.o: cxx ../third_party/icu/source/common/wintz.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = wintz.cpp
+  source_name_part = wintz
+build obj/third_party/icu/icuuc_private/stubdata.o: cxx ../third_party/icu/source/stubdata/stubdata.cpp || obj/third_party/icu/icudata.stamp
+  source_file_part = stubdata.cpp
+  source_name_part = stubdata
+
+build ./libicuuc.cr.so ./libicuuc.cr.so.TOC ./lib.unstripped/libicuuc.cr.so: solink obj/third_party/icu/icuuc_private/appendable.o obj/third_party/icu/icuuc_private/bmpset.o obj/third_party/icu/icuuc_private/brkeng.o obj/third_party/icu/icuuc_private/brkiter.o obj/third_party/icu/icuuc_private/bytesinkutil.o obj/third_party/icu/icuuc_private/bytestream.o obj/third_party/icu/icuuc_private/bytestriebuilder.o obj/third_party/icu/icuuc_private/bytestrie.o obj/third_party/icu/icuuc_private/bytestrieiterator.o obj/third_party/icu/icuuc_private/caniter.o obj/third_party/icu/icuuc_private/characterproperties.o obj/third_party/icu/icuuc_private/chariter.o obj/third_party/icu/icuuc_private/charstr.o obj/third_party/icu/icuuc_private/cmemory.o obj/third_party/icu/icuuc_private/cstr.o obj/third_party/icu/icuuc_private/cstring.o obj/third_party/icu/icuuc_private/cwchar.o obj/third_party/icu/icuuc_private/dictbe.o obj/third_party/icu/icuuc_private/dictionarydata.o obj/third_party/icu/icuuc_private/dtintrv.o obj/third_party/icu/icuuc_private/edits.o obj/third_party/icu/icuuc_private/emojiprops.o obj/third_party/icu/icuuc_private/errorcode.o obj/third_party/icu/icuuc_private/filteredbrk.o obj/third_party/icu/icuuc_private/filterednormalizer2.o obj/third_party/icu/icuuc_private/icudataver.o obj/third_party/icu/icuuc_private/icuplug.o obj/third_party/icu/icuuc_private/loadednormalizer2impl.o obj/third_party/icu/icuuc_private/localebuilder.o obj/third_party/icu/icuuc_private/localematcher.o obj/third_party/icu/icuuc_private/localeprioritylist.o obj/third_party/icu/icuuc_private/locavailable.o obj/third_party/icu/icuuc_private/locbased.o obj/third_party/icu/icuuc_private/locdispnames.o obj/third_party/icu/icuuc_private/locdistance.o obj/third_party/icu/icuuc_private/locdspnm.o obj/third_party/icu/icuuc_private/locid.o obj/third_party/icu/icuuc_private/loclikely.o obj/third_party/icu/icuuc_private/loclikelysubtags.o obj/third_party/icu/icuuc_private/locmap.o obj/third_party/icu/icuuc_private/locresdata.o obj/third_party/icu/icuuc_private/locutil.o obj/third_party/icu/icuuc_private/lsr.o obj/third_party/icu/icuuc_private/lstmbe.o obj/third_party/icu/icuuc_private/messagepattern.o obj/third_party/icu/icuuc_private/normalizer2.o obj/third_party/icu/icuuc_private/normalizer2impl.o obj/third_party/icu/icuuc_private/normlzr.o obj/third_party/icu/icuuc_private/parsepos.o obj/third_party/icu/icuuc_private/patternprops.o obj/third_party/icu/icuuc_private/pluralmap.o obj/third_party/icu/icuuc_private/propname.o obj/third_party/icu/icuuc_private/propsvec.o obj/third_party/icu/icuuc_private/punycode.o obj/third_party/icu/icuuc_private/putil.o obj/third_party/icu/icuuc_private/rbbi_cache.o obj/third_party/icu/icuuc_private/rbbi.o obj/third_party/icu/icuuc_private/rbbidata.o obj/third_party/icu/icuuc_private/rbbinode.o obj/third_party/icu/icuuc_private/rbbirb.o obj/third_party/icu/icuuc_private/rbbiscan.o obj/third_party/icu/icuuc_private/rbbisetb.o obj/third_party/icu/icuuc_private/rbbistbl.o obj/third_party/icu/icuuc_private/rbbitblb.o obj/third_party/icu/icuuc_private/resbund_cnv.o obj/third_party/icu/icuuc_private/resbund.o obj/third_party/icu/icuuc_private/resource.o obj/third_party/icu/icuuc_private/restrace.o obj/third_party/icu/icuuc_private/ruleiter.o obj/third_party/icu/icuuc_private/schriter.o obj/third_party/icu/icuuc_private/serv.o obj/third_party/icu/icuuc_private/servlk.o obj/third_party/icu/icuuc_private/servlkf.o obj/third_party/icu/icuuc_private/servls.o obj/third_party/icu/icuuc_private/servnotf.o obj/third_party/icu/icuuc_private/servrbf.o obj/third_party/icu/icuuc_private/servslkf.o obj/third_party/icu/icuuc_private/sharedobject.o obj/third_party/icu/icuuc_private/simpleformatter.o obj/third_party/icu/icuuc_private/static_unicode_sets.o obj/third_party/icu/icuuc_private/stringpiece.o obj/third_party/icu/icuuc_private/stringtriebuilder.o obj/third_party/icu/icuuc_private/uarrsort.o obj/third_party/icu/icuuc_private/ubidi.o obj/third_party/icu/icuuc_private/ubidiln.o obj/third_party/icu/icuuc_private/ubidi_props.o obj/third_party/icu/icuuc_private/ubiditransform.o obj/third_party/icu/icuuc_private/ubidiwrt.o obj/third_party/icu/icuuc_private/ubrk.o obj/third_party/icu/icuuc_private/ucase.o obj/third_party/icu/icuuc_private/ucasemap.o obj/third_party/icu/icuuc_private/ucasemap_titlecase_brkiter.o obj/third_party/icu/icuuc_private/ucat.o obj/third_party/icu/icuuc_private/uchar.o obj/third_party/icu/icuuc_private/ucharstriebuilder.o obj/third_party/icu/icuuc_private/ucharstrie.o obj/third_party/icu/icuuc_private/ucharstrieiterator.o obj/third_party/icu/icuuc_private/uchriter.o obj/third_party/icu/icuuc_private/ucln_cmn.o obj/third_party/icu/icuuc_private/ucmndata.o obj/third_party/icu/icuuc_private/ucnv2022.o obj/third_party/icu/icuuc_private/ucnv_bld.o obj/third_party/icu/icuuc_private/ucnvbocu.o obj/third_party/icu/icuuc_private/ucnv_cb.o obj/third_party/icu/icuuc_private/ucnv_cnv.o obj/third_party/icu/icuuc_private/ucnv.o obj/third_party/icu/icuuc_private/ucnv_ct.o obj/third_party/icu/icuuc_private/ucnvdisp.o obj/third_party/icu/icuuc_private/ucnv_err.o obj/third_party/icu/icuuc_private/ucnv_ext.o obj/third_party/icu/icuuc_private/ucnvhz.o obj/third_party/icu/icuuc_private/ucnv_io.o obj/third_party/icu/icuuc_private/ucnvisci.o obj/third_party/icu/icuuc_private/ucnvlat1.o obj/third_party/icu/icuuc_private/ucnv_lmb.o obj/third_party/icu/icuuc_private/ucnvmbcs.o obj/third_party/icu/icuuc_private/ucnvscsu.o obj/third_party/icu/icuuc_private/ucnvsel.o obj/third_party/icu/icuuc_private/ucnv_set.o obj/third_party/icu/icuuc_private/ucnv_u16.o obj/third_party/icu/icuuc_private/ucnv_u32.o obj/third_party/icu/icuuc_private/ucnv_u7.o obj/third_party/icu/icuuc_private/ucnv_u8.o obj/third_party/icu/icuuc_private/ucol_swp.o obj/third_party/icu/icuuc_private/ucptrie.o obj/third_party/icu/icuuc_private/ucurr.o obj/third_party/icu/icuuc_private/udata.o obj/third_party/icu/icuuc_private/udatamem.o obj/third_party/icu/icuuc_private/udataswp.o obj/third_party/icu/icuuc_private/uenum.o obj/third_party/icu/icuuc_private/uhash.o obj/third_party/icu/icuuc_private/uhash_us.o obj/third_party/icu/icuuc_private/uidna.o obj/third_party/icu/icuuc_private/uinit.o obj/third_party/icu/icuuc_private/uinvchar.o obj/third_party/icu/icuuc_private/uiter.o obj/third_party/icu/icuuc_private/ulist.o obj/third_party/icu/icuuc_private/uloc.o obj/third_party/icu/icuuc_private/uloc_keytype.o obj/third_party/icu/icuuc_private/uloc_tag.o obj/third_party/icu/icuuc_private/umapfile.o obj/third_party/icu/icuuc_private/umath.o obj/third_party/icu/icuuc_private/umutablecptrie.o obj/third_party/icu/icuuc_private/umutex.o obj/third_party/icu/icuuc_private/unames.o obj/third_party/icu/icuuc_private/unifiedcache.o obj/third_party/icu/icuuc_private/unifilt.o obj/third_party/icu/icuuc_private/unifunct.o obj/third_party/icu/icuuc_private/uniset_closure.o obj/third_party/icu/icuuc_private/uniset.o obj/third_party/icu/icuuc_private/uniset_props.o obj/third_party/icu/icuuc_private/unisetspan.o obj/third_party/icu/icuuc_private/unistr_case.o obj/third_party/icu/icuuc_private/unistr_case_locale.o obj/third_party/icu/icuuc_private/unistr_cnv.o obj/third_party/icu/icuuc_private/unistr.o obj/third_party/icu/icuuc_private/unistr_props.o obj/third_party/icu/icuuc_private/unistr_titlecase_brkiter.o obj/third_party/icu/icuuc_private/unormcmp.o obj/third_party/icu/icuuc_private/unorm.o obj/third_party/icu/icuuc_private/uobject.o obj/third_party/icu/icuuc_private/uprops.o obj/third_party/icu/icuuc_private/uresbund.o obj/third_party/icu/icuuc_private/ures_cnv.o obj/third_party/icu/icuuc_private/uresdata.o obj/third_party/icu/icuuc_private/usc_impl.o obj/third_party/icu/icuuc_private/uscript.o obj/third_party/icu/icuuc_private/uscript_props.o obj/third_party/icu/icuuc_private/uset.o obj/third_party/icu/icuuc_private/usetiter.o obj/third_party/icu/icuuc_private/uset_props.o obj/third_party/icu/icuuc_private/ushape.o obj/third_party/icu/icuuc_private/usprep.o obj/third_party/icu/icuuc_private/ustack.o obj/third_party/icu/icuuc_private/ustrcase.o obj/third_party/icu/icuuc_private/ustrcase_locale.o obj/third_party/icu/icuuc_private/ustr_cnv.o obj/third_party/icu/icuuc_private/ustrenum.o obj/third_party/icu/icuuc_private/ustrfmt.o obj/third_party/icu/icuuc_private/ustring.o obj/third_party/icu/icuuc_private/ustr_titlecase_brkiter.o obj/third_party/icu/icuuc_private/ustrtrns.o obj/third_party/icu/icuuc_private/ustr_wcs.o obj/third_party/icu/icuuc_private/utext.o obj/third_party/icu/icuuc_private/utf_impl.o obj/third_party/icu/icuuc_private/util.o obj/third_party/icu/icuuc_private/util_props.o obj/third_party/icu/icuuc_private/utrace.o obj/third_party/icu/icuuc_private/utrie2_builder.o obj/third_party/icu/icuuc_private/utrie2.o obj/third_party/icu/icuuc_private/utrie.o obj/third_party/icu/icuuc_private/utrie_swap.o obj/third_party/icu/icuuc_private/uts46.o obj/third_party/icu/icuuc_private/utypes.o obj/third_party/icu/icuuc_private/uvector.o obj/third_party/icu/icuuc_private/uvectr32.o obj/third_party/icu/icuuc_private/uvectr64.o obj/third_party/icu/icuuc_private/wintz.o obj/third_party/icu/icuuc_private/stubdata.o | ./libc++_chrome.cr.so.TOC || obj/third_party/icu/icuuc_public.stamp obj/third_party/icu/icudata.stamp obj/build/config/shared_library_deps.stamp
+  ldflags = -fuse-ld=lld -Wl,--fatal-warnings -Wl,--build-id -fPIC -Wl,-z,noexecstack -Wl,-z,relro -Wl,--color-diagnostics -Wl,--no-rosegment -Wl,--no-call-graph-profile-sort -Wl,--exclude-libs=libvpx_assembly_arm.a --unwindlib=none --target=arm-linux-androideabi23 -no-canonical-prefixes -Wl,-z,defs -Wl,--as-needed -nostdlib++ --sysroot=../third_party/android_ndk/toolchains/llvm/prebuilt/linux-x86_64/sysroot -Wl,--warn-shared-textrel -Werror
+  libs = -landroid_support -ldl -lm
+  frameworks =
+  swiftmodules =
+  output_extension = .cr.so
+  output_dir = .
+  solibs = ./libc++_chrome.cr.so

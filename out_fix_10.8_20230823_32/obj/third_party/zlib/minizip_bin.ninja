@@ -1,0 +1,20 @@
+defines = -DOFFICIAL_BUILD -D_GNU_SOURCE -DANDROID -DHAVE_SYS_UIO_H -DANDROID_NDK_VERSION_ROLL=r23_1 -DCR_CLANG_REVISION=\"llvmorg-16-init-6084-g2f3d7c2c-1\" -DNDEBUG -DNVALGRIND -DDYNAMIC_ANNOTATIONS_ENABLED=0
+include_dirs = -I../third_party/zlib -I.. -Igen
+cflags = -Wno-incompatible-pointer-types-discards-qualifiers -Wno-deprecated-non-prototype -fno-delete-null-pointer-checks -fno-ident -fno-strict-aliasing --param=ssp-buffer-size=4 -fstack-protector -funwind-tables -fPIC -fcolor-diagnostics -fmerge-all-constants -fcrash-diagnostics-dir=../tools/clang/crashreports -mllvm -instcombine-lower-dbg-declare=0 -ffp-contract=off -ffunction-sections -fno-short-enums --target=arm-linux-androideabi21 -march=armv7-a -mfloat-abi=softfp -ffile-compilation-dir=. -no-canonical-prefixes -mfpu=neon -mthumb -fomit-frame-pointer -g0 -fvisibility=hidden -Wheader-hygiene -Wstring-conversion -Wtautological-overlap-compare -O3 -fdata-sections -ffunction-sections -fno-unique-section-names -Wall -Wno-unused-variable -Wno-c++11-narrowing -Wno-unused-but-set-variable -Wno-misleading-indentation -Wno-missing-field-initializers -Wno-unused-parameter -Wloop-analysis -Wno-unneeded-internal-declaration -Wenum-compare-conditional -Wno-psabi -Wno-ignored-pragma-optimize -Wno-deprecated-builtins -Wno-bitfield-constant-conversion
+cflags_c = -std=c11 --sysroot=../../../opt/sdk-root/ndk/25.0.8775105/toolchains/llvm/prebuilt/linux-x86_64/sysroot
+label_name = minizip_bin
+root_out_dir = .
+target_out_dir = obj/third_party/zlib
+target_output_name = minizip_bin
+
+build obj/third_party/zlib/minizip_bin/minizip.o: cc ../third_party/zlib/contrib/minizip/minizip.c
+  source_file_part = minizip.c
+  source_name_part = minizip
+
+build ./minizip_bin ./exe.unstripped/minizip_bin ./exe.unstripped/minizip_bin.map.gz: link obj/third_party/zlib/minizip_bin/minizip.o obj/third_party/zlib/zlib_adler32_simd/adler32_simd.o obj/third_party/zlib/zlib_inflate_chunk_simd/inffast_chunk.o obj/third_party/zlib/zlib_inflate_chunk_simd/inflate.o obj/third_party/zlib/zlib_arm_crc32/crc32_simd.o obj/third_party/android_ndk/cpu_features/cpu-features.o obj/third_party/zlib/libminizip.a obj/third_party/zlib/libchrome_zlib.a || obj/build/config/executable_deps.stamp obj/third_party/zlib/zlib_adler32_simd.stamp obj/third_party/zlib/zlib_common_headers.stamp obj/third_party/zlib/zlib_inflate_chunk_simd.stamp obj/third_party/zlib/zlib_slide_hash_simd.stamp obj/third_party/zlib/zlib_arm_crc32.stamp obj/third_party/android_ndk/cpu_features.stamp
+  ldflags = -fuse-ld=lld -Wl,--fatal-warnings -Wl,--build-id=sha1 -fPIC -Wl,-z,noexecstack -Wl,-z,relro -Wl,-z,now -Wl,--icf=all -Wl,--color-diagnostics -Wl,--no-rosegment -Wl,--no-call-graph-profile-sort -Wl,--exclude-libs=libvpx_assembly_arm.a --unwindlib=none --target=arm-linux-androideabi21 -no-canonical-prefixes -Wl,-z,defs -Wl,--as-needed --sysroot=../../../opt/sdk-root/ndk/25.0.8775105/toolchains/llvm/prebuilt/linux-x86_64/sysroot -Wl,--warn-shared-textrel -pie -Bdynamic -Wl,-z,nocopyreloc -Wl,--warn-shared-textrel -Wl,-O2 -Wl,--gc-sections
+  libs = -landroid_support -ldl -lm
+  frameworks =
+  swiftmodules =
+  output_extension = 
+  output_dir = .

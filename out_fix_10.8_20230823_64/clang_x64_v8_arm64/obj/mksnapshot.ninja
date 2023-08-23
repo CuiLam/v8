@@ -1,0 +1,47 @@
+defines = -DUSE_UDEV -DUSE_AURA=1 -DUSE_OZONE=1 -DOFFICIAL_BUILD -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D_FORTIFY_SOURCE=2 -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -DNO_UNWIND_TABLES -D_GNU_SOURCE -DCR_CLANG_REVISION=\"llvmorg-16-init-6084-g2f3d7c2c-1\" -DCR_SYSROOT_HASH=393193b824afacfcd2fb53cb47fc2023740f4995 -DNDEBUG -DNVALGRIND -DDYNAMIC_ANNOTATIONS_ENABLED=0 -DV8_TYPED_ARRAY_MAX_SIZE_IN_HEAP=64 -DV8_ATOMIC_OBJECT_FIELD_WRITES -DV8_ENABLE_LAZY_SOURCE_POSITIONS -DV8_SHARED_RO_HEAP -DV8_WIN64_UNWINDING_INFO -DV8_ENABLE_REGEXP_INTERPRETER_THREADED_DISPATCH -DV8_ENABLE_CONTROL_FLOW_INTEGRITY -DV8_SHORT_BUILTIN_CALLS -DV8_EXTERNAL_CODE_SPACE -DV8_ENABLE_WEBASSEMBLY -DV8_ENABLE_JAVASCRIPT_PROMISE_HOOKS -DV8_ALLOCATION_FOLDING -DV8_ALLOCATION_SITE_TRACKING -DV8_ADVANCED_BIGINT_ALGORITHMS -DV8_USE_ZLIB -DV8_COMPRESS_POINTERS -DV8_COMPRESS_POINTERS_IN_SHARED_CAGE -DV8_31BIT_SMIS_ON_64BIT_ARCH -DV8_ENABLE_SANDBOX -DV8_DEPRECATION_WARNINGS -DV8_IMMINENT_DEPRECATION_WARNINGS -DCPPGC_CAGED_HEAP -DCPPGC_YOUNG_GENERATION -DCPPGC_POINTER_COMPRESSION -DV8_TARGET_ARCH_ARM64 -DV8_HAVE_TARGET_OS -DV8_TARGET_OS_ANDROID
+include_dirs = -I.. -Iclang_x64_v8_arm64/gen -I../include -Iclang_x64_v8_arm64/gen/include
+cflags = -Wall -Wextra -Wimplicit-fallthrough -Wextra-semi -Wunreachable-code-aggressive -Wthread-safety -Wno-missing-field-initializers -Wno-unused-parameter -Wloop-analysis -Wno-unneeded-internal-declaration -Wenum-compare-conditional -Wno-psabi -Wno-ignored-pragma-optimize -Wno-deprecated-builtins -Wno-bitfield-constant-conversion -Wshadow -fno-delete-null-pointer-checks -fno-ident -fno-strict-aliasing --param=ssp-buffer-size=4 -fstack-protector -fno-unwind-tables -fno-asynchronous-unwind-tables -fPIC -pthread -fcolor-diagnostics -fmerge-all-constants -fcrash-diagnostics-dir=../tools/clang/crashreports -mllvm -instcombine-lower-dbg-declare=0 -ffp-contract=off -m64 -msse3 -ffile-compilation-dir=. -no-canonical-prefixes -fno-omit-frame-pointer -g0 -Wheader-hygiene -Wstring-conversion -Wtautological-overlap-compare -Wmissing-field-initializers -Wunreachable-code -Wctad-maybe-unsupported -Wno-shadow -Wshorten-64-to-32 -O3 -fdata-sections -ffunction-sections -fno-unique-section-names -fvisibility=default -Wexit-time-destructors
+cflags_cc = -std=c++17 -Wno-trigraphs -fno-exceptions -fno-rtti --sysroot=../build/linux/debian_bullseye_amd64-sysroot
+label_name = mksnapshot
+target_out_dir = clang_x64_v8_arm64/obj
+target_output_name = mksnapshot
+
+build clang_x64_v8_arm64/obj/mksnapshot.inputdeps.stamp: clang_x64_v8_arm64_stamp clang_x64_v8_arm64/obj/generate_bytecode_builtins_list.stamp clang_x64_v8_arm64/obj/run_torque.stamp clang_x64_v8_arm64/obj/v8_dump_build_config.stamp clang_x64_v8_arm64/obj/src/inspector/protocol_generated_sources.stamp
+build clang_x64_v8_arm64/obj/mksnapshot/embedded-empty.o: clang_x64_v8_arm64_cxx ../src/snapshot/embedded/embedded-empty.cc || clang_x64_v8_arm64/obj/mksnapshot.inputdeps.stamp
+  source_file_part = embedded-empty.cc
+  source_name_part = embedded-empty
+build clang_x64_v8_arm64/obj/mksnapshot/embedded-file-writer.o: clang_x64_v8_arm64_cxx ../src/snapshot/embedded/embedded-file-writer.cc || clang_x64_v8_arm64/obj/mksnapshot.inputdeps.stamp
+  source_file_part = embedded-file-writer.cc
+  source_name_part = embedded-file-writer
+build clang_x64_v8_arm64/obj/mksnapshot/platform-embedded-file-writer-aix.o: clang_x64_v8_arm64_cxx ../src/snapshot/embedded/platform-embedded-file-writer-aix.cc || clang_x64_v8_arm64/obj/mksnapshot.inputdeps.stamp
+  source_file_part = platform-embedded-file-writer-aix.cc
+  source_name_part = platform-embedded-file-writer-aix
+build clang_x64_v8_arm64/obj/mksnapshot/platform-embedded-file-writer-base.o: clang_x64_v8_arm64_cxx ../src/snapshot/embedded/platform-embedded-file-writer-base.cc || clang_x64_v8_arm64/obj/mksnapshot.inputdeps.stamp
+  source_file_part = platform-embedded-file-writer-base.cc
+  source_name_part = platform-embedded-file-writer-base
+build clang_x64_v8_arm64/obj/mksnapshot/platform-embedded-file-writer-generic.o: clang_x64_v8_arm64_cxx ../src/snapshot/embedded/platform-embedded-file-writer-generic.cc || clang_x64_v8_arm64/obj/mksnapshot.inputdeps.stamp
+  source_file_part = platform-embedded-file-writer-generic.cc
+  source_name_part = platform-embedded-file-writer-generic
+build clang_x64_v8_arm64/obj/mksnapshot/platform-embedded-file-writer-mac.o: clang_x64_v8_arm64_cxx ../src/snapshot/embedded/platform-embedded-file-writer-mac.cc || clang_x64_v8_arm64/obj/mksnapshot.inputdeps.stamp
+  source_file_part = platform-embedded-file-writer-mac.cc
+  source_name_part = platform-embedded-file-writer-mac
+build clang_x64_v8_arm64/obj/mksnapshot/platform-embedded-file-writer-win.o: clang_x64_v8_arm64_cxx ../src/snapshot/embedded/platform-embedded-file-writer-win.cc || clang_x64_v8_arm64/obj/mksnapshot.inputdeps.stamp
+  source_file_part = platform-embedded-file-writer-win.cc
+  source_name_part = platform-embedded-file-writer-win
+build clang_x64_v8_arm64/obj/mksnapshot/mksnapshot.o: clang_x64_v8_arm64_cxx ../src/snapshot/mksnapshot.cc || clang_x64_v8_arm64/obj/mksnapshot.inputdeps.stamp
+  source_file_part = mksnapshot.cc
+  source_name_part = mksnapshot
+build clang_x64_v8_arm64/obj/mksnapshot/snapshot-empty.o: clang_x64_v8_arm64_cxx ../src/snapshot/snapshot-empty.cc || clang_x64_v8_arm64/obj/mksnapshot.inputdeps.stamp
+  source_file_part = snapshot-empty.cc
+  source_name_part = snapshot-empty
+build clang_x64_v8_arm64/obj/mksnapshot/deoptimizer-cfi-empty.o: clang_x64_v8_arm64_cxx ../src/deoptimizer/deoptimizer-cfi-empty.cc || clang_x64_v8_arm64/obj/mksnapshot.inputdeps.stamp
+  source_file_part = deoptimizer-cfi-empty.cc
+  source_name_part = deoptimizer-cfi-empty
+
+build clang_x64_v8_arm64/mksnapshot: clang_x64_v8_arm64_link clang_x64_v8_arm64/obj/mksnapshot/embedded-empty.o clang_x64_v8_arm64/obj/mksnapshot/embedded-file-writer.o clang_x64_v8_arm64/obj/mksnapshot/platform-embedded-file-writer-aix.o clang_x64_v8_arm64/obj/mksnapshot/platform-embedded-file-writer-base.o clang_x64_v8_arm64/obj/mksnapshot/platform-embedded-file-writer-generic.o clang_x64_v8_arm64/obj/mksnapshot/platform-embedded-file-writer-mac.o clang_x64_v8_arm64/obj/mksnapshot/platform-embedded-file-writer-win.o clang_x64_v8_arm64/obj/mksnapshot/mksnapshot.o clang_x64_v8_arm64/obj/mksnapshot/snapshot-empty.o clang_x64_v8_arm64/obj/mksnapshot/deoptimizer-cfi-empty.o clang_x64_v8_arm64/obj/third_party/zlib/zlib_adler32_simd/adler32_simd.o clang_x64_v8_arm64/obj/third_party/zlib/zlib_inflate_chunk_simd/inffast_chunk.o clang_x64_v8_arm64/obj/third_party/zlib/zlib_inflate_chunk_simd/inflate.o clang_x64_v8_arm64/obj/third_party/zlib/zlib_crc32_simd/crc32_simd.o clang_x64_v8_arm64/obj/third_party/zlib/zlib_crc32_simd/crc_folding.o clang_x64_v8_arm64/obj/libv8_base_without_compiler.a clang_x64_v8_arm64/obj/libv8_init.a clang_x64_v8_arm64/obj/libv8_libbase.a clang_x64_v8_arm64/obj/libv8_libplatform.a clang_x64_v8_arm64/obj/libv8_turboshaft.a clang_x64_v8_arm64/obj/libcppgc_base.a clang_x64_v8_arm64/obj/libv8_heap_base.a clang_x64_v8_arm64/obj/libtorque_generated_definitions.a clang_x64_v8_arm64/obj/libv8_bigint.a clang_x64_v8_arm64/obj/src/inspector/libinspector.a clang_x64_v8_arm64/obj/src/inspector/libinspector_string_conversions.a clang_x64_v8_arm64/obj/third_party/inspector_protocol/libcrdtp.a clang_x64_v8_arm64/obj/third_party/inspector_protocol/libcrdtp_platform.a clang_x64_v8_arm64/obj/third_party/zlib/libchrome_zlib.a clang_x64_v8_arm64/obj/third_party/zlib/google/libcompression_utils_portable.a clang_x64_v8_arm64/obj/libv8_compiler.a clang_x64_v8_arm64/obj/libv8_initializers.a clang_x64_v8_arm64/obj/libtorque_generated_initializers.a || clang_x64_v8_arm64/obj/v8_compiler_for_mksnapshot.stamp clang_x64_v8_arm64/obj/v8_maybe_icu.stamp clang_x64_v8_arm64/obj/v8_shared_internal_headers.stamp clang_x64_v8_arm64/obj/v8_tracing.stamp clang_x64_v8_arm64/obj/build/win/default_exe_manifest.stamp clang_x64_v8_arm64/obj/v8_dump_build_config.stamp clang_x64_v8_arm64/obj/build/config/executable_deps.stamp clang_x64_v8_arm64/obj/cppgc_headers.stamp clang_x64_v8_arm64/obj/v8_config_headers.stamp clang_x64_v8_arm64/obj/v8_heap_base_headers.stamp clang_x64_v8_arm64/obj/v8_headers.stamp clang_x64_v8_arm64/obj/v8_version.stamp clang_x64_v8_arm64/obj/v8_internal_headers.stamp clang_x64_v8_arm64/obj/torque_runtime_support.stamp clang_x64_v8_arm64/obj/v8_flags.stamp clang_x64_v8_arm64/obj/src/inspector/inspector_test_headers.stamp clang_x64_v8_arm64/obj/third_party/zlib/zlib_adler32_simd.stamp clang_x64_v8_arm64/obj/third_party/zlib/zlib_common_headers.stamp clang_x64_v8_arm64/obj/third_party/zlib/zlib_inflate_chunk_simd.stamp clang_x64_v8_arm64/obj/third_party/zlib/zlib_slide_hash_simd.stamp clang_x64_v8_arm64/obj/third_party/zlib/zlib_crc32_simd.stamp
+  ldflags = -pie -fuse-ld=lld -Wl,--fatal-warnings -Wl,--build-id=sha1 -fPIC -Wl,-z,noexecstack -Wl,-z,relro -Wl,-z,now -Wl,--icf=all -Wl,--color-diagnostics -m64 -no-canonical-prefixes -rdynamic -Wl,-z,defs -Wl,--as-needed --sysroot=../build/linux/debian_bullseye_amd64-sysroot -pie -Wl,--disable-new-dtags -Wl,-O2 -Wl,--gc-sections
+  libs = -latomic -ldl -lpthread -lrt
+  frameworks =
+  swiftmodules =
+  output_extension = 
+  output_dir = clang_x64_v8_arm64

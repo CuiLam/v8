@@ -1,0 +1,146 @@
+defines = -DUSE_UDEV -DUSE_AURA=1 -DUSE_OZONE=1 -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_GNU_SOURCE -DCR_CLANG_REVISION=\"llvmorg-16-init-6084-g2f3d7c2c-1\" -DCOMPONENT_BUILD -DCR_LIBCXX_REVISION=2e919977e0030ce61bd19c40cefe31b995f1e2d4 -DCR_SYSROOT_HASH=af39443b6101f4c417bb83113a306fc028d2b665 -D_DEBUG -DDYNAMIC_ANNOTATIONS_ENABLED=1 -DCPPGC_VERIFY_HEAP -DENABLE_DISASSEMBLER -DV8_TYPED_ARRAY_MAX_SIZE_IN_HEAP=64 -DOBJECT_PRINT -DVERIFY_HEAP -DV8_TRACE_MAPS -DV8_ENABLE_ALLOCATION_TIMEOUT -DV8_ENABLE_FORCE_SLOW_PATH -DV8_ENABLE_DOUBLE_CONST_STORE_CHECK -DV8_INTL_SUPPORT -DENABLE_HANDLE_ZAPPING -DV8_CODE_COMMENTS -DV8_ENABLE_DEBUG_CODE -DV8_ENABLE_HEAP_SNAPSHOT_VERIFY -DV8_SNAPSHOT_NATIVE_CODE_COUNTERS -DV8_USE_EXTERNAL_STARTUP_DATA -DV8_ATOMIC_OBJECT_FIELD_WRITES -DV8_ENABLE_LAZY_SOURCE_POSITIONS -DV8_SHARED_RO_HEAP -DV8_WIN64_UNWINDING_INFO -DV8_ENABLE_REGEXP_INTERPRETER_THREADED_DISPATCH -DV8_SNAPSHOT_COMPRESSION -DV8_ENABLE_WEBASSEMBLY -DV8_ALLOCATION_FOLDING -DV8_ALLOCATION_SITE_TRACKING -DV8_ADVANCED_BIGINT_ALGORITHMS -DV8_USE_ZLIB -DV8_ENABLE_CHECKS -DV8_DEPRECATION_WARNINGS -DV8_IMMINENT_DEPRECATION_WARNINGS -DV8_TARGET_ARCH_ARM -DCAN_USE_ARMV7_INSTRUCTIONS -DCAN_USE_VFP3_INSTRUCTIONS -DCAN_USE_VFP32DREGS -DCAN_USE_NEON -DUSE_EABI_HARDFLOAT=0 -DV8_HAVE_TARGET_OS -DV8_TARGET_OS_ANDROID -DDEBUG -DBUILDING_V8_SHARED -DU_USING_ICU_NAMESPACE=0 -DU_ENABLE_DYLOAD=0 -DUSE_CHROMIUM_ICU=1 -DU_ENABLE_TRACING=1 -DU_ENABLE_RESOURCE_TRACING=0 -DICU_UTIL_DATA_IMPL=ICU_UTIL_DATA_FILE -DUSING_V8_BASE_SHARED -DUSING_V8_PLATFORM_SHARED
+include_dirs = -I.. -Iclang_x86_v8_arm/gen -I../buildtools/third_party/libc++ -I../include -Iclang_x86_v8_arm/gen/include -I../third_party/icu/source/common -I../third_party/icu/source/i18n
+cflags = -Wall -Werror -Wextra -Wimplicit-fallthrough -Wextra-semi -Wunreachable-code-aggressive -Wthread-safety -Wno-missing-field-initializers -Wno-unused-parameter -Wloop-analysis -Wno-unneeded-internal-declaration -Wenum-compare-conditional -Wno-psabi -Wno-ignored-pragma-optimize -Wno-deprecated-builtins -Wno-bitfield-constant-conversion -Wshadow -fno-delete-null-pointer-checks -fno-ident -fno-strict-aliasing --param=ssp-buffer-size=4 -fstack-protector -funwind-tables -fPIC -pthread -fcolor-diagnostics -fmerge-all-constants -fcrash-diagnostics-dir=../tools/clang/crashreports -mllvm -instcombine-lower-dbg-declare=0 -ffp-contract=off -fcomplete-member-pointers -m32 -mfpmath=sse -msse3 -Wno-builtin-macro-redefined -D__DATE__= -D__TIME__= -D__TIMESTAMP__= -ffile-compilation-dir=. -no-canonical-prefixes -ftrivial-auto-var-init=pattern -fno-omit-frame-pointer -momit-leaf-frame-pointer -gdwarf-4 -g2 -gdwarf-aranges -gsplit-dwarf -Xclang -fuse-ctor-homing -fvisibility=hidden -Wheader-hygiene -Wstring-conversion -Wtautological-overlap-compare -Wmissing-field-initializers -Wunreachable-code -Wctad-maybe-unsupported -Wno-shadow -O3 -fdata-sections -ffunction-sections -fno-unique-section-names -Wexit-time-destructors
+cflags_cc = -Wno-undefined-bool-conversion -Wno-tautological-undefined-compare -std=c++17 -Wno-trigraphs -fno-exceptions -fno-rtti -nostdinc++ -isystem../buildtools/third_party/libc++/trunk/include -isystem../buildtools/third_party/libc++abi/trunk/include --sysroot=../build/linux/debian_bullseye_i386-sysroot -fvisibility-inlines-hidden
+label_name = v8_initializers
+target_out_dir = clang_x86_v8_arm/obj
+target_output_name = v8_initializers
+
+build clang_x86_v8_arm/obj/v8_initializers.inputdeps.stamp: clang_x86_v8_arm_stamp clang_x86_v8_arm/obj/generate_bytecode_builtins_list.stamp clang_x86_v8_arm/obj/run_gen-regexp-special-case.stamp clang_x86_v8_arm/obj/run_torque.stamp clang_x86_v8_arm/obj/src/inspector/protocol_generated_sources.stamp clang_x86_v8_arm/obj/third_party/icu/icudata.stamp
+build clang_x86_v8_arm/obj/v8_initializers/builtins-array-gen.o: clang_x86_v8_arm_cxx ../src/builtins/builtins-array-gen.cc || clang_x86_v8_arm/obj/v8_initializers.inputdeps.stamp
+  source_file_part = builtins-array-gen.cc
+  source_name_part = builtins-array-gen
+build clang_x86_v8_arm/obj/v8_initializers/builtins-async-function-gen.o: clang_x86_v8_arm_cxx ../src/builtins/builtins-async-function-gen.cc || clang_x86_v8_arm/obj/v8_initializers.inputdeps.stamp
+  source_file_part = builtins-async-function-gen.cc
+  source_name_part = builtins-async-function-gen
+build clang_x86_v8_arm/obj/v8_initializers/builtins-async-gen.o: clang_x86_v8_arm_cxx ../src/builtins/builtins-async-gen.cc || clang_x86_v8_arm/obj/v8_initializers.inputdeps.stamp
+  source_file_part = builtins-async-gen.cc
+  source_name_part = builtins-async-gen
+build clang_x86_v8_arm/obj/v8_initializers/builtins-async-generator-gen.o: clang_x86_v8_arm_cxx ../src/builtins/builtins-async-generator-gen.cc || clang_x86_v8_arm/obj/v8_initializers.inputdeps.stamp
+  source_file_part = builtins-async-generator-gen.cc
+  source_name_part = builtins-async-generator-gen
+build clang_x86_v8_arm/obj/v8_initializers/builtins-async-iterator-gen.o: clang_x86_v8_arm_cxx ../src/builtins/builtins-async-iterator-gen.cc || clang_x86_v8_arm/obj/v8_initializers.inputdeps.stamp
+  source_file_part = builtins-async-iterator-gen.cc
+  source_name_part = builtins-async-iterator-gen
+build clang_x86_v8_arm/obj/v8_initializers/builtins-bigint-gen.o: clang_x86_v8_arm_cxx ../src/builtins/builtins-bigint-gen.cc || clang_x86_v8_arm/obj/v8_initializers.inputdeps.stamp
+  source_file_part = builtins-bigint-gen.cc
+  source_name_part = builtins-bigint-gen
+build clang_x86_v8_arm/obj/v8_initializers/builtins-call-gen.o: clang_x86_v8_arm_cxx ../src/builtins/builtins-call-gen.cc || clang_x86_v8_arm/obj/v8_initializers.inputdeps.stamp
+  source_file_part = builtins-call-gen.cc
+  source_name_part = builtins-call-gen
+build clang_x86_v8_arm/obj/v8_initializers/builtins-collections-gen.o: clang_x86_v8_arm_cxx ../src/builtins/builtins-collections-gen.cc || clang_x86_v8_arm/obj/v8_initializers.inputdeps.stamp
+  source_file_part = builtins-collections-gen.cc
+  source_name_part = builtins-collections-gen
+build clang_x86_v8_arm/obj/v8_initializers/builtins-constructor-gen.o: clang_x86_v8_arm_cxx ../src/builtins/builtins-constructor-gen.cc || clang_x86_v8_arm/obj/v8_initializers.inputdeps.stamp
+  source_file_part = builtins-constructor-gen.cc
+  source_name_part = builtins-constructor-gen
+build clang_x86_v8_arm/obj/v8_initializers/builtins-conversion-gen.o: clang_x86_v8_arm_cxx ../src/builtins/builtins-conversion-gen.cc || clang_x86_v8_arm/obj/v8_initializers.inputdeps.stamp
+  source_file_part = builtins-conversion-gen.cc
+  source_name_part = builtins-conversion-gen
+build clang_x86_v8_arm/obj/v8_initializers/builtins-date-gen.o: clang_x86_v8_arm_cxx ../src/builtins/builtins-date-gen.cc || clang_x86_v8_arm/obj/v8_initializers.inputdeps.stamp
+  source_file_part = builtins-date-gen.cc
+  source_name_part = builtins-date-gen
+build clang_x86_v8_arm/obj/v8_initializers/builtins-generator-gen.o: clang_x86_v8_arm_cxx ../src/builtins/builtins-generator-gen.cc || clang_x86_v8_arm/obj/v8_initializers.inputdeps.stamp
+  source_file_part = builtins-generator-gen.cc
+  source_name_part = builtins-generator-gen
+build clang_x86_v8_arm/obj/v8_initializers/builtins-global-gen.o: clang_x86_v8_arm_cxx ../src/builtins/builtins-global-gen.cc || clang_x86_v8_arm/obj/v8_initializers.inputdeps.stamp
+  source_file_part = builtins-global-gen.cc
+  source_name_part = builtins-global-gen
+build clang_x86_v8_arm/obj/v8_initializers/builtins-handler-gen.o: clang_x86_v8_arm_cxx ../src/builtins/builtins-handler-gen.cc || clang_x86_v8_arm/obj/v8_initializers.inputdeps.stamp
+  source_file_part = builtins-handler-gen.cc
+  source_name_part = builtins-handler-gen
+build clang_x86_v8_arm/obj/v8_initializers/builtins-ic-gen.o: clang_x86_v8_arm_cxx ../src/builtins/builtins-ic-gen.cc || clang_x86_v8_arm/obj/v8_initializers.inputdeps.stamp
+  source_file_part = builtins-ic-gen.cc
+  source_name_part = builtins-ic-gen
+build clang_x86_v8_arm/obj/v8_initializers/builtins-internal-gen.o: clang_x86_v8_arm_cxx ../src/builtins/builtins-internal-gen.cc || clang_x86_v8_arm/obj/v8_initializers.inputdeps.stamp
+  source_file_part = builtins-internal-gen.cc
+  source_name_part = builtins-internal-gen
+build clang_x86_v8_arm/obj/v8_initializers/builtins-interpreter-gen.o: clang_x86_v8_arm_cxx ../src/builtins/builtins-interpreter-gen.cc || clang_x86_v8_arm/obj/v8_initializers.inputdeps.stamp
+  source_file_part = builtins-interpreter-gen.cc
+  source_name_part = builtins-interpreter-gen
+build clang_x86_v8_arm/obj/v8_initializers/builtins-intl-gen.o: clang_x86_v8_arm_cxx ../src/builtins/builtins-intl-gen.cc || clang_x86_v8_arm/obj/v8_initializers.inputdeps.stamp
+  source_file_part = builtins-intl-gen.cc
+  source_name_part = builtins-intl-gen
+build clang_x86_v8_arm/obj/v8_initializers/builtins-iterator-gen.o: clang_x86_v8_arm_cxx ../src/builtins/builtins-iterator-gen.cc || clang_x86_v8_arm/obj/v8_initializers.inputdeps.stamp
+  source_file_part = builtins-iterator-gen.cc
+  source_name_part = builtins-iterator-gen
+build clang_x86_v8_arm/obj/v8_initializers/builtins-lazy-gen.o: clang_x86_v8_arm_cxx ../src/builtins/builtins-lazy-gen.cc || clang_x86_v8_arm/obj/v8_initializers.inputdeps.stamp
+  source_file_part = builtins-lazy-gen.cc
+  source_name_part = builtins-lazy-gen
+build clang_x86_v8_arm/obj/v8_initializers/builtins-microtask-queue-gen.o: clang_x86_v8_arm_cxx ../src/builtins/builtins-microtask-queue-gen.cc || clang_x86_v8_arm/obj/v8_initializers.inputdeps.stamp
+  source_file_part = builtins-microtask-queue-gen.cc
+  source_name_part = builtins-microtask-queue-gen
+build clang_x86_v8_arm/obj/v8_initializers/builtins-number-gen.o: clang_x86_v8_arm_cxx ../src/builtins/builtins-number-gen.cc || clang_x86_v8_arm/obj/v8_initializers.inputdeps.stamp
+  source_file_part = builtins-number-gen.cc
+  source_name_part = builtins-number-gen
+build clang_x86_v8_arm/obj/v8_initializers/builtins-object-gen.o: clang_x86_v8_arm_cxx ../src/builtins/builtins-object-gen.cc || clang_x86_v8_arm/obj/v8_initializers.inputdeps.stamp
+  source_file_part = builtins-object-gen.cc
+  source_name_part = builtins-object-gen
+build clang_x86_v8_arm/obj/v8_initializers/builtins-promise-gen.o: clang_x86_v8_arm_cxx ../src/builtins/builtins-promise-gen.cc || clang_x86_v8_arm/obj/v8_initializers.inputdeps.stamp
+  source_file_part = builtins-promise-gen.cc
+  source_name_part = builtins-promise-gen
+build clang_x86_v8_arm/obj/v8_initializers/builtins-proxy-gen.o: clang_x86_v8_arm_cxx ../src/builtins/builtins-proxy-gen.cc || clang_x86_v8_arm/obj/v8_initializers.inputdeps.stamp
+  source_file_part = builtins-proxy-gen.cc
+  source_name_part = builtins-proxy-gen
+build clang_x86_v8_arm/obj/v8_initializers/builtins-regexp-gen.o: clang_x86_v8_arm_cxx ../src/builtins/builtins-regexp-gen.cc || clang_x86_v8_arm/obj/v8_initializers.inputdeps.stamp
+  source_file_part = builtins-regexp-gen.cc
+  source_name_part = builtins-regexp-gen
+build clang_x86_v8_arm/obj/v8_initializers/builtins-shadow-realm-gen.o: clang_x86_v8_arm_cxx ../src/builtins/builtins-shadow-realm-gen.cc || clang_x86_v8_arm/obj/v8_initializers.inputdeps.stamp
+  source_file_part = builtins-shadow-realm-gen.cc
+  source_name_part = builtins-shadow-realm-gen
+build clang_x86_v8_arm/obj/v8_initializers/builtins-sharedarraybuffer-gen.o: clang_x86_v8_arm_cxx ../src/builtins/builtins-sharedarraybuffer-gen.cc || clang_x86_v8_arm/obj/v8_initializers.inputdeps.stamp
+  source_file_part = builtins-sharedarraybuffer-gen.cc
+  source_name_part = builtins-sharedarraybuffer-gen
+build clang_x86_v8_arm/obj/v8_initializers/builtins-string-gen.o: clang_x86_v8_arm_cxx ../src/builtins/builtins-string-gen.cc || clang_x86_v8_arm/obj/v8_initializers.inputdeps.stamp
+  source_file_part = builtins-string-gen.cc
+  source_name_part = builtins-string-gen
+build clang_x86_v8_arm/obj/v8_initializers/builtins-temporal-gen.o: clang_x86_v8_arm_cxx ../src/builtins/builtins-temporal-gen.cc || clang_x86_v8_arm/obj/v8_initializers.inputdeps.stamp
+  source_file_part = builtins-temporal-gen.cc
+  source_name_part = builtins-temporal-gen
+build clang_x86_v8_arm/obj/v8_initializers/builtins-typed-array-gen.o: clang_x86_v8_arm_cxx ../src/builtins/builtins-typed-array-gen.cc || clang_x86_v8_arm/obj/v8_initializers.inputdeps.stamp
+  source_file_part = builtins-typed-array-gen.cc
+  source_name_part = builtins-typed-array-gen
+build clang_x86_v8_arm/obj/v8_initializers/growable-fixed-array-gen.o: clang_x86_v8_arm_cxx ../src/builtins/growable-fixed-array-gen.cc || clang_x86_v8_arm/obj/v8_initializers.inputdeps.stamp
+  source_file_part = growable-fixed-array-gen.cc
+  source_name_part = growable-fixed-array-gen
+build clang_x86_v8_arm/obj/v8_initializers/profile-data-reader.o: clang_x86_v8_arm_cxx ../src/builtins/profile-data-reader.cc || clang_x86_v8_arm/obj/v8_initializers.inputdeps.stamp
+  source_file_part = profile-data-reader.cc
+  source_name_part = profile-data-reader
+build clang_x86_v8_arm/obj/v8_initializers/setup-builtins-internal.o: clang_x86_v8_arm_cxx ../src/builtins/setup-builtins-internal.cc || clang_x86_v8_arm/obj/v8_initializers.inputdeps.stamp
+  source_file_part = setup-builtins-internal.cc
+  source_name_part = setup-builtins-internal
+build clang_x86_v8_arm/obj/v8_initializers/code-stub-assembler.o: clang_x86_v8_arm_cxx ../src/codegen/code-stub-assembler.cc || clang_x86_v8_arm/obj/v8_initializers.inputdeps.stamp
+  source_file_part = code-stub-assembler.cc
+  source_name_part = code-stub-assembler
+build clang_x86_v8_arm/obj/v8_initializers/setup-heap-internal.o: clang_x86_v8_arm_cxx ../src/heap/setup-heap-internal.cc || clang_x86_v8_arm/obj/v8_initializers.inputdeps.stamp
+  source_file_part = setup-heap-internal.cc
+  source_name_part = setup-heap-internal
+build clang_x86_v8_arm/obj/v8_initializers/accessor-assembler.o: clang_x86_v8_arm_cxx ../src/ic/accessor-assembler.cc || clang_x86_v8_arm/obj/v8_initializers.inputdeps.stamp
+  source_file_part = accessor-assembler.cc
+  source_name_part = accessor-assembler
+build clang_x86_v8_arm/obj/v8_initializers/binary-op-assembler.o: clang_x86_v8_arm_cxx ../src/ic/binary-op-assembler.cc || clang_x86_v8_arm/obj/v8_initializers.inputdeps.stamp
+  source_file_part = binary-op-assembler.cc
+  source_name_part = binary-op-assembler
+build clang_x86_v8_arm/obj/v8_initializers/keyed-store-generic.o: clang_x86_v8_arm_cxx ../src/ic/keyed-store-generic.cc || clang_x86_v8_arm/obj/v8_initializers.inputdeps.stamp
+  source_file_part = keyed-store-generic.cc
+  source_name_part = keyed-store-generic
+build clang_x86_v8_arm/obj/v8_initializers/unary-op-assembler.o: clang_x86_v8_arm_cxx ../src/ic/unary-op-assembler.cc || clang_x86_v8_arm/obj/v8_initializers.inputdeps.stamp
+  source_file_part = unary-op-assembler.cc
+  source_name_part = unary-op-assembler
+build clang_x86_v8_arm/obj/v8_initializers/interpreter-assembler.o: clang_x86_v8_arm_cxx ../src/interpreter/interpreter-assembler.cc || clang_x86_v8_arm/obj/v8_initializers.inputdeps.stamp
+  source_file_part = interpreter-assembler.cc
+  source_name_part = interpreter-assembler
+build clang_x86_v8_arm/obj/v8_initializers/interpreter-generator.o: clang_x86_v8_arm_cxx ../src/interpreter/interpreter-generator.cc || clang_x86_v8_arm/obj/v8_initializers.inputdeps.stamp
+  source_file_part = interpreter-generator.cc
+  source_name_part = interpreter-generator
+build clang_x86_v8_arm/obj/v8_initializers/interpreter-intrinsics-generator.o: clang_x86_v8_arm_cxx ../src/interpreter/interpreter-intrinsics-generator.cc || clang_x86_v8_arm/obj/v8_initializers.inputdeps.stamp
+  source_file_part = interpreter-intrinsics-generator.cc
+  source_name_part = interpreter-intrinsics-generator
+build clang_x86_v8_arm/obj/v8_initializers/builtins-wasm-gen.o: clang_x86_v8_arm_cxx ../src/builtins/builtins-wasm-gen.cc || clang_x86_v8_arm/obj/v8_initializers.inputdeps.stamp
+  source_file_part = builtins-wasm-gen.cc
+  source_name_part = builtins-wasm-gen
+build clang_x86_v8_arm/obj/v8_initializers/builtins-arm.o: clang_x86_v8_arm_cxx ../src/builtins/arm/builtins-arm.cc || clang_x86_v8_arm/obj/v8_initializers.inputdeps.stamp
+  source_file_part = builtins-arm.cc
+  source_name_part = builtins-arm
+
+build clang_x86_v8_arm/obj/v8_initializers.stamp: clang_x86_v8_arm_stamp clang_x86_v8_arm/obj/v8_initializers/builtins-array-gen.o clang_x86_v8_arm/obj/v8_initializers/builtins-async-function-gen.o clang_x86_v8_arm/obj/v8_initializers/builtins-async-gen.o clang_x86_v8_arm/obj/v8_initializers/builtins-async-generator-gen.o clang_x86_v8_arm/obj/v8_initializers/builtins-async-iterator-gen.o clang_x86_v8_arm/obj/v8_initializers/builtins-bigint-gen.o clang_x86_v8_arm/obj/v8_initializers/builtins-call-gen.o clang_x86_v8_arm/obj/v8_initializers/builtins-collections-gen.o clang_x86_v8_arm/obj/v8_initializers/builtins-constructor-gen.o clang_x86_v8_arm/obj/v8_initializers/builtins-conversion-gen.o clang_x86_v8_arm/obj/v8_initializers/builtins-date-gen.o clang_x86_v8_arm/obj/v8_initializers/builtins-generator-gen.o clang_x86_v8_arm/obj/v8_initializers/builtins-global-gen.o clang_x86_v8_arm/obj/v8_initializers/builtins-handler-gen.o clang_x86_v8_arm/obj/v8_initializers/builtins-ic-gen.o clang_x86_v8_arm/obj/v8_initializers/builtins-internal-gen.o clang_x86_v8_arm/obj/v8_initializers/builtins-interpreter-gen.o clang_x86_v8_arm/obj/v8_initializers/builtins-intl-gen.o clang_x86_v8_arm/obj/v8_initializers/builtins-iterator-gen.o clang_x86_v8_arm/obj/v8_initializers/builtins-lazy-gen.o clang_x86_v8_arm/obj/v8_initializers/builtins-microtask-queue-gen.o clang_x86_v8_arm/obj/v8_initializers/builtins-number-gen.o clang_x86_v8_arm/obj/v8_initializers/builtins-object-gen.o clang_x86_v8_arm/obj/v8_initializers/builtins-promise-gen.o clang_x86_v8_arm/obj/v8_initializers/builtins-proxy-gen.o clang_x86_v8_arm/obj/v8_initializers/builtins-regexp-gen.o clang_x86_v8_arm/obj/v8_initializers/builtins-shadow-realm-gen.o clang_x86_v8_arm/obj/v8_initializers/builtins-sharedarraybuffer-gen.o clang_x86_v8_arm/obj/v8_initializers/builtins-string-gen.o clang_x86_v8_arm/obj/v8_initializers/builtins-temporal-gen.o clang_x86_v8_arm/obj/v8_initializers/builtins-typed-array-gen.o clang_x86_v8_arm/obj/v8_initializers/growable-fixed-array-gen.o clang_x86_v8_arm/obj/v8_initializers/profile-data-reader.o clang_x86_v8_arm/obj/v8_initializers/setup-builtins-internal.o clang_x86_v8_arm/obj/v8_initializers/code-stub-assembler.o clang_x86_v8_arm/obj/v8_initializers/setup-heap-internal.o clang_x86_v8_arm/obj/v8_initializers/accessor-assembler.o clang_x86_v8_arm/obj/v8_initializers/binary-op-assembler.o clang_x86_v8_arm/obj/v8_initializers/keyed-store-generic.o clang_x86_v8_arm/obj/v8_initializers/unary-op-assembler.o clang_x86_v8_arm/obj/v8_initializers/interpreter-assembler.o clang_x86_v8_arm/obj/v8_initializers/interpreter-generator.o clang_x86_v8_arm/obj/v8_initializers/interpreter-intrinsics-generator.o clang_x86_v8_arm/obj/v8_initializers/builtins-wasm-gen.o clang_x86_v8_arm/obj/v8_initializers/builtins-arm.o || clang_x86_v8_arm/obj/torque_generated_initializers.stamp clang_x86_v8_arm/obj/v8_base_without_compiler.stamp clang_x86_v8_arm/obj/v8_shared_internal_headers.stamp clang_x86_v8_arm/obj/v8_tracing.stamp clang_x86_v8_arm/obj/torque_runtime_support.stamp clang_x86_v8_arm/libicui18n.cr.so.TOC clang_x86_v8_arm/libicuuc.cr.so.TOC clang_x86_v8_arm/obj/cppgc_base.stamp clang_x86_v8_arm/obj/cppgc_headers.stamp clang_x86_v8_arm/obj/v8_config_headers.stamp clang_x86_v8_arm/libv8_libbase.cr.so.TOC clang_x86_v8_arm/libv8_libplatform.cr.so.TOC clang_x86_v8_arm/obj/v8_heap_base.stamp clang_x86_v8_arm/obj/v8_heap_base_headers.stamp clang_x86_v8_arm/obj/v8_headers.stamp clang_x86_v8_arm/obj/v8_version.stamp clang_x86_v8_arm/obj/v8_internal_headers.stamp clang_x86_v8_arm/obj/v8_flags.stamp clang_x86_v8_arm/obj/torque_generated_definitions.stamp clang_x86_v8_arm/obj/v8_bigint.stamp clang_x86_v8_arm/obj/src/inspector/inspector.stamp clang_x86_v8_arm/obj/src/inspector/inspector_test_headers.stamp clang_x86_v8_arm/obj/src/inspector/inspector_string_conversions.stamp clang_x86_v8_arm/obj/third_party/inspector_protocol/crdtp.stamp clang_x86_v8_arm/obj/third_party/inspector_protocol/crdtp_platform.stamp clang_x86_v8_arm/libchrome_zlib.cr.so.TOC clang_x86_v8_arm/obj/third_party/zlib/google/libcompression_utils_portable.a

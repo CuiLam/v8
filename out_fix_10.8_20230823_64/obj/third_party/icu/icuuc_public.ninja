@@ -1,0 +1,9 @@
+defines = -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D_GNU_SOURCE -DANDROID -DHAVE_SYS_UIO_H -DANDROID_NDK_VERSION_ROLL=r23_1 -DCR_CLANG_REVISION=\"llvmorg-16-init-6084-g2f3d7c2c-1\" -DCOMPONENT_BUILD -DCR_LIBCXX_REVISION=2e919977e0030ce61bd19c40cefe31b995f1e2d4 -D_DEBUG -DDYNAMIC_ANNOTATIONS_ENABLED=1
+include_dirs = -I.. -Igen -I../buildtools/third_party/libc++
+label_name = icuuc_public
+root_out_dir = .
+target_out_dir = obj/third_party/icu
+target_output_name = icuuc_public
+
+
+build obj/third_party/icu/icuuc_public.stamp: stamp

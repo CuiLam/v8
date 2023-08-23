@@ -1,0 +1,441 @@
+defines = -DOFFICIAL_BUILD -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D_FORTIFY_SOURCE=2 -D_GNU_SOURCE -DANDROID -DHAVE_SYS_UIO_H -DANDROID_NDK_VERSION_ROLL=r23_1 -DCR_CLANG_REVISION=\"llvmorg-16-init-6084-g2f3d7c2c-1\" -DNDEBUG -DNVALGRIND -DDYNAMIC_ANNOTATIONS_ENABLED=0 -DV8_TYPED_ARRAY_MAX_SIZE_IN_HEAP=64 -DV8_ATOMIC_OBJECT_FIELD_WRITES -DV8_ENABLE_LAZY_SOURCE_POSITIONS -DV8_SHARED_RO_HEAP -DV8_WIN64_UNWINDING_INFO -DV8_ENABLE_REGEXP_INTERPRETER_THREADED_DISPATCH -DV8_ENABLE_WEBASSEMBLY -DV8_ENABLE_JAVASCRIPT_PROMISE_HOOKS -DV8_ALLOCATION_FOLDING -DV8_ALLOCATION_SITE_TRACKING -DV8_USE_ZLIB -DV8_DEPRECATION_WARNINGS -DV8_IMMINENT_DEPRECATION_WARNINGS -DV8_TARGET_ARCH_ARM -DCAN_USE_ARMV7_INSTRUCTIONS -DCAN_USE_VFP3_INSTRUCTIONS -DCAN_USE_VFP32DREGS -DCAN_USE_NEON -DV8_HAVE_TARGET_OS -DV8_TARGET_OS_ANDROID
+include_dirs = -I.. -Igen -I../include -Igen/include
+cflags = -ffp-contract=off -Wall -Wextra -Wimplicit-fallthrough -Wextra-semi -Wunreachable-code-aggressive -Wthread-safety -Wno-missing-field-initializers -Wno-unused-parameter -Wloop-analysis -Wno-unneeded-internal-declaration -Wenum-compare-conditional -Wno-psabi -Wno-ignored-pragma-optimize -Wno-deprecated-builtins -Wno-bitfield-constant-conversion -Wshadow -fno-delete-null-pointer-checks -fno-ident -fno-strict-aliasing --param=ssp-buffer-size=4 -fstack-protector -funwind-tables -fPIC -fcolor-diagnostics -fmerge-all-constants -fcrash-diagnostics-dir=../tools/clang/crashreports -mllvm -instcombine-lower-dbg-declare=0 -ffp-contract=off -ffunction-sections -fno-short-enums --target=arm-linux-androideabi21 -march=armv7-a -mfloat-abi=softfp -ffile-compilation-dir=. -no-canonical-prefixes -mfpu=neon -mthumb -fomit-frame-pointer -g0 -Wheader-hygiene -Wstring-conversion -Wtautological-overlap-compare -Wmissing-field-initializers -Wunreachable-code -Wctad-maybe-unsupported -Wno-shadow -O2 -fdata-sections -ffunction-sections -fno-unique-section-names -fvisibility=default -Wno-string-concatenation
+cflags_cc = -std=c++17 -Wno-trigraphs -fno-exceptions -fno-rtti --sysroot=../../../opt/sdk-root/ndk/25.0.8775105/toolchains/llvm/prebuilt/linux-x86_64/sysroot
+label_name = cctest_sources
+root_out_dir = .
+target_out_dir = obj/test/cctest
+target_output_name = libcctest_sources
+
+build obj/test/cctest/cctest_sources.inputdeps.stamp: stamp obj/generate_bytecode_builtins_list.stamp obj/run_torque.stamp obj/src/inspector/protocol_generated_sources.stamp
+build obj/test/cctest/cctest_sources/value-helper.o: cxx ../test/common/value-helper.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = value-helper.cc
+  source_name_part = value-helper
+build obj/test/cctest/cctest_sources/codegen-tester.o: cxx ../test/cctest/compiler/codegen-tester.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = codegen-tester.cc
+  source_name_part = codegen-tester
+build obj/test/cctest/cctest_sources/function-tester.o: cxx ../test/cctest/compiler/function-tester.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = function-tester.cc
+  source_name_part = function-tester
+build obj/test/cctest/cctest_sources/test-atomic-load-store-codegen.o: cxx ../test/cctest/compiler/test-atomic-load-store-codegen.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-atomic-load-store-codegen.cc
+  source_name_part = test-atomic-load-store-codegen
+build obj/test/cctest/cctest_sources/test-basic-block-profiler.o: cxx ../test/cctest/compiler/test-basic-block-profiler.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-basic-block-profiler.cc
+  source_name_part = test-basic-block-profiler
+build obj/test/cctest/cctest_sources/test-branch-combine.o: cxx ../test/cctest/compiler/test-branch-combine.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-branch-combine.cc
+  source_name_part = test-branch-combine
+build obj/test/cctest/cctest_sources/test-calls-with-arraylike-or-spread.o: cxx ../test/cctest/compiler/test-calls-with-arraylike-or-spread.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-calls-with-arraylike-or-spread.cc
+  source_name_part = test-calls-with-arraylike-or-spread
+build obj/test/cctest/cctest_sources/test-code-assembler.o: cxx ../test/cctest/compiler/test-code-assembler.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-code-assembler.cc
+  source_name_part = test-code-assembler
+build obj/test/cctest/cctest_sources/test-code-generator.o: cxx ../test/cctest/compiler/test-code-generator.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-code-generator.cc
+  source_name_part = test-code-generator
+build obj/test/cctest/cctest_sources/test-concurrent-shared-function-info.o: cxx ../test/cctest/compiler/test-concurrent-shared-function-info.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-concurrent-shared-function-info.cc
+  source_name_part = test-concurrent-shared-function-info
+build obj/test/cctest/cctest_sources/test-gap-resolver.o: cxx ../test/cctest/compiler/test-gap-resolver.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-gap-resolver.cc
+  source_name_part = test-gap-resolver
+build obj/test/cctest/cctest_sources/test-graph-visualizer.o: cxx ../test/cctest/compiler/test-graph-visualizer.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-graph-visualizer.cc
+  source_name_part = test-graph-visualizer
+build obj/test/cctest/cctest_sources/test-instruction-scheduler.o: cxx ../test/cctest/compiler/test-instruction-scheduler.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-instruction-scheduler.cc
+  source_name_part = test-instruction-scheduler
+build obj/test/cctest/cctest_sources/test-instruction.o: cxx ../test/cctest/compiler/test-instruction.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-instruction.cc
+  source_name_part = test-instruction
+build obj/test/cctest/cctest_sources/test-js-constant-cache.o: cxx ../test/cctest/compiler/test-js-constant-cache.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-js-constant-cache.cc
+  source_name_part = test-js-constant-cache
+build obj/test/cctest/cctest_sources/test-js-context-specialization.o: cxx ../test/cctest/compiler/test-js-context-specialization.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-js-context-specialization.cc
+  source_name_part = test-js-context-specialization
+build obj/test/cctest/cctest_sources/test-js-typed-lowering.o: cxx ../test/cctest/compiler/test-js-typed-lowering.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-js-typed-lowering.cc
+  source_name_part = test-js-typed-lowering
+build obj/test/cctest/cctest_sources/test-jump-threading.o: cxx ../test/cctest/compiler/test-jump-threading.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-jump-threading.cc
+  source_name_part = test-jump-threading
+build obj/test/cctest/cctest_sources/test-linkage.o: cxx ../test/cctest/compiler/test-linkage.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-linkage.cc
+  source_name_part = test-linkage
+build obj/test/cctest/cctest_sources/test-loop-analysis.o: cxx ../test/cctest/compiler/test-loop-analysis.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-loop-analysis.cc
+  source_name_part = test-loop-analysis
+build obj/test/cctest/cctest_sources/test-machine-operator-reducer.o: cxx ../test/cctest/compiler/test-machine-operator-reducer.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-machine-operator-reducer.cc
+  source_name_part = test-machine-operator-reducer
+build obj/test/cctest/cctest_sources/test-node.o: cxx ../test/cctest/compiler/test-node.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-node.cc
+  source_name_part = test-node
+build obj/test/cctest/cctest_sources/test-operator.o: cxx ../test/cctest/compiler/test-operator.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-operator.cc
+  source_name_part = test-operator
+build obj/test/cctest/cctest_sources/test-representation-change.o: cxx ../test/cctest/compiler/test-representation-change.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-representation-change.cc
+  source_name_part = test-representation-change
+build obj/test/cctest/cctest_sources/test-run-calls-to-external-references.o: cxx ../test/cctest/compiler/test-run-calls-to-external-references.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-run-calls-to-external-references.cc
+  source_name_part = test-run-calls-to-external-references
+build obj/test/cctest/cctest_sources/test-run-load-store.o: cxx ../test/cctest/compiler/test-run-load-store.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-run-load-store.cc
+  source_name_part = test-run-load-store
+build obj/test/cctest/cctest_sources/test-run-machops.o: cxx ../test/cctest/compiler/test-run-machops.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-run-machops.cc
+  source_name_part = test-run-machops
+build obj/test/cctest/cctest_sources/test-run-stackcheck.o: cxx ../test/cctest/compiler/test-run-stackcheck.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-run-stackcheck.cc
+  source_name_part = test-run-stackcheck
+build obj/test/cctest/cctest_sources/test-run-unwinding-info.o: cxx ../test/cctest/compiler/test-run-unwinding-info.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-run-unwinding-info.cc
+  source_name_part = test-run-unwinding-info
+build obj/test/cctest/cctest_sources/test-run-variables.o: cxx ../test/cctest/compiler/test-run-variables.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-run-variables.cc
+  source_name_part = test-run-variables
+build obj/test/cctest/cctest_sources/test-verify-type.o: cxx ../test/cctest/compiler/test-verify-type.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-verify-type.cc
+  source_name_part = test-verify-type
+build obj/test/cctest/cctest_sources/heap-utils.o: cxx ../test/cctest/heap/heap-utils.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = heap-utils.cc
+  source_name_part = heap-utils
+build obj/test/cctest/cctest_sources/test-alloc.o: cxx ../test/cctest/heap/test-alloc.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-alloc.cc
+  source_name_part = test-alloc
+build obj/test/cctest/cctest_sources/test-array-buffer-tracker.o: cxx ../test/cctest/heap/test-array-buffer-tracker.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-array-buffer-tracker.cc
+  source_name_part = test-array-buffer-tracker
+build obj/test/cctest/cctest_sources/test-compaction.o: cxx ../test/cctest/heap/test-compaction.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-compaction.cc
+  source_name_part = test-compaction
+build obj/test/cctest/cctest_sources/test-concurrent-allocation.o: cxx ../test/cctest/heap/test-concurrent-allocation.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-concurrent-allocation.cc
+  source_name_part = test-concurrent-allocation
+build obj/test/cctest/cctest_sources/test-concurrent-marking.o: cxx ../test/cctest/heap/test-concurrent-marking.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-concurrent-marking.cc
+  source_name_part = test-concurrent-marking
+build obj/test/cctest/cctest_sources/test-external-string-tracker.o: cxx ../test/cctest/heap/test-external-string-tracker.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-external-string-tracker.cc
+  source_name_part = test-external-string-tracker
+build obj/test/cctest/cctest_sources/test-heap.o: cxx ../test/cctest/heap/test-heap.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-heap.cc
+  source_name_part = test-heap
+build obj/test/cctest/cctest_sources/test-incremental-marking.o: cxx ../test/cctest/heap/test-incremental-marking.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-incremental-marking.cc
+  source_name_part = test-incremental-marking
+build obj/test/cctest/cctest_sources/test-invalidated-slots.o: cxx ../test/cctest/heap/test-invalidated-slots.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-invalidated-slots.cc
+  source_name_part = test-invalidated-slots
+build obj/test/cctest/cctest_sources/test-iterators.o: cxx ../test/cctest/heap/test-iterators.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-iterators.cc
+  source_name_part = test-iterators
+build obj/test/cctest/cctest_sources/test-mark-compact.o: cxx ../test/cctest/heap/test-mark-compact.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-mark-compact.cc
+  source_name_part = test-mark-compact
+build obj/test/cctest/cctest_sources/test-memory-measurement.o: cxx ../test/cctest/heap/test-memory-measurement.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-memory-measurement.cc
+  source_name_part = test-memory-measurement
+build obj/test/cctest/cctest_sources/test-spaces.o: cxx ../test/cctest/heap/test-spaces.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-spaces.cc
+  source_name_part = test-spaces
+build obj/test/cctest/cctest_sources/test-unmapper.o: cxx ../test/cctest/heap/test-unmapper.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-unmapper.cc
+  source_name_part = test-unmapper
+build obj/test/cctest/cctest_sources/test-weak-references.o: cxx ../test/cctest/heap/test-weak-references.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-weak-references.cc
+  source_name_part = test-weak-references
+build obj/test/cctest/cctest_sources/test-write-barrier.o: cxx ../test/cctest/heap/test-write-barrier.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-write-barrier.cc
+  source_name_part = test-write-barrier
+build obj/test/cctest/cctest_sources/print-extension.o: cxx ../test/cctest/print-extension.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = print-extension.cc
+  source_name_part = print-extension
+build obj/test/cctest/cctest_sources/profiler-extension.o: cxx ../test/cctest/profiler-extension.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = profiler-extension.cc
+  source_name_part = profiler-extension
+build obj/test/cctest/cctest_sources/setup-isolate-for-tests.o: cxx ../test/cctest/setup-isolate-for-tests.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = setup-isolate-for-tests.cc
+  source_name_part = setup-isolate-for-tests
+build obj/test/cctest/cctest_sources/test-accessor-assembler.o: cxx ../test/cctest/test-accessor-assembler.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-accessor-assembler.cc
+  source_name_part = test-accessor-assembler
+build obj/test/cctest/cctest_sources/test-accessors.o: cxx ../test/cctest/test-accessors.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-accessors.cc
+  source_name_part = test-accessors
+build obj/test/cctest/cctest_sources/test-allocation.o: cxx ../test/cctest/test-allocation.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-allocation.cc
+  source_name_part = test-allocation
+build obj/test/cctest/cctest_sources/test-api-array-buffer.o: cxx ../test/cctest/test-api-array-buffer.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-api-array-buffer.cc
+  source_name_part = test-api-array-buffer
+build obj/test/cctest/cctest_sources/test-api-interceptors.o: cxx ../test/cctest/test-api-interceptors.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-api-interceptors.cc
+  source_name_part = test-api-interceptors
+build obj/test/cctest/cctest_sources/test-api-stack-traces.o: cxx ../test/cctest/test-api-stack-traces.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-api-stack-traces.cc
+  source_name_part = test-api-stack-traces
+build obj/test/cctest/cctest_sources/test-api-typed-array.o: cxx ../test/cctest/test-api-typed-array.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-api-typed-array.cc
+  source_name_part = test-api-typed-array
+build obj/test/cctest/cctest_sources/test-api.o: cxx ../test/cctest/test-api.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-api.cc
+  source_name_part = test-api
+build obj/test/cctest/cctest_sources/test-code-stub-assembler.o: cxx ../test/cctest/test-code-stub-assembler.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-code-stub-assembler.cc
+  source_name_part = test-code-stub-assembler
+build obj/test/cctest/cctest_sources/test-constantpool.o: cxx ../test/cctest/test-constantpool.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-constantpool.cc
+  source_name_part = test-constantpool
+build obj/test/cctest/cctest_sources/test-cpu-profiler.o: cxx ../test/cctest/test-cpu-profiler.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-cpu-profiler.cc
+  source_name_part = test-cpu-profiler
+build obj/test/cctest/cctest_sources/test-debug-helper.o: cxx ../test/cctest/test-debug-helper.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-debug-helper.cc
+  source_name_part = test-debug-helper
+build obj/test/cctest/cctest_sources/test-debug.o: cxx ../test/cctest/test-debug.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-debug.cc
+  source_name_part = test-debug
+build obj/test/cctest/cctest_sources/test-descriptor-array.o: cxx ../test/cctest/test-descriptor-array.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-descriptor-array.cc
+  source_name_part = test-descriptor-array
+build obj/test/cctest/cctest_sources/test-disasm-regex-helper.o: cxx ../test/cctest/test-disasm-regex-helper.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-disasm-regex-helper.cc
+  source_name_part = test-disasm-regex-helper
+build obj/test/cctest/cctest_sources/test-field-type-tracking.o: cxx ../test/cctest/test-field-type-tracking.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-field-type-tracking.cc
+  source_name_part = test-field-type-tracking
+build obj/test/cctest/cctest_sources/test-func-name-inference.o: cxx ../test/cctest/test-func-name-inference.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-func-name-inference.cc
+  source_name_part = test-func-name-inference
+build obj/test/cctest/cctest_sources/test-heap-profiler.o: cxx ../test/cctest/test-heap-profiler.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-heap-profiler.cc
+  source_name_part = test-heap-profiler
+build obj/test/cctest/cctest_sources/test-icache.o: cxx ../test/cctest/test-icache.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-icache.cc
+  source_name_part = test-icache
+build obj/test/cctest/cctest_sources/test-ignition-statistics-extension.o: cxx ../test/cctest/test-ignition-statistics-extension.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-ignition-statistics-extension.cc
+  source_name_part = test-ignition-statistics-extension
+build obj/test/cctest/cctest_sources/test-inobject-slack-tracking.o: cxx ../test/cctest/test-inobject-slack-tracking.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-inobject-slack-tracking.cc
+  source_name_part = test-inobject-slack-tracking
+build obj/test/cctest/cctest_sources/test-js-weak-refs.o: cxx ../test/cctest/test-js-weak-refs.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-js-weak-refs.cc
+  source_name_part = test-js-weak-refs
+build obj/test/cctest/cctest_sources/test-liveedit.o: cxx ../test/cctest/test-liveedit.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-liveedit.cc
+  source_name_part = test-liveedit
+build obj/test/cctest/cctest_sources/test-lockers.o: cxx ../test/cctest/test-lockers.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-lockers.cc
+  source_name_part = test-lockers
+build obj/test/cctest/cctest_sources/test-mementos.o: cxx ../test/cctest/test-mementos.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-mementos.cc
+  source_name_part = test-mementos
+build obj/test/cctest/cctest_sources/test-orderedhashtable.o: cxx ../test/cctest/test-orderedhashtable.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-orderedhashtable.cc
+  source_name_part = test-orderedhashtable
+build obj/test/cctest/cctest_sources/test-profile-generator.o: cxx ../test/cctest/test-profile-generator.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-profile-generator.cc
+  source_name_part = test-profile-generator
+build obj/test/cctest/cctest_sources/test-property-details.o: cxx ../test/cctest/test-property-details.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-property-details.cc
+  source_name_part = test-property-details
+build obj/test/cctest/cctest_sources/test-ptr-compr-cage.o: cxx ../test/cctest/test-ptr-compr-cage.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-ptr-compr-cage.cc
+  source_name_part = test-ptr-compr-cage
+build obj/test/cctest/cctest_sources/test-random-number-generator.o: cxx ../test/cctest/test-random-number-generator.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-random-number-generator.cc
+  source_name_part = test-random-number-generator
+build obj/test/cctest/cctest_sources/test-sampler-api.o: cxx ../test/cctest/test-sampler-api.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-sampler-api.cc
+  source_name_part = test-sampler-api
+build obj/test/cctest/cctest_sources/test-serialize.o: cxx ../test/cctest/test-serialize.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-serialize.cc
+  source_name_part = test-serialize
+build obj/test/cctest/cctest_sources/test-shared-strings.o: cxx ../test/cctest/test-shared-strings.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-shared-strings.cc
+  source_name_part = test-shared-strings
+build obj/test/cctest/cctest_sources/test-smi-lexicographic-compare.o: cxx ../test/cctest/test-smi-lexicographic-compare.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-smi-lexicographic-compare.cc
+  source_name_part = test-smi-lexicographic-compare
+build obj/test/cctest/cctest_sources/test-strings.o: cxx ../test/cctest/test-strings.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-strings.cc
+  source_name_part = test-strings
+build obj/test/cctest/cctest_sources/test-swiss-name-dictionary-csa.o: cxx ../test/cctest/test-swiss-name-dictionary-csa.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-swiss-name-dictionary-csa.cc
+  source_name_part = test-swiss-name-dictionary-csa
+build obj/test/cctest/cctest_sources/test-swiss-name-dictionary-infra.o: cxx ../test/cctest/test-swiss-name-dictionary-infra.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-swiss-name-dictionary-infra.cc
+  source_name_part = test-swiss-name-dictionary-infra
+build obj/test/cctest/cctest_sources/test-swiss-name-dictionary.o: cxx ../test/cctest/test-swiss-name-dictionary.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-swiss-name-dictionary.cc
+  source_name_part = test-swiss-name-dictionary
+build obj/test/cctest/cctest_sources/test-trace-event.o: cxx ../test/cctest/test-trace-event.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-trace-event.cc
+  source_name_part = test-trace-event
+build obj/test/cctest/cctest_sources/test-transitions.o: cxx ../test/cctest/test-transitions.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-transitions.cc
+  source_name_part = test-transitions
+build obj/test/cctest/cctest_sources/test-typedarrays.o: cxx ../test/cctest/test-typedarrays.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-typedarrays.cc
+  source_name_part = test-typedarrays
+build obj/test/cctest/cctest_sources/test-unscopables-hidden-prototype.o: cxx ../test/cctest/test-unscopables-hidden-prototype.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-unscopables-hidden-prototype.cc
+  source_name_part = test-unscopables-hidden-prototype
+build obj/test/cctest/cctest_sources/test-unwinder-code-pages.o: cxx ../test/cctest/test-unwinder-code-pages.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-unwinder-code-pages.cc
+  source_name_part = test-unwinder-code-pages
+build obj/test/cctest/cctest_sources/test-usecounters.o: cxx ../test/cctest/test-usecounters.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-usecounters.cc
+  source_name_part = test-usecounters
+build obj/test/cctest/cctest_sources/test-utils.o: cxx ../test/cctest/test-utils.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-utils.cc
+  source_name_part = test-utils
+build obj/test/cctest/cctest_sources/test-verifiers.o: cxx ../test/cctest/test-verifiers.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-verifiers.cc
+  source_name_part = test-verifiers
+build obj/test/cctest/cctest_sources/test-torque.o: cxx ../test/cctest/torque/test-torque.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-torque.cc
+  source_name_part = test-torque
+build obj/test/cctest/cctest_sources/trace-extension.o: cxx ../test/cctest/trace-extension.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = trace-extension.cc
+  source_name_part = trace-extension
+build obj/test/cctest/cctest_sources/assembler-helper-arm.o: cxx ../test/cctest/assembler-helper-arm.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = assembler-helper-arm.cc
+  source_name_part = assembler-helper-arm
+build obj/test/cctest/cctest_sources/test-assembler-arm.o: cxx ../test/cctest/test-assembler-arm.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-assembler-arm.cc
+  source_name_part = test-assembler-arm
+build obj/test/cctest/cctest_sources/test-macro-assembler-arm.o: cxx ../test/cctest/test-macro-assembler-arm.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-macro-assembler-arm.cc
+  source_name_part = test-macro-assembler-arm
+build obj/test/cctest/cctest_sources/test-sync-primitives-arm.o: cxx ../test/cctest/test-sync-primitives-arm.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-sync-primitives-arm.cc
+  source_name_part = test-sync-primitives-arm
+build obj/test/cctest/cctest_sources/test-multiple-return.o: cxx ../test/cctest/compiler/test-multiple-return.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-multiple-return.cc
+  source_name_part = test-multiple-return
+build obj/test/cctest/cctest_sources/test-run-native-calls.o: cxx ../test/cctest/compiler/test-run-native-calls.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-run-native-calls.cc
+  source_name_part = test-run-native-calls
+build obj/test/cctest/cctest_sources/test-js-to-wasm.o: cxx ../test/cctest/test-js-to-wasm.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-js-to-wasm.cc
+  source_name_part = test-js-to-wasm
+build obj/test/cctest/cctest_sources/test-backing-store.o: cxx ../test/cctest/wasm/test-backing-store.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-backing-store.cc
+  source_name_part = test-backing-store
+build obj/test/cctest/cctest_sources/test-c-wasm-entry.o: cxx ../test/cctest/wasm/test-c-wasm-entry.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-c-wasm-entry.cc
+  source_name_part = test-c-wasm-entry
+build obj/test/cctest/cctest_sources/test-compilation-cache.o: cxx ../test/cctest/wasm/test-compilation-cache.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-compilation-cache.cc
+  source_name_part = test-compilation-cache
+build obj/test/cctest/cctest_sources/test-gc.o: cxx ../test/cctest/wasm/test-gc.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-gc.cc
+  source_name_part = test-gc
+build obj/test/cctest/cctest_sources/test-grow-memory.o: cxx ../test/cctest/wasm/test-grow-memory.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-grow-memory.cc
+  source_name_part = test-grow-memory
+build obj/test/cctest/cctest_sources/test-jump-table-assembler.o: cxx ../test/cctest/wasm/test-jump-table-assembler.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-jump-table-assembler.cc
+  source_name_part = test-jump-table-assembler
+build obj/test/cctest/cctest_sources/test-liftoff-for-fuzzing.o: cxx ../test/cctest/wasm/test-liftoff-for-fuzzing.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-liftoff-for-fuzzing.cc
+  source_name_part = test-liftoff-for-fuzzing
+build obj/test/cctest/cctest_sources/test-liftoff-inspection.o: cxx ../test/cctest/wasm/test-liftoff-inspection.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-liftoff-inspection.cc
+  source_name_part = test-liftoff-inspection
+build obj/test/cctest/cctest_sources/test-run-wasm-64.o: cxx ../test/cctest/wasm/test-run-wasm-64.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-run-wasm-64.cc
+  source_name_part = test-run-wasm-64
+build obj/test/cctest/cctest_sources/test-run-wasm-asmjs.o: cxx ../test/cctest/wasm/test-run-wasm-asmjs.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-run-wasm-asmjs.cc
+  source_name_part = test-run-wasm-asmjs
+build obj/test/cctest/cctest_sources/test-run-wasm-atomics.o: cxx ../test/cctest/wasm/test-run-wasm-atomics.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-run-wasm-atomics.cc
+  source_name_part = test-run-wasm-atomics
+build obj/test/cctest/cctest_sources/test-run-wasm-atomics64.o: cxx ../test/cctest/wasm/test-run-wasm-atomics64.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-run-wasm-atomics64.cc
+  source_name_part = test-run-wasm-atomics64
+build obj/test/cctest/cctest_sources/test-run-wasm-bulk-memory.o: cxx ../test/cctest/wasm/test-run-wasm-bulk-memory.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-run-wasm-bulk-memory.cc
+  source_name_part = test-run-wasm-bulk-memory
+build obj/test/cctest/cctest_sources/test-run-wasm-exceptions.o: cxx ../test/cctest/wasm/test-run-wasm-exceptions.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-run-wasm-exceptions.cc
+  source_name_part = test-run-wasm-exceptions
+build obj/test/cctest/cctest_sources/test-run-wasm-interpreter.o: cxx ../test/cctest/wasm/test-run-wasm-interpreter.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-run-wasm-interpreter.cc
+  source_name_part = test-run-wasm-interpreter
+build obj/test/cctest/cctest_sources/test-run-wasm-js.o: cxx ../test/cctest/wasm/test-run-wasm-js.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-run-wasm-js.cc
+  source_name_part = test-run-wasm-js
+build obj/test/cctest/cctest_sources/test-run-wasm-memory64.o: cxx ../test/cctest/wasm/test-run-wasm-memory64.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-run-wasm-memory64.cc
+  source_name_part = test-run-wasm-memory64
+build obj/test/cctest/cctest_sources/test-run-wasm-module.o: cxx ../test/cctest/wasm/test-run-wasm-module.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-run-wasm-module.cc
+  source_name_part = test-run-wasm-module
+build obj/test/cctest/cctest_sources/test-run-wasm-relaxed-simd.o: cxx ../test/cctest/wasm/test-run-wasm-relaxed-simd.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-run-wasm-relaxed-simd.cc
+  source_name_part = test-run-wasm-relaxed-simd
+build obj/test/cctest/cctest_sources/test-run-wasm-sign-extension.o: cxx ../test/cctest/wasm/test-run-wasm-sign-extension.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-run-wasm-sign-extension.cc
+  source_name_part = test-run-wasm-sign-extension
+build obj/test/cctest/cctest_sources/test-run-wasm-simd-liftoff.o: cxx ../test/cctest/wasm/test-run-wasm-simd-liftoff.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-run-wasm-simd-liftoff.cc
+  source_name_part = test-run-wasm-simd-liftoff
+build obj/test/cctest/cctest_sources/test-run-wasm-simd.o: cxx ../test/cctest/wasm/test-run-wasm-simd.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-run-wasm-simd.cc
+  source_name_part = test-run-wasm-simd
+build obj/test/cctest/cctest_sources/test-run-wasm-wrappers.o: cxx ../test/cctest/wasm/test-run-wasm-wrappers.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-run-wasm-wrappers.cc
+  source_name_part = test-run-wasm-wrappers
+build obj/test/cctest/cctest_sources/test-run-wasm.o: cxx ../test/cctest/wasm/test-run-wasm.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-run-wasm.cc
+  source_name_part = test-run-wasm
+build obj/test/cctest/cctest_sources/test-streaming-compilation.o: cxx ../test/cctest/wasm/test-streaming-compilation.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-streaming-compilation.cc
+  source_name_part = test-streaming-compilation
+build obj/test/cctest/cctest_sources/test-wasm-breakpoints.o: cxx ../test/cctest/wasm/test-wasm-breakpoints.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-wasm-breakpoints.cc
+  source_name_part = test-wasm-breakpoints
+build obj/test/cctest/cctest_sources/test-wasm-codegen.o: cxx ../test/cctest/wasm/test-wasm-codegen.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-wasm-codegen.cc
+  source_name_part = test-wasm-codegen
+build obj/test/cctest/cctest_sources/test-wasm-import-wrapper-cache.o: cxx ../test/cctest/wasm/test-wasm-import-wrapper-cache.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-wasm-import-wrapper-cache.cc
+  source_name_part = test-wasm-import-wrapper-cache
+build obj/test/cctest/cctest_sources/test-wasm-metrics.o: cxx ../test/cctest/wasm/test-wasm-metrics.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-wasm-metrics.cc
+  source_name_part = test-wasm-metrics
+build obj/test/cctest/cctest_sources/test-wasm-serialization.o: cxx ../test/cctest/wasm/test-wasm-serialization.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-wasm-serialization.cc
+  source_name_part = test-wasm-serialization
+build obj/test/cctest/cctest_sources/test-wasm-shared-engine.o: cxx ../test/cctest/wasm/test-wasm-shared-engine.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-wasm-shared-engine.cc
+  source_name_part = test-wasm-shared-engine
+build obj/test/cctest/cctest_sources/test-wasm-stack.o: cxx ../test/cctest/wasm/test-wasm-stack.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-wasm-stack.cc
+  source_name_part = test-wasm-stack
+build obj/test/cctest/cctest_sources/test-wasm-strings.o: cxx ../test/cctest/wasm/test-wasm-strings.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-wasm-strings.cc
+  source_name_part = test-wasm-strings
+build obj/test/cctest/cctest_sources/test-wasm-trap-position.o: cxx ../test/cctest/wasm/test-wasm-trap-position.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = test-wasm-trap-position.cc
+  source_name_part = test-wasm-trap-position
+build obj/test/cctest/cctest_sources/wasm-run-utils.o: cxx ../test/cctest/wasm/wasm-run-utils.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = wasm-run-utils.cc
+  source_name_part = wasm-run-utils
+build obj/test/cctest/cctest_sources/wasm-simd-utils.o: cxx ../test/cctest/wasm/wasm-simd-utils.cc || obj/test/cctest/cctest_sources.inputdeps.stamp
+  source_file_part = wasm-simd-utils.cc
+  source_name_part = wasm-simd-utils
+
+build obj/test/cctest/libcctest_sources.a: alink obj/test/cctest/cctest_sources/value-helper.o obj/test/cctest/cctest_sources/codegen-tester.o obj/test/cctest/cctest_sources/function-tester.o obj/test/cctest/cctest_sources/test-atomic-load-store-codegen.o obj/test/cctest/cctest_sources/test-basic-block-profiler.o obj/test/cctest/cctest_sources/test-branch-combine.o obj/test/cctest/cctest_sources/test-calls-with-arraylike-or-spread.o obj/test/cctest/cctest_sources/test-code-assembler.o obj/test/cctest/cctest_sources/test-code-generator.o obj/test/cctest/cctest_sources/test-concurrent-shared-function-info.o obj/test/cctest/cctest_sources/test-gap-resolver.o obj/test/cctest/cctest_sources/test-graph-visualizer.o obj/test/cctest/cctest_sources/test-instruction-scheduler.o obj/test/cctest/cctest_sources/test-instruction.o obj/test/cctest/cctest_sources/test-js-constant-cache.o obj/test/cctest/cctest_sources/test-js-context-specialization.o obj/test/cctest/cctest_sources/test-js-typed-lowering.o obj/test/cctest/cctest_sources/test-jump-threading.o obj/test/cctest/cctest_sources/test-linkage.o obj/test/cctest/cctest_sources/test-loop-analysis.o obj/test/cctest/cctest_sources/test-machine-operator-reducer.o obj/test/cctest/cctest_sources/test-node.o obj/test/cctest/cctest_sources/test-operator.o obj/test/cctest/cctest_sources/test-representation-change.o obj/test/cctest/cctest_sources/test-run-calls-to-external-references.o obj/test/cctest/cctest_sources/test-run-load-store.o obj/test/cctest/cctest_sources/test-run-machops.o obj/test/cctest/cctest_sources/test-run-stackcheck.o obj/test/cctest/cctest_sources/test-run-unwinding-info.o obj/test/cctest/cctest_sources/test-run-variables.o obj/test/cctest/cctest_sources/test-verify-type.o obj/test/cctest/cctest_sources/heap-utils.o obj/test/cctest/cctest_sources/test-alloc.o obj/test/cctest/cctest_sources/test-array-buffer-tracker.o obj/test/cctest/cctest_sources/test-compaction.o obj/test/cctest/cctest_sources/test-concurrent-allocation.o obj/test/cctest/cctest_sources/test-concurrent-marking.o obj/test/cctest/cctest_sources/test-external-string-tracker.o obj/test/cctest/cctest_sources/test-heap.o obj/test/cctest/cctest_sources/test-incremental-marking.o obj/test/cctest/cctest_sources/test-invalidated-slots.o obj/test/cctest/cctest_sources/test-iterators.o obj/test/cctest/cctest_sources/test-mark-compact.o obj/test/cctest/cctest_sources/test-memory-measurement.o obj/test/cctest/cctest_sources/test-spaces.o obj/test/cctest/cctest_sources/test-unmapper.o obj/test/cctest/cctest_sources/test-weak-references.o obj/test/cctest/cctest_sources/test-write-barrier.o obj/test/cctest/cctest_sources/print-extension.o obj/test/cctest/cctest_sources/profiler-extension.o obj/test/cctest/cctest_sources/setup-isolate-for-tests.o obj/test/cctest/cctest_sources/test-accessor-assembler.o obj/test/cctest/cctest_sources/test-accessors.o obj/test/cctest/cctest_sources/test-allocation.o obj/test/cctest/cctest_sources/test-api-array-buffer.o obj/test/cctest/cctest_sources/test-api-interceptors.o obj/test/cctest/cctest_sources/test-api-stack-traces.o obj/test/cctest/cctest_sources/test-api-typed-array.o obj/test/cctest/cctest_sources/test-api.o obj/test/cctest/cctest_sources/test-code-stub-assembler.o obj/test/cctest/cctest_sources/test-constantpool.o obj/test/cctest/cctest_sources/test-cpu-profiler.o obj/test/cctest/cctest_sources/test-debug-helper.o obj/test/cctest/cctest_sources/test-debug.o obj/test/cctest/cctest_sources/test-descriptor-array.o obj/test/cctest/cctest_sources/test-disasm-regex-helper.o obj/test/cctest/cctest_sources/test-field-type-tracking.o obj/test/cctest/cctest_sources/test-func-name-inference.o obj/test/cctest/cctest_sources/test-heap-profiler.o obj/test/cctest/cctest_sources/test-icache.o obj/test/cctest/cctest_sources/test-ignition-statistics-extension.o obj/test/cctest/cctest_sources/test-inobject-slack-tracking.o obj/test/cctest/cctest_sources/test-js-weak-refs.o obj/test/cctest/cctest_sources/test-liveedit.o obj/test/cctest/cctest_sources/test-lockers.o obj/test/cctest/cctest_sources/test-mementos.o obj/test/cctest/cctest_sources/test-orderedhashtable.o obj/test/cctest/cctest_sources/test-profile-generator.o obj/test/cctest/cctest_sources/test-property-details.o obj/test/cctest/cctest_sources/test-ptr-compr-cage.o obj/test/cctest/cctest_sources/test-random-number-generator.o obj/test/cctest/cctest_sources/test-sampler-api.o obj/test/cctest/cctest_sources/test-serialize.o obj/test/cctest/cctest_sources/test-shared-strings.o obj/test/cctest/cctest_sources/test-smi-lexicographic-compare.o obj/test/cctest/cctest_sources/test-strings.o obj/test/cctest/cctest_sources/test-swiss-name-dictionary-csa.o obj/test/cctest/cctest_sources/test-swiss-name-dictionary-infra.o obj/test/cctest/cctest_sources/test-swiss-name-dictionary.o obj/test/cctest/cctest_sources/test-trace-event.o obj/test/cctest/cctest_sources/test-transitions.o obj/test/cctest/cctest_sources/test-typedarrays.o obj/test/cctest/cctest_sources/test-unscopables-hidden-prototype.o obj/test/cctest/cctest_sources/test-unwinder-code-pages.o obj/test/cctest/cctest_sources/test-usecounters.o obj/test/cctest/cctest_sources/test-utils.o obj/test/cctest/cctest_sources/test-verifiers.o obj/test/cctest/cctest_sources/test-torque.o obj/test/cctest/cctest_sources/trace-extension.o obj/test/cctest/cctest_sources/assembler-helper-arm.o obj/test/cctest/cctest_sources/test-assembler-arm.o obj/test/cctest/cctest_sources/test-macro-assembler-arm.o obj/test/cctest/cctest_sources/test-sync-primitives-arm.o obj/test/cctest/cctest_sources/test-multiple-return.o obj/test/cctest/cctest_sources/test-run-native-calls.o obj/test/cctest/cctest_sources/test-js-to-wasm.o obj/test/cctest/cctest_sources/test-backing-store.o obj/test/cctest/cctest_sources/test-c-wasm-entry.o obj/test/cctest/cctest_sources/test-compilation-cache.o obj/test/cctest/cctest_sources/test-gc.o obj/test/cctest/cctest_sources/test-grow-memory.o obj/test/cctest/cctest_sources/test-jump-table-assembler.o obj/test/cctest/cctest_sources/test-liftoff-for-fuzzing.o obj/test/cctest/cctest_sources/test-liftoff-inspection.o obj/test/cctest/cctest_sources/test-run-wasm-64.o obj/test/cctest/cctest_sources/test-run-wasm-asmjs.o obj/test/cctest/cctest_sources/test-run-wasm-atomics.o obj/test/cctest/cctest_sources/test-run-wasm-atomics64.o obj/test/cctest/cctest_sources/test-run-wasm-bulk-memory.o obj/test/cctest/cctest_sources/test-run-wasm-exceptions.o obj/test/cctest/cctest_sources/test-run-wasm-interpreter.o obj/test/cctest/cctest_sources/test-run-wasm-js.o obj/test/cctest/cctest_sources/test-run-wasm-memory64.o obj/test/cctest/cctest_sources/test-run-wasm-module.o obj/test/cctest/cctest_sources/test-run-wasm-relaxed-simd.o obj/test/cctest/cctest_sources/test-run-wasm-sign-extension.o obj/test/cctest/cctest_sources/test-run-wasm-simd-liftoff.o obj/test/cctest/cctest_sources/test-run-wasm-simd.o obj/test/cctest/cctest_sources/test-run-wasm-wrappers.o obj/test/cctest/cctest_sources/test-run-wasm.o obj/test/cctest/cctest_sources/test-streaming-compilation.o obj/test/cctest/cctest_sources/test-wasm-breakpoints.o obj/test/cctest/cctest_sources/test-wasm-codegen.o obj/test/cctest/cctest_sources/test-wasm-import-wrapper-cache.o obj/test/cctest/cctest_sources/test-wasm-metrics.o obj/test/cctest/cctest_sources/test-wasm-serialization.o obj/test/cctest/cctest_sources/test-wasm-shared-engine.o obj/test/cctest/cctest_sources/test-wasm-stack.o obj/test/cctest/cctest_sources/test-wasm-strings.o obj/test/cctest/cctest_sources/test-wasm-trap-position.o obj/test/cctest/cctest_sources/wasm-run-utils.o obj/test/cctest/cctest_sources/wasm-simd-utils.o || obj/test/cctest/cctest_headers.stamp obj/test/common_test_headers.stamp obj/src/inspector/protocol_generated_sources.stamp obj/build/win/default_exe_manifest.stamp obj/libwasm_test_common.a obj/run_torque.stamp obj/v8_shared_internal_headers.stamp obj/v8_internal_headers.stamp obj/torque_runtime_support.stamp obj/v8_flags.stamp obj/libv8_libbase.a obj/v8_config_headers.stamp obj/v8_headers.stamp obj/cppgc_headers.stamp obj/libv8_libplatform.a obj/v8_version.stamp obj/v8_heap_base_headers.stamp
+  arflags = -T
+  output_extension = .a
+  output_dir = obj/test/cctest

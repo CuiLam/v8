@@ -1,0 +1,14 @@
+defines = -DOFFICIAL_BUILD -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D_FORTIFY_SOURCE=2 -D_GNU_SOURCE -DANDROID -DHAVE_SYS_UIO_H -DANDROID_NDK_VERSION_ROLL=r23_1 -DCR_CLANG_REVISION=\"llvmorg-16-init-6084-g2f3d7c2c-1\" -DNDEBUG -DNVALGRIND -DDYNAMIC_ANNOTATIONS_ENABLED=0 -DZLIB_IMPLEMENTATION -DCRC32_ARMV8_CRC32 -DARMV8_OS_ANDROID
+include_dirs = -I../third_party/zlib -I.. -Igen
+cflags = -Wall -Wextra -Wimplicit-fallthrough -Wextra-semi -Wunreachable-code-aggressive -Wthread-safety -Wno-missing-field-initializers -Wno-unused-parameter -Wloop-analysis -Wno-unneeded-internal-declaration -Wenum-compare-conditional -Wno-psabi -Wno-ignored-pragma-optimize -Wno-deprecated-builtins -Wno-bitfield-constant-conversion -Wshadow -fno-delete-null-pointer-checks -fno-ident -fno-strict-aliasing --param=ssp-buffer-size=4 -fstack-protector -funwind-tables -fPIC -fcolor-diagnostics -fmerge-all-constants -fcrash-diagnostics-dir=../tools/clang/crashreports -mllvm -instcombine-lower-dbg-declare=0 -ffp-contract=off -ffunction-sections -fno-short-enums -mbranch-protection=standard --target=aarch64-linux-android21 -mno-outline-atomics -mno-outline -ffile-compilation-dir=. -no-canonical-prefixes -Oz -fdata-sections -ffunction-sections -fno-unique-section-names -fno-omit-frame-pointer -g0 -fvisibility=hidden -Wheader-hygiene -Wstring-conversion -Wtautological-overlap-compare -O3 -fdata-sections -ffunction-sections -fno-unique-section-names
+cflags_c = -std=c11 --sysroot=../../../opt/sdk-root/ndk/25.0.8775105/toolchains/llvm/prebuilt/linux-x86_64/sysroot
+label_name = zlib_arm_crc32
+root_out_dir = .
+target_out_dir = obj/third_party/zlib
+target_output_name = zlib_arm_crc32
+
+build obj/third_party/zlib/zlib_arm_crc32/crc32_simd.o: cc ../third_party/zlib/crc32_simd.c
+  source_file_part = crc32_simd.c
+  source_name_part = crc32_simd
+
+build obj/third_party/zlib/zlib_arm_crc32.stamp: stamp obj/third_party/zlib/zlib_arm_crc32/crc32_simd.o || obj/third_party/zlib/zlib_common_headers.stamp

@@ -1,0 +1,8 @@
+defines = -DUSE_UDEV -DUSE_AURA=1 -DUSE_OZONE=1 -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_GNU_SOURCE -DCR_CLANG_REVISION=\"llvmorg-16-init-6084-g2f3d7c2c-1\" -DCOMPONENT_BUILD -DCR_LIBCXX_REVISION=2e919977e0030ce61bd19c40cefe31b995f1e2d4 -DCR_SYSROOT_HASH=af39443b6101f4c417bb83113a306fc028d2b665 -D_DEBUG -DDYNAMIC_ANNOTATIONS_ENABLED=1 -DZLIB_IMPLEMENTATION -DZLIB_DEBUG -DDEFLATE_SLIDE_HASH_SSE2
+include_dirs = -I.. -Iclang_x86_v8_arm/gen -I../buildtools/third_party/libc++
+label_name = zlib_slide_hash_simd
+target_out_dir = clang_x86_v8_arm/obj/third_party/zlib
+target_output_name = zlib_slide_hash_simd
+
+
+build clang_x86_v8_arm/obj/third_party/zlib/zlib_slide_hash_simd.stamp: clang_x86_v8_arm_stamp || clang_x86_v8_arm/obj/third_party/zlib/zlib_common_headers.stamp

@@ -1,0 +1,114 @@
+defines = -DOFFICIAL_BUILD -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D_FORTIFY_SOURCE=2 -D_GNU_SOURCE -DANDROID -DHAVE_SYS_UIO_H -DANDROID_NDK_VERSION_ROLL=r23_1 -DCR_CLANG_REVISION=\"llvmorg-16-init-6084-g2f3d7c2c-1\" -DNDEBUG -DNVALGRIND -DDYNAMIC_ANNOTATIONS_ENABLED=0 -DV8_TYPED_ARRAY_MAX_SIZE_IN_HEAP=64 -DV8_ATOMIC_OBJECT_FIELD_WRITES -DV8_ENABLE_LAZY_SOURCE_POSITIONS -DV8_SHARED_RO_HEAP -DV8_WIN64_UNWINDING_INFO -DV8_ENABLE_REGEXP_INTERPRETER_THREADED_DISPATCH -DV8_ENABLE_WEBASSEMBLY -DV8_ENABLE_JAVASCRIPT_PROMISE_HOOKS -DV8_ALLOCATION_FOLDING -DV8_ALLOCATION_SITE_TRACKING -DV8_USE_ZLIB -DV8_DEPRECATION_WARNINGS -DV8_IMMINENT_DEPRECATION_WARNINGS -DV8_TARGET_ARCH_ARM -DCAN_USE_ARMV7_INSTRUCTIONS -DCAN_USE_VFP3_INSTRUCTIONS -DCAN_USE_VFP32DREGS -DCAN_USE_NEON -DV8_HAVE_TARGET_OS -DV8_TARGET_OS_ANDROID
+include_dirs = -I.. -Igen -I../include -Igen/include
+cflags = -Wall -Wextra -Wimplicit-fallthrough -Wextra-semi -Wunreachable-code-aggressive -Wthread-safety -Wno-missing-field-initializers -Wno-unused-parameter -Wloop-analysis -Wno-unneeded-internal-declaration -Wenum-compare-conditional -Wno-psabi -Wno-ignored-pragma-optimize -Wno-deprecated-builtins -Wno-bitfield-constant-conversion -Wshadow -fno-delete-null-pointer-checks -fno-ident -fno-strict-aliasing --param=ssp-buffer-size=4 -fstack-protector -funwind-tables -fPIC -fcolor-diagnostics -fmerge-all-constants -fcrash-diagnostics-dir=../tools/clang/crashreports -mllvm -instcombine-lower-dbg-declare=0 -ffp-contract=off -ffunction-sections -fno-short-enums --target=arm-linux-androideabi21 -march=armv7-a -mfloat-abi=softfp -ffile-compilation-dir=. -no-canonical-prefixes -mfpu=neon -mthumb -fomit-frame-pointer -g0 -Wheader-hygiene -Wstring-conversion -Wtautological-overlap-compare -Wmissing-field-initializers -Wunreachable-code -Wctad-maybe-unsupported -Wno-shadow -O2 -fdata-sections -ffunction-sections -fno-unique-section-names -fvisibility=default -Wexit-time-destructors
+cflags_cc = -std=c++17 -Wno-trigraphs -fno-exceptions -fno-rtti --sysroot=../../../opt/sdk-root/ndk/25.0.8775105/toolchains/llvm/prebuilt/linux-x86_64/sysroot
+label_name = inspector
+root_out_dir = .
+target_out_dir = obj/src/inspector
+target_output_name = libinspector
+
+build obj/src/inspector/inspector.inputdeps.stamp: stamp obj/generate_bytecode_builtins_list.stamp obj/run_torque.stamp obj/src/inspector/protocol_generated_sources.stamp
+build obj/src/inspector/inspector/Protocol.o: cxx gen/src/inspector/protocol/Protocol.cpp || obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = Protocol.cpp
+  source_name_part = Protocol
+build obj/src/inspector/inspector/Console.o: cxx gen/src/inspector/protocol/Console.cpp || obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = Console.cpp
+  source_name_part = Console
+build obj/src/inspector/inspector/Debugger.o: cxx gen/src/inspector/protocol/Debugger.cpp || obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = Debugger.cpp
+  source_name_part = Debugger
+build obj/src/inspector/inspector/HeapProfiler.o: cxx gen/src/inspector/protocol/HeapProfiler.cpp || obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = HeapProfiler.cpp
+  source_name_part = HeapProfiler
+build obj/src/inspector/inspector/Profiler.o: cxx gen/src/inspector/protocol/Profiler.cpp || obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = Profiler.cpp
+  source_name_part = Profiler
+build obj/src/inspector/inspector/Runtime.o: cxx gen/src/inspector/protocol/Runtime.cpp || obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = Runtime.cpp
+  source_name_part = Runtime
+build obj/src/inspector/inspector/Schema.o: cxx gen/src/inspector/protocol/Schema.cpp || obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = Schema.cpp
+  source_name_part = Schema
+build obj/src/inspector/inspector/custom-preview.o: cxx ../src/inspector/custom-preview.cc || obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = custom-preview.cc
+  source_name_part = custom-preview
+build obj/src/inspector/inspector/injected-script.o: cxx ../src/inspector/injected-script.cc || obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = injected-script.cc
+  source_name_part = injected-script
+build obj/src/inspector/inspector/inspected-context.o: cxx ../src/inspector/inspected-context.cc || obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = inspected-context.cc
+  source_name_part = inspected-context
+build obj/src/inspector/inspector/remote-object-id.o: cxx ../src/inspector/remote-object-id.cc || obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = remote-object-id.cc
+  source_name_part = remote-object-id
+build obj/src/inspector/inspector/search-util.o: cxx ../src/inspector/search-util.cc || obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = search-util.cc
+  source_name_part = search-util
+build obj/src/inspector/inspector/string-16.o: cxx ../src/inspector/string-16.cc || obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = string-16.cc
+  source_name_part = string-16
+build obj/src/inspector/inspector/string-util.o: cxx ../src/inspector/string-util.cc || obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = string-util.cc
+  source_name_part = string-util
+build obj/src/inspector/inspector/test-interface.o: cxx ../src/inspector/test-interface.cc || obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = test-interface.cc
+  source_name_part = test-interface
+build obj/src/inspector/inspector/v8-console-agent-impl.o: cxx ../src/inspector/v8-console-agent-impl.cc || obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = v8-console-agent-impl.cc
+  source_name_part = v8-console-agent-impl
+build obj/src/inspector/inspector/v8-console-message.o: cxx ../src/inspector/v8-console-message.cc || obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = v8-console-message.cc
+  source_name_part = v8-console-message
+build obj/src/inspector/inspector/v8-console.o: cxx ../src/inspector/v8-console.cc || obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = v8-console.cc
+  source_name_part = v8-console
+build obj/src/inspector/inspector/v8-debugger-agent-impl.o: cxx ../src/inspector/v8-debugger-agent-impl.cc || obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = v8-debugger-agent-impl.cc
+  source_name_part = v8-debugger-agent-impl
+build obj/src/inspector/inspector/v8-debugger-id.o: cxx ../src/inspector/v8-debugger-id.cc || obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = v8-debugger-id.cc
+  source_name_part = v8-debugger-id
+build obj/src/inspector/inspector/v8-debugger-script.o: cxx ../src/inspector/v8-debugger-script.cc || obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = v8-debugger-script.cc
+  source_name_part = v8-debugger-script
+build obj/src/inspector/inspector/v8-debugger.o: cxx ../src/inspector/v8-debugger.cc || obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = v8-debugger.cc
+  source_name_part = v8-debugger
+build obj/src/inspector/inspector/v8-heap-profiler-agent-impl.o: cxx ../src/inspector/v8-heap-profiler-agent-impl.cc || obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = v8-heap-profiler-agent-impl.cc
+  source_name_part = v8-heap-profiler-agent-impl
+build obj/src/inspector/inspector/v8-inspector-impl.o: cxx ../src/inspector/v8-inspector-impl.cc || obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = v8-inspector-impl.cc
+  source_name_part = v8-inspector-impl
+build obj/src/inspector/inspector/v8-inspector-session-impl.o: cxx ../src/inspector/v8-inspector-session-impl.cc || obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = v8-inspector-session-impl.cc
+  source_name_part = v8-inspector-session-impl
+build obj/src/inspector/inspector/v8-profiler-agent-impl.o: cxx ../src/inspector/v8-profiler-agent-impl.cc || obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = v8-profiler-agent-impl.cc
+  source_name_part = v8-profiler-agent-impl
+build obj/src/inspector/inspector/v8-regex.o: cxx ../src/inspector/v8-regex.cc || obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = v8-regex.cc
+  source_name_part = v8-regex
+build obj/src/inspector/inspector/v8-runtime-agent-impl.o: cxx ../src/inspector/v8-runtime-agent-impl.cc || obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = v8-runtime-agent-impl.cc
+  source_name_part = v8-runtime-agent-impl
+build obj/src/inspector/inspector/v8-schema-agent-impl.o: cxx ../src/inspector/v8-schema-agent-impl.cc || obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = v8-schema-agent-impl.cc
+  source_name_part = v8-schema-agent-impl
+build obj/src/inspector/inspector/v8-stack-trace-impl.o: cxx ../src/inspector/v8-stack-trace-impl.cc || obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = v8-stack-trace-impl.cc
+  source_name_part = v8-stack-trace-impl
+build obj/src/inspector/inspector/v8-value-utils.o: cxx ../src/inspector/v8-value-utils.cc || obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = v8-value-utils.cc
+  source_name_part = v8-value-utils
+build obj/src/inspector/inspector/v8-webdriver-serializer.o: cxx ../src/inspector/v8-webdriver-serializer.cc || obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = v8-webdriver-serializer.cc
+  source_name_part = v8-webdriver-serializer
+build obj/src/inspector/inspector/value-mirror.o: cxx ../src/inspector/value-mirror.cc || obj/src/inspector/inspector.inputdeps.stamp
+  source_file_part = value-mirror.cc
+  source_name_part = value-mirror
+
+build obj/src/inspector/libinspector.a: alink obj/src/inspector/inspector/Protocol.o obj/src/inspector/inspector/Console.o obj/src/inspector/inspector/Debugger.o obj/src/inspector/inspector/HeapProfiler.o obj/src/inspector/inspector/Profiler.o obj/src/inspector/inspector/Runtime.o obj/src/inspector/inspector/Schema.o obj/src/inspector/inspector/custom-preview.o obj/src/inspector/inspector/injected-script.o obj/src/inspector/inspector/inspected-context.o obj/src/inspector/inspector/remote-object-id.o obj/src/inspector/inspector/search-util.o obj/src/inspector/inspector/string-16.o obj/src/inspector/inspector/string-util.o obj/src/inspector/inspector/test-interface.o obj/src/inspector/inspector/v8-console-agent-impl.o obj/src/inspector/inspector/v8-console-message.o obj/src/inspector/inspector/v8-console.o obj/src/inspector/inspector/v8-debugger-agent-impl.o obj/src/inspector/inspector/v8-debugger-id.o obj/src/inspector/inspector/v8-debugger-script.o obj/src/inspector/inspector/v8-debugger.o obj/src/inspector/inspector/v8-heap-profiler-agent-impl.o obj/src/inspector/inspector/v8-inspector-impl.o obj/src/inspector/inspector/v8-inspector-session-impl.o obj/src/inspector/inspector/v8-profiler-agent-impl.o obj/src/inspector/inspector/v8-regex.o obj/src/inspector/inspector/v8-runtime-agent-impl.o obj/src/inspector/inspector/v8-schema-agent-impl.o obj/src/inspector/inspector/v8-stack-trace-impl.o obj/src/inspector/inspector/v8-value-utils.o obj/src/inspector/inspector/v8-webdriver-serializer.o obj/src/inspector/inspector/value-mirror.o || obj/src/inspector/inspector_test_headers.stamp obj/src/inspector/protocol_generated_sources.stamp obj/libv8_libbase.a obj/src/inspector/libinspector_string_conversions.a obj/v8_tracing.stamp obj/v8_version.stamp obj/third_party/inspector_protocol/libcrdtp.a obj/v8_headers.stamp obj/v8_config_headers.stamp obj/cppgc_headers.stamp obj/libv8_libplatform.a obj/third_party/inspector_protocol/libcrdtp_platform.a obj/v8_internal_headers.stamp obj/torque_runtime_support.stamp obj/v8_flags.stamp obj/v8_shared_internal_headers.stamp obj/v8_heap_base_headers.stamp
+  arflags = -T
+  output_extension = .a
+  output_dir = obj/src/inspector

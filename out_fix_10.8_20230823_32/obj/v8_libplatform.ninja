@@ -1,0 +1,50 @@
+defines = -DOFFICIAL_BUILD -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D_FORTIFY_SOURCE=2 -D_GNU_SOURCE -DANDROID -DHAVE_SYS_UIO_H -DANDROID_NDK_VERSION_ROLL=r23_1 -DCR_CLANG_REVISION=\"llvmorg-16-init-6084-g2f3d7c2c-1\" -DNDEBUG -DNVALGRIND -DDYNAMIC_ANNOTATIONS_ENABLED=0 -DV8_TYPED_ARRAY_MAX_SIZE_IN_HEAP=64 -DV8_ATOMIC_OBJECT_FIELD_WRITES -DV8_ENABLE_LAZY_SOURCE_POSITIONS -DV8_SHARED_RO_HEAP -DV8_WIN64_UNWINDING_INFO -DV8_ENABLE_REGEXP_INTERPRETER_THREADED_DISPATCH -DV8_ENABLE_WEBASSEMBLY -DV8_ENABLE_JAVASCRIPT_PROMISE_HOOKS -DV8_ALLOCATION_FOLDING -DV8_ALLOCATION_SITE_TRACKING -DV8_USE_ZLIB -DV8_DEPRECATION_WARNINGS -DV8_IMMINENT_DEPRECATION_WARNINGS -DV8_TARGET_ARCH_ARM -DCAN_USE_ARMV7_INSTRUCTIONS -DCAN_USE_VFP3_INSTRUCTIONS -DCAN_USE_VFP32DREGS -DCAN_USE_NEON -DV8_HAVE_TARGET_OS -DV8_TARGET_OS_ANDROID
+include_dirs = -I.. -Igen -I../include -Igen/include
+cflags = -Wall -Wextra -Wimplicit-fallthrough -Wextra-semi -Wunreachable-code-aggressive -Wthread-safety -Wno-missing-field-initializers -Wno-unused-parameter -Wloop-analysis -Wno-unneeded-internal-declaration -Wenum-compare-conditional -Wno-psabi -Wno-ignored-pragma-optimize -Wno-deprecated-builtins -Wno-bitfield-constant-conversion -Wshadow -fno-delete-null-pointer-checks -fno-ident -fno-strict-aliasing --param=ssp-buffer-size=4 -fstack-protector -funwind-tables -fPIC -fcolor-diagnostics -fmerge-all-constants -fcrash-diagnostics-dir=../tools/clang/crashreports -mllvm -instcombine-lower-dbg-declare=0 -ffp-contract=off -ffunction-sections -fno-short-enums --target=arm-linux-androideabi21 -march=armv7-a -mfloat-abi=softfp -ffile-compilation-dir=. -no-canonical-prefixes -mfpu=neon -mthumb -fomit-frame-pointer -g0 -Wheader-hygiene -Wstring-conversion -Wtautological-overlap-compare -Wmissing-field-initializers -Wunreachable-code -Wctad-maybe-unsupported -Wno-shadow -O2 -fdata-sections -ffunction-sections -fno-unique-section-names -fvisibility=default
+cflags_cc = -std=c++17 -Wno-trigraphs -fno-exceptions -fno-rtti --sysroot=../../../opt/sdk-root/ndk/25.0.8775105/toolchains/llvm/prebuilt/linux-x86_64/sysroot
+label_name = v8_libplatform
+root_out_dir = .
+target_out_dir = obj
+target_output_name = libv8_libplatform
+
+build obj/v8_libplatform/default-foreground-task-runner.o: cxx ../src/libplatform/default-foreground-task-runner.cc
+  source_file_part = default-foreground-task-runner.cc
+  source_name_part = default-foreground-task-runner
+build obj/v8_libplatform/default-job.o: cxx ../src/libplatform/default-job.cc
+  source_file_part = default-job.cc
+  source_name_part = default-job
+build obj/v8_libplatform/default-platform.o: cxx ../src/libplatform/default-platform.cc
+  source_file_part = default-platform.cc
+  source_name_part = default-platform
+build obj/v8_libplatform/default-worker-threads-task-runner.o: cxx ../src/libplatform/default-worker-threads-task-runner.cc
+  source_file_part = default-worker-threads-task-runner.cc
+  source_name_part = default-worker-threads-task-runner
+build obj/v8_libplatform/delayed-task-queue.o: cxx ../src/libplatform/delayed-task-queue.cc
+  source_file_part = delayed-task-queue.cc
+  source_name_part = delayed-task-queue
+build obj/v8_libplatform/task-queue.o: cxx ../src/libplatform/task-queue.cc
+  source_file_part = task-queue.cc
+  source_name_part = task-queue
+build obj/v8_libplatform/trace-buffer.o: cxx ../src/libplatform/tracing/trace-buffer.cc
+  source_file_part = trace-buffer.cc
+  source_name_part = trace-buffer
+build obj/v8_libplatform/trace-config.o: cxx ../src/libplatform/tracing/trace-config.cc
+  source_file_part = trace-config.cc
+  source_name_part = trace-config
+build obj/v8_libplatform/trace-object.o: cxx ../src/libplatform/tracing/trace-object.cc
+  source_file_part = trace-object.cc
+  source_name_part = trace-object
+build obj/v8_libplatform/trace-writer.o: cxx ../src/libplatform/tracing/trace-writer.cc
+  source_file_part = trace-writer.cc
+  source_name_part = trace-writer
+build obj/v8_libplatform/tracing-controller.o: cxx ../src/libplatform/tracing/tracing-controller.cc
+  source_file_part = tracing-controller.cc
+  source_name_part = tracing-controller
+build obj/v8_libplatform/worker-thread.o: cxx ../src/libplatform/worker-thread.cc
+  source_file_part = worker-thread.cc
+  source_name_part = worker-thread
+
+build obj/libv8_libplatform.a: alink obj/v8_libplatform/default-foreground-task-runner.o obj/v8_libplatform/default-job.o obj/v8_libplatform/default-platform.o obj/v8_libplatform/default-worker-threads-task-runner.o obj/v8_libplatform/delayed-task-queue.o obj/v8_libplatform/task-queue.o obj/v8_libplatform/trace-buffer.o obj/v8_libplatform/trace-config.o obj/v8_libplatform/trace-object.o obj/v8_libplatform/trace-writer.o obj/v8_libplatform/tracing-controller.o obj/v8_libplatform/worker-thread.o || obj/v8_config_headers.stamp obj/libv8_libbase.a obj/v8_tracing.stamp
+  arflags = -T
+  output_extension = .a
+  output_dir = obj

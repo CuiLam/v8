@@ -1,0 +1,39 @@
+defines = -DOFFICIAL_BUILD -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D_FORTIFY_SOURCE=2 -D_GNU_SOURCE -DANDROID -DHAVE_SYS_UIO_H -DANDROID_NDK_VERSION_ROLL=r23_1 -DCR_CLANG_REVISION=\"llvmorg-16-init-6084-g2f3d7c2c-1\" -DNDEBUG -DNVALGRIND -DDYNAMIC_ANNOTATIONS_ENABLED=0 -DV8_TYPED_ARRAY_MAX_SIZE_IN_HEAP=64 -DV8_ATOMIC_OBJECT_FIELD_WRITES -DV8_ENABLE_LAZY_SOURCE_POSITIONS -DV8_SHARED_RO_HEAP -DV8_WIN64_UNWINDING_INFO -DV8_ENABLE_REGEXP_INTERPRETER_THREADED_DISPATCH -DV8_ENABLE_WEBASSEMBLY -DV8_ENABLE_JAVASCRIPT_PROMISE_HOOKS -DV8_ALLOCATION_FOLDING -DV8_ALLOCATION_SITE_TRACKING -DV8_USE_ZLIB -DV8_DEPRECATION_WARNINGS -DV8_IMMINENT_DEPRECATION_WARNINGS -DV8_TARGET_ARCH_ARM -DCAN_USE_ARMV7_INSTRUCTIONS -DCAN_USE_VFP3_INSTRUCTIONS -DCAN_USE_VFP32DREGS -DCAN_USE_NEON -DV8_HAVE_TARGET_OS -DV8_TARGET_OS_ANDROID
+include_dirs = -I.. -Igen -I../tools/debug_helper -Igen/tools/debug_helper -I../include -Igen/include
+cflags = -Wall -Wextra -Wimplicit-fallthrough -Wextra-semi -Wunreachable-code-aggressive -Wthread-safety -Wno-missing-field-initializers -Wno-unused-parameter -Wloop-analysis -Wno-unneeded-internal-declaration -Wenum-compare-conditional -Wno-psabi -Wno-ignored-pragma-optimize -Wno-deprecated-builtins -Wno-bitfield-constant-conversion -Wshadow -fno-delete-null-pointer-checks -fno-ident -fno-strict-aliasing --param=ssp-buffer-size=4 -fstack-protector -funwind-tables -fPIC -fcolor-diagnostics -fmerge-all-constants -fcrash-diagnostics-dir=../tools/clang/crashreports -mllvm -instcombine-lower-dbg-declare=0 -ffp-contract=off -ffunction-sections -fno-short-enums --target=arm-linux-androideabi21 -march=armv7-a -mfloat-abi=softfp -ffile-compilation-dir=. -no-canonical-prefixes -mfpu=neon -mthumb -fomit-frame-pointer -g0 -Wheader-hygiene -Wstring-conversion -Wtautological-overlap-compare -Wmissing-field-initializers -Wunreachable-code -Wctad-maybe-unsupported -Wno-shadow -O2 -fdata-sections -ffunction-sections -fno-unique-section-names -fvisibility=default
+cflags_cc = -std=c++17 -Wno-trigraphs -fno-exceptions --sysroot=../../../opt/sdk-root/ndk/25.0.8775105/toolchains/llvm/prebuilt/linux-x86_64/sysroot -frtti
+label_name = v8_debug_helper
+root_out_dir = .
+target_out_dir = obj/tools/debug_helper
+target_output_name = libv8_debug_helper
+
+build obj/tools/debug_helper/v8_debug_helper.inputdeps.stamp: stamp obj/generate_bytecode_builtins_list.stamp obj/run_torque.stamp obj/tools/debug_helper/gen_heap_constants.stamp
+build obj/tools/debug_helper/v8_debug_helper/class-debug-readers.o: cxx gen/torque-generated/class-debug-readers.cc || obj/tools/debug_helper/v8_debug_helper.inputdeps.stamp
+  source_file_part = class-debug-readers.cc
+  source_name_part = class-debug-readers
+build obj/tools/debug_helper/v8_debug_helper/debug-macros.o: cxx gen/torque-generated/debug-macros.cc || obj/tools/debug_helper/v8_debug_helper.inputdeps.stamp
+  source_file_part = debug-macros.cc
+  source_name_part = debug-macros
+build obj/tools/debug_helper/v8_debug_helper/heap-constants-gen.o: cxx gen/tools/debug_helper/heap-constants-gen.cc || obj/tools/debug_helper/v8_debug_helper.inputdeps.stamp
+  source_file_part = heap-constants-gen.cc
+  source_name_part = heap-constants-gen
+build obj/tools/debug_helper/v8_debug_helper/compiler-types.o: cxx ../tools/debug_helper/compiler-types.cc || obj/tools/debug_helper/v8_debug_helper.inputdeps.stamp
+  source_file_part = compiler-types.cc
+  source_name_part = compiler-types
+build obj/tools/debug_helper/v8_debug_helper/debug-helper-internal.o: cxx ../tools/debug_helper/debug-helper-internal.cc || obj/tools/debug_helper/v8_debug_helper.inputdeps.stamp
+  source_file_part = debug-helper-internal.cc
+  source_name_part = debug-helper-internal
+build obj/tools/debug_helper/v8_debug_helper/get-object-properties.o: cxx ../tools/debug_helper/get-object-properties.cc || obj/tools/debug_helper/v8_debug_helper.inputdeps.stamp
+  source_file_part = get-object-properties.cc
+  source_name_part = get-object-properties
+build obj/tools/debug_helper/v8_debug_helper/heap-constants.o: cxx ../tools/debug_helper/heap-constants.cc || obj/tools/debug_helper/v8_debug_helper.inputdeps.stamp
+  source_file_part = heap-constants.cc
+  source_name_part = heap-constants
+build obj/tools/debug_helper/v8_debug_helper/list-object-classes.o: cxx ../tools/debug_helper/list-object-classes.cc || obj/tools/debug_helper/v8_debug_helper.inputdeps.stamp
+  source_file_part = list-object-classes.cc
+  source_name_part = list-object-classes
+
+build obj/tools/debug_helper/libv8_debug_helper.a: alink obj/tools/debug_helper/v8_debug_helper/class-debug-readers.o obj/tools/debug_helper/v8_debug_helper/debug-macros.o obj/tools/debug_helper/v8_debug_helper/heap-constants-gen.o obj/tools/debug_helper/v8_debug_helper/compiler-types.o obj/tools/debug_helper/v8_debug_helper/debug-helper-internal.o obj/tools/debug_helper/v8_debug_helper/get-object-properties.o obj/tools/debug_helper/v8_debug_helper/heap-constants.o obj/tools/debug_helper/v8_debug_helper/list-object-classes.o || obj/tools/debug_helper/gen_heap_constants.stamp obj/generate_bytecode_builtins_list.stamp obj/run_torque.stamp obj/v8_headers.stamp obj/v8_internal_headers.stamp obj/libv8_libbase.a obj/v8_shared_internal_headers.stamp obj/v8_tracing.stamp obj/v8_config_headers.stamp obj/cppgc_headers.stamp obj/libv8_libplatform.a obj/v8_version.stamp obj/torque_runtime_support.stamp obj/v8_flags.stamp obj/v8_heap_base_headers.stamp
+  arflags = -T
+  output_extension = .a
+  output_dir = obj/tools/debug_helper

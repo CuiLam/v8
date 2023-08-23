@@ -1,0 +1,14 @@
+defines = -DOFFICIAL_BUILD -D_GNU_SOURCE -DANDROID -DHAVE_SYS_UIO_H -DANDROID_NDK_VERSION_ROLL=r23_1 -DCR_CLANG_REVISION=\"llvmorg-16-init-6084-g2f3d7c2c-1\" -DNDEBUG -DNVALGRIND -DDYNAMIC_ANNOTATIONS_ENABLED=0
+include_dirs = -I.. -Igen -I../third_party/android_ndk/sources/android/cpufeatures
+cflags = -fno-delete-null-pointer-checks -fno-ident -fno-strict-aliasing --param=ssp-buffer-size=4 -fstack-protector -funwind-tables -fPIC -fcolor-diagnostics -fmerge-all-constants -fcrash-diagnostics-dir=../tools/clang/crashreports -mllvm -instcombine-lower-dbg-declare=0 -ffp-contract=off -ffunction-sections -fno-short-enums --target=arm-linux-androideabi21 -march=armv7-a -mfloat-abi=softfp -ffile-compilation-dir=. -no-canonical-prefixes -mfpu=neon -mthumb -Oz -fdata-sections -ffunction-sections -fno-unique-section-names -fomit-frame-pointer -g0 -fvisibility=hidden -Wheader-hygiene -Wstring-conversion -Wtautological-overlap-compare -Wall -Wno-unused-variable -Wno-c++11-narrowing -Wno-unused-but-set-variable -Wno-misleading-indentation -Wno-missing-field-initializers -Wno-unused-parameter -Wloop-analysis -Wno-unneeded-internal-declaration -Wenum-compare-conditional -Wno-psabi -Wno-ignored-pragma-optimize -Wno-deprecated-builtins -Wno-bitfield-constant-conversion -Wno-unused-function
+cflags_c = -std=c11 --sysroot=../../../opt/sdk-root/ndk/25.0.8775105/toolchains/llvm/prebuilt/linux-x86_64/sysroot
+label_name = cpu_features
+root_out_dir = .
+target_out_dir = obj/third_party/android_ndk
+target_output_name = cpu_features
+
+build obj/third_party/android_ndk/cpu_features/cpu-features.o: cc ../third_party/android_ndk/sources/android/cpufeatures/cpu-features.c
+  source_file_part = cpu-features.c
+  source_name_part = cpu-features
+
+build obj/third_party/android_ndk/cpu_features.stamp: stamp obj/third_party/android_ndk/cpu_features/cpu-features.o

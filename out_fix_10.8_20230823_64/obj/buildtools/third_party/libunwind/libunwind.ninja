@@ -1,0 +1,34 @@
+defines = -D_GNU_SOURCE -DANDROID -DHAVE_SYS_UIO_H -DANDROID_NDK_VERSION_ROLL=r23_1 -DCR_CLANG_REVISION=\"llvmorg-16-init-6084-g2f3d7c2c-1\" -DCOMPONENT_BUILD -DCR_LIBCXX_REVISION=2e919977e0030ce61bd19c40cefe31b995f1e2d4 -D_DEBUG -DDYNAMIC_ANNOTATIONS_ENABLED=1 -D_LIBUNWIND_IS_NATIVE_ONLY
+include_dirs = -I../buildtools/third_party/libunwind/trunk/include -I.. -Igen -I../buildtools/third_party/libc++
+asmflags = -fPIC -fno-delete-null-pointer-checks -fno-ident -fno-strict-aliasing --param=ssp-buffer-size=4 -fstack-protector -funwind-tables -fPIC -fcolor-diagnostics -fmerge-all-constants -fcrash-diagnostics-dir=../tools/clang/crashreports -mllvm -instcombine-lower-dbg-declare=0 -ffp-contract=off -fcomplete-member-pointers -std=c11 -ffunction-sections -fno-short-enums --target=arm-linux-androideabi23 -march=armv7-a -mfloat-abi=softfp -Wa,-fdebug-compilation-dir,. -mfpu=neon -gdwarf-4 -g2 -gdwarf-aranges --sysroot=../third_party/android_ndk/toolchains/llvm/prebuilt/linux-x86_64/sysroot
+cflags = -fno-delete-null-pointer-checks -fno-ident -fno-strict-aliasing --param=ssp-buffer-size=4 -fstack-protector -funwind-tables -fPIC -fcolor-diagnostics -fmerge-all-constants -fcrash-diagnostics-dir=../tools/clang/crashreports -mllvm -instcombine-lower-dbg-declare=0 -ffp-contract=off -fcomplete-member-pointers -ffunction-sections -fno-short-enums --target=arm-linux-androideabi23 -march=armv7-a -mfloat-abi=softfp -Wno-builtin-macro-redefined -D__DATE__= -D__TIME__= -D__TIMESTAMP__= -ffile-compilation-dir=. -no-canonical-prefixes -mfpu=neon -mthumb -fomit-frame-pointer -gdwarf-4 -g2 -gdwarf-aranges -Xclang -fuse-ctor-homing -fvisibility=hidden -Xclang -add-plugin -Xclang find-bad-constructs -Xclang -plugin-arg-find-bad-constructs -Xclang raw-ref-template-as-trivial-member -Xclang -plugin-arg-find-bad-constructs -Xclang check-ipc -Wheader-hygiene -Wstring-conversion -Wtautological-overlap-compare -Werror -Wall -Wno-unused-variable -Wno-c++11-narrowing -Wno-unused-but-set-variable -Wno-misleading-indentation -Wno-missing-field-initializers -Wno-unused-parameter -Wloop-analysis -Wno-unneeded-internal-declaration -Wenum-compare-conditional -Wno-psabi -Wno-ignored-pragma-optimize -Wno-deprecated-builtins -Wno-bitfield-constant-conversion -O3 -fdata-sections -ffunction-sections -fno-unique-section-names -fstrict-aliasing -fPIC -Wno-unused-function -funwind-tables
+cflags_c = -std=c11 --sysroot=../third_party/android_ndk/toolchains/llvm/prebuilt/linux-x86_64/sysroot
+cflags_cc = -Wno-undefined-bool-conversion -Wno-tautological-undefined-compare -std=c++17 -Wno-trigraphs -nostdinc++ -isystem../buildtools/third_party/libc++/trunk/include -isystem../buildtools/third_party/libc++abi/trunk/include --sysroot=../third_party/android_ndk/toolchains/llvm/prebuilt/linux-x86_64/sysroot -fvisibility-inlines-hidden -fexceptions -frtti
+label_name = libunwind
+root_out_dir = .
+target_out_dir = obj/buildtools/third_party/libunwind
+target_output_name = libunwind
+
+build obj/buildtools/third_party/libunwind/libunwind/Unwind-EHABI.o: cxx ../buildtools/third_party/libunwind/trunk/src/Unwind-EHABI.cpp
+  source_file_part = Unwind-EHABI.cpp
+  source_name_part = Unwind-EHABI
+build obj/buildtools/third_party/libunwind/libunwind/libunwind.o: cxx ../buildtools/third_party/libunwind/trunk/src/libunwind.cpp
+  source_file_part = libunwind.cpp
+  source_name_part = libunwind
+build obj/buildtools/third_party/libunwind/libunwind/Unwind-sjlj.o: cc ../buildtools/third_party/libunwind/trunk/src/Unwind-sjlj.c
+  source_file_part = Unwind-sjlj.c
+  source_name_part = Unwind-sjlj
+build obj/buildtools/third_party/libunwind/libunwind/UnwindLevel1-gcc-ext.o: cc ../buildtools/third_party/libunwind/trunk/src/UnwindLevel1-gcc-ext.c
+  source_file_part = UnwindLevel1-gcc-ext.c
+  source_name_part = UnwindLevel1-gcc-ext
+build obj/buildtools/third_party/libunwind/libunwind/UnwindLevel1.o: cc ../buildtools/third_party/libunwind/trunk/src/UnwindLevel1.c
+  source_file_part = UnwindLevel1.c
+  source_name_part = UnwindLevel1
+build obj/buildtools/third_party/libunwind/libunwind/UnwindRegistersRestore.o: asm ../buildtools/third_party/libunwind/trunk/src/UnwindRegistersRestore.S
+  source_file_part = UnwindRegistersRestore.S
+  source_name_part = UnwindRegistersRestore
+build obj/buildtools/third_party/libunwind/libunwind/UnwindRegistersSave.o: asm ../buildtools/third_party/libunwind/trunk/src/UnwindRegistersSave.S
+  source_file_part = UnwindRegistersSave.S
+  source_name_part = UnwindRegistersSave
+
+build obj/buildtools/third_party/libunwind/libunwind.stamp: stamp obj/buildtools/third_party/libunwind/libunwind/Unwind-EHABI.o obj/buildtools/third_party/libunwind/libunwind/libunwind.o obj/buildtools/third_party/libunwind/libunwind/Unwind-sjlj.o obj/buildtools/third_party/libunwind/libunwind/UnwindLevel1-gcc-ext.o obj/buildtools/third_party/libunwind/libunwind/UnwindLevel1.o obj/buildtools/third_party/libunwind/libunwind/UnwindRegistersRestore.o obj/buildtools/third_party/libunwind/libunwind/UnwindRegistersSave.o

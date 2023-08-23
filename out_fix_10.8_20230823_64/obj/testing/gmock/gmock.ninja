@@ -1,0 +1,9 @@
+defines = -DOFFICIAL_BUILD -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D_FORTIFY_SOURCE=2 -D_GNU_SOURCE -DANDROID -DHAVE_SYS_UIO_H -DANDROID_NDK_VERSION_ROLL=r23_1 -DCR_CLANG_REVISION=\"llvmorg-16-init-6084-g2f3d7c2c-1\" -DNDEBUG -DNVALGRIND -DDYNAMIC_ANNOTATIONS_ENABLED=0 -DGTEST_API_= -DGTEST_HAS_POSIX_RE=0 -DGTEST_LANG_CXX11=1 -DGTEST_HAS_TR1_TUPLE=0
+include_dirs = -I.. -Igen -I../third_party/googletest/custom -I../third_party/googletest/src/googletest/include -I../third_party/googletest/src/googlemock/include
+label_name = gmock
+root_out_dir = .
+target_out_dir = obj/testing/gmock
+target_output_name = gmock
+
+
+build obj/testing/gmock/gmock.stamp: stamp || obj/third_party/googletest/gmock.stamp obj/third_party/googletest/gtest.stamp

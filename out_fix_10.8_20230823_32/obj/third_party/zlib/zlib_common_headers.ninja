@@ -1,0 +1,9 @@
+defines = -DOFFICIAL_BUILD -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D_FORTIFY_SOURCE=2 -D_GNU_SOURCE -DANDROID -DHAVE_SYS_UIO_H -DANDROID_NDK_VERSION_ROLL=r23_1 -DCR_CLANG_REVISION=\"llvmorg-16-init-6084-g2f3d7c2c-1\" -DNDEBUG -DNVALGRIND -DDYNAMIC_ANNOTATIONS_ENABLED=0
+include_dirs = -I.. -Igen
+label_name = zlib_common_headers
+root_out_dir = .
+target_out_dir = obj/third_party/zlib
+target_output_name = zlib_common_headers
+
+
+build obj/third_party/zlib/zlib_common_headers.stamp: stamp

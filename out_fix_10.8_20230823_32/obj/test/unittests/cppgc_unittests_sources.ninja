@@ -1,0 +1,159 @@
+defines = -DOFFICIAL_BUILD -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D_FORTIFY_SOURCE=2 -D_GNU_SOURCE -DANDROID -DHAVE_SYS_UIO_H -DANDROID_NDK_VERSION_ROLL=r23_1 -DCR_CLANG_REVISION=\"llvmorg-16-init-6084-g2f3d7c2c-1\" -DNDEBUG -DNVALGRIND -DDYNAMIC_ANNOTATIONS_ENABLED=0 -DV8_TYPED_ARRAY_MAX_SIZE_IN_HEAP=64 -DV8_ATOMIC_OBJECT_FIELD_WRITES -DV8_ENABLE_LAZY_SOURCE_POSITIONS -DV8_SHARED_RO_HEAP -DV8_WIN64_UNWINDING_INFO -DV8_ENABLE_REGEXP_INTERPRETER_THREADED_DISPATCH -DV8_ENABLE_WEBASSEMBLY -DV8_ENABLE_JAVASCRIPT_PROMISE_HOOKS -DV8_ALLOCATION_FOLDING -DV8_ALLOCATION_SITE_TRACKING -DV8_USE_ZLIB -DV8_DEPRECATION_WARNINGS -DV8_IMMINENT_DEPRECATION_WARNINGS -DV8_TARGET_ARCH_ARM -DCAN_USE_ARMV7_INSTRUCTIONS -DCAN_USE_VFP3_INSTRUCTIONS -DCAN_USE_VFP32DREGS -DCAN_USE_NEON -DV8_HAVE_TARGET_OS -DV8_TARGET_OS_ANDROID -DGTEST_API_= -DGTEST_HAS_POSIX_RE=0 -DGTEST_LANG_CXX11=1 -DGTEST_HAS_TR1_TUPLE=0 -DUNIT_TEST
+include_dirs = -I.. -Igen -I../include -Igen/include -I../third_party/googletest/custom -I../third_party/googletest/src/googletest/include -I../third_party/googletest/src/googlemock/include
+cflags = -Wall -Wextra -Wimplicit-fallthrough -Wextra-semi -Wunreachable-code-aggressive -Wthread-safety -Wno-missing-field-initializers -Wno-unused-parameter -Wloop-analysis -Wno-unneeded-internal-declaration -Wenum-compare-conditional -Wno-psabi -Wno-ignored-pragma-optimize -Wno-deprecated-builtins -Wno-bitfield-constant-conversion -Wshadow -fno-delete-null-pointer-checks -fno-ident -fno-strict-aliasing --param=ssp-buffer-size=4 -fstack-protector -funwind-tables -fPIC -fcolor-diagnostics -fmerge-all-constants -fcrash-diagnostics-dir=../tools/clang/crashreports -mllvm -instcombine-lower-dbg-declare=0 -ffp-contract=off -ffunction-sections -fno-short-enums --target=arm-linux-androideabi21 -march=armv7-a -mfloat-abi=softfp -ffile-compilation-dir=. -no-canonical-prefixes -mfpu=neon -mthumb -fomit-frame-pointer -g0 -Wheader-hygiene -Wstring-conversion -Wtautological-overlap-compare -Wmissing-field-initializers -Wunreachable-code -Wctad-maybe-unsupported -Wno-shadow -O2 -fdata-sections -ffunction-sections -fno-unique-section-names -fvisibility=default
+cflags_cc = -std=c++17 -Wno-trigraphs -fno-exceptions -fno-rtti --sysroot=../../../opt/sdk-root/ndk/25.0.8775105/toolchains/llvm/prebuilt/linux-x86_64/sysroot
+label_name = cppgc_unittests_sources
+root_out_dir = .
+target_out_dir = obj/test/unittests
+target_output_name = libcppgc_unittests_sources
+
+build obj/test/unittests/cppgc_unittests_sources.inputdeps.stamp: stamp obj/generate_bytecode_builtins_list.stamp obj/run_torque.stamp obj/src/inspector/protocol_generated_sources.stamp
+build obj/test/unittests/cppgc_unittests_sources/allocation-unittest.o: cxx ../test/unittests/heap/cppgc/allocation-unittest.cc || obj/test/unittests/cppgc_unittests_sources.inputdeps.stamp
+  source_file_part = allocation-unittest.cc
+  source_name_part = allocation-unittest
+build obj/test/unittests/cppgc_unittests_sources/compactor-unittest.o: cxx ../test/unittests/heap/cppgc/compactor-unittest.cc || obj/test/unittests/cppgc_unittests_sources.inputdeps.stamp
+  source_file_part = compactor-unittest.cc
+  source_name_part = compactor-unittest
+build obj/test/unittests/cppgc_unittests_sources/concurrent-marking-unittest.o: cxx ../test/unittests/heap/cppgc/concurrent-marking-unittest.cc || obj/test/unittests/cppgc_unittests_sources.inputdeps.stamp
+  source_file_part = concurrent-marking-unittest.cc
+  source_name_part = concurrent-marking-unittest
+build obj/test/unittests/cppgc_unittests_sources/concurrent-sweeper-unittest.o: cxx ../test/unittests/heap/cppgc/concurrent-sweeper-unittest.cc || obj/test/unittests/cppgc_unittests_sources.inputdeps.stamp
+  source_file_part = concurrent-sweeper-unittest.cc
+  source_name_part = concurrent-sweeper-unittest
+build obj/test/unittests/cppgc_unittests_sources/cross-thread-persistent-unittest.o: cxx ../test/unittests/heap/cppgc/cross-thread-persistent-unittest.cc || obj/test/unittests/cppgc_unittests_sources.inputdeps.stamp
+  source_file_part = cross-thread-persistent-unittest.cc
+  source_name_part = cross-thread-persistent-unittest
+build obj/test/unittests/cppgc_unittests_sources/custom-spaces-unittest.o: cxx ../test/unittests/heap/cppgc/custom-spaces-unittest.cc || obj/test/unittests/cppgc_unittests_sources.inputdeps.stamp
+  source_file_part = custom-spaces-unittest.cc
+  source_name_part = custom-spaces-unittest
+build obj/test/unittests/cppgc_unittests_sources/ephemeron-pair-unittest.o: cxx ../test/unittests/heap/cppgc/ephemeron-pair-unittest.cc || obj/test/unittests/cppgc_unittests_sources.inputdeps.stamp
+  source_file_part = ephemeron-pair-unittest.cc
+  source_name_part = ephemeron-pair-unittest
+build obj/test/unittests/cppgc_unittests_sources/explicit-management-unittest.o: cxx ../test/unittests/heap/cppgc/explicit-management-unittest.cc || obj/test/unittests/cppgc_unittests_sources.inputdeps.stamp
+  source_file_part = explicit-management-unittest.cc
+  source_name_part = explicit-management-unittest
+build obj/test/unittests/cppgc_unittests_sources/finalizer-trait-unittest.o: cxx ../test/unittests/heap/cppgc/finalizer-trait-unittest.cc || obj/test/unittests/cppgc_unittests_sources.inputdeps.stamp
+  source_file_part = finalizer-trait-unittest.cc
+  source_name_part = finalizer-trait-unittest
+build obj/test/unittests/cppgc_unittests_sources/free-list-unittest.o: cxx ../test/unittests/heap/cppgc/free-list-unittest.cc || obj/test/unittests/cppgc_unittests_sources.inputdeps.stamp
+  source_file_part = free-list-unittest.cc
+  source_name_part = free-list-unittest
+build obj/test/unittests/cppgc_unittests_sources/garbage-collected-unittest.o: cxx ../test/unittests/heap/cppgc/garbage-collected-unittest.cc || obj/test/unittests/cppgc_unittests_sources.inputdeps.stamp
+  source_file_part = garbage-collected-unittest.cc
+  source_name_part = garbage-collected-unittest
+build obj/test/unittests/cppgc_unittests_sources/gc-info-unittest.o: cxx ../test/unittests/heap/cppgc/gc-info-unittest.cc || obj/test/unittests/cppgc_unittests_sources.inputdeps.stamp
+  source_file_part = gc-info-unittest.cc
+  source_name_part = gc-info-unittest
+build obj/test/unittests/cppgc_unittests_sources/gc-invoker-unittest.o: cxx ../test/unittests/heap/cppgc/gc-invoker-unittest.cc || obj/test/unittests/cppgc_unittests_sources.inputdeps.stamp
+  source_file_part = gc-invoker-unittest.cc
+  source_name_part = gc-invoker-unittest
+build obj/test/unittests/cppgc_unittests_sources/heap-growing-unittest.o: cxx ../test/unittests/heap/cppgc/heap-growing-unittest.cc || obj/test/unittests/cppgc_unittests_sources.inputdeps.stamp
+  source_file_part = heap-growing-unittest.cc
+  source_name_part = heap-growing-unittest
+build obj/test/unittests/cppgc_unittests_sources/heap-object-header-unittest.o: cxx ../test/unittests/heap/cppgc/heap-object-header-unittest.cc || obj/test/unittests/cppgc_unittests_sources.inputdeps.stamp
+  source_file_part = heap-object-header-unittest.cc
+  source_name_part = heap-object-header-unittest
+build obj/test/unittests/cppgc_unittests_sources/heap-page-unittest.o: cxx ../test/unittests/heap/cppgc/heap-page-unittest.cc || obj/test/unittests/cppgc_unittests_sources.inputdeps.stamp
+  source_file_part = heap-page-unittest.cc
+  source_name_part = heap-page-unittest
+build obj/test/unittests/cppgc_unittests_sources/heap-registry-unittest.o: cxx ../test/unittests/heap/cppgc/heap-registry-unittest.cc || obj/test/unittests/cppgc_unittests_sources.inputdeps.stamp
+  source_file_part = heap-registry-unittest.cc
+  source_name_part = heap-registry-unittest
+build obj/test/unittests/cppgc_unittests_sources/heap-statistics-collector-unittest.o: cxx ../test/unittests/heap/cppgc/heap-statistics-collector-unittest.cc || obj/test/unittests/cppgc_unittests_sources.inputdeps.stamp
+  source_file_part = heap-statistics-collector-unittest.cc
+  source_name_part = heap-statistics-collector-unittest
+build obj/test/unittests/cppgc_unittests_sources/heap-unittest.o: cxx ../test/unittests/heap/cppgc/heap-unittest.cc || obj/test/unittests/cppgc_unittests_sources.inputdeps.stamp
+  source_file_part = heap-unittest.cc
+  source_name_part = heap-unittest
+build obj/test/unittests/cppgc_unittests_sources/incremental-marking-schedule-unittest.o: cxx ../test/unittests/heap/cppgc/incremental-marking-schedule-unittest.cc || obj/test/unittests/cppgc_unittests_sources.inputdeps.stamp
+  source_file_part = incremental-marking-schedule-unittest.cc
+  source_name_part = incremental-marking-schedule-unittest
+build obj/test/unittests/cppgc_unittests_sources/liveness-broker-unittest.o: cxx ../test/unittests/heap/cppgc/liveness-broker-unittest.cc || obj/test/unittests/cppgc_unittests_sources.inputdeps.stamp
+  source_file_part = liveness-broker-unittest.cc
+  source_name_part = liveness-broker-unittest
+build obj/test/unittests/cppgc_unittests_sources/logging-unittest.o: cxx ../test/unittests/heap/cppgc/logging-unittest.cc || obj/test/unittests/cppgc_unittests_sources.inputdeps.stamp
+  source_file_part = logging-unittest.cc
+  source_name_part = logging-unittest
+build obj/test/unittests/cppgc_unittests_sources/marker-unittest.o: cxx ../test/unittests/heap/cppgc/marker-unittest.cc || obj/test/unittests/cppgc_unittests_sources.inputdeps.stamp
+  source_file_part = marker-unittest.cc
+  source_name_part = marker-unittest
+build obj/test/unittests/cppgc_unittests_sources/marking-verifier-unittest.o: cxx ../test/unittests/heap/cppgc/marking-verifier-unittest.cc || obj/test/unittests/cppgc_unittests_sources.inputdeps.stamp
+  source_file_part = marking-verifier-unittest.cc
+  source_name_part = marking-verifier-unittest
+build obj/test/unittests/cppgc_unittests_sources/marking-visitor-unittest.o: cxx ../test/unittests/heap/cppgc/marking-visitor-unittest.cc || obj/test/unittests/cppgc_unittests_sources.inputdeps.stamp
+  source_file_part = marking-visitor-unittest.cc
+  source_name_part = marking-visitor-unittest
+build obj/test/unittests/cppgc_unittests_sources/member-unittest.o: cxx ../test/unittests/heap/cppgc/member-unittest.cc || obj/test/unittests/cppgc_unittests_sources.inputdeps.stamp
+  source_file_part = member-unittest.cc
+  source_name_part = member-unittest
+build obj/test/unittests/cppgc_unittests_sources/metric-recorder-unittest.o: cxx ../test/unittests/heap/cppgc/metric-recorder-unittest.cc || obj/test/unittests/cppgc_unittests_sources.inputdeps.stamp
+  source_file_part = metric-recorder-unittest.cc
+  source_name_part = metric-recorder-unittest
+build obj/test/unittests/cppgc_unittests_sources/minor-gc-unittest.o: cxx ../test/unittests/heap/cppgc/minor-gc-unittest.cc || obj/test/unittests/cppgc_unittests_sources.inputdeps.stamp
+  source_file_part = minor-gc-unittest.cc
+  source_name_part = minor-gc-unittest
+build obj/test/unittests/cppgc_unittests_sources/name-trait-unittest.o: cxx ../test/unittests/heap/cppgc/name-trait-unittest.cc || obj/test/unittests/cppgc_unittests_sources.inputdeps.stamp
+  source_file_part = name-trait-unittest.cc
+  source_name_part = name-trait-unittest
+build obj/test/unittests/cppgc_unittests_sources/object-size-trait-unittest.o: cxx ../test/unittests/heap/cppgc/object-size-trait-unittest.cc || obj/test/unittests/cppgc_unittests_sources.inputdeps.stamp
+  source_file_part = object-size-trait-unittest.cc
+  source_name_part = object-size-trait-unittest
+build obj/test/unittests/cppgc_unittests_sources/object-start-bitmap-unittest.o: cxx ../test/unittests/heap/cppgc/object-start-bitmap-unittest.cc || obj/test/unittests/cppgc_unittests_sources.inputdeps.stamp
+  source_file_part = object-start-bitmap-unittest.cc
+  source_name_part = object-start-bitmap-unittest
+build obj/test/unittests/cppgc_unittests_sources/page-memory-unittest.o: cxx ../test/unittests/heap/cppgc/page-memory-unittest.cc || obj/test/unittests/cppgc_unittests_sources.inputdeps.stamp
+  source_file_part = page-memory-unittest.cc
+  source_name_part = page-memory-unittest
+build obj/test/unittests/cppgc_unittests_sources/persistent-family-unittest.o: cxx ../test/unittests/heap/cppgc/persistent-family-unittest.cc || obj/test/unittests/cppgc_unittests_sources.inputdeps.stamp
+  source_file_part = persistent-family-unittest.cc
+  source_name_part = persistent-family-unittest
+build obj/test/unittests/cppgc_unittests_sources/platform-unittest.o: cxx ../test/unittests/heap/cppgc/platform-unittest.cc || obj/test/unittests/cppgc_unittests_sources.inputdeps.stamp
+  source_file_part = platform-unittest.cc
+  source_name_part = platform-unittest
+build obj/test/unittests/cppgc_unittests_sources/prefinalizer-unittest.o: cxx ../test/unittests/heap/cppgc/prefinalizer-unittest.cc || obj/test/unittests/cppgc_unittests_sources.inputdeps.stamp
+  source_file_part = prefinalizer-unittest.cc
+  source_name_part = prefinalizer-unittest
+build obj/test/unittests/cppgc_unittests_sources/sanitizer-unittest.o: cxx ../test/unittests/heap/cppgc/sanitizer-unittest.cc || obj/test/unittests/cppgc_unittests_sources.inputdeps.stamp
+  source_file_part = sanitizer-unittest.cc
+  source_name_part = sanitizer-unittest
+build obj/test/unittests/cppgc_unittests_sources/source-location-unittest.o: cxx ../test/unittests/heap/cppgc/source-location-unittest.cc || obj/test/unittests/cppgc_unittests_sources.inputdeps.stamp
+  source_file_part = source-location-unittest.cc
+  source_name_part = source-location-unittest
+build obj/test/unittests/cppgc_unittests_sources/stack-unittest.o: cxx ../test/unittests/heap/cppgc/stack-unittest.cc || obj/test/unittests/cppgc_unittests_sources.inputdeps.stamp
+  source_file_part = stack-unittest.cc
+  source_name_part = stack-unittest
+build obj/test/unittests/cppgc_unittests_sources/stats-collector-scopes-unittest.o: cxx ../test/unittests/heap/cppgc/stats-collector-scopes-unittest.cc || obj/test/unittests/cppgc_unittests_sources.inputdeps.stamp
+  source_file_part = stats-collector-scopes-unittest.cc
+  source_name_part = stats-collector-scopes-unittest
+build obj/test/unittests/cppgc_unittests_sources/stats-collector-unittest.o: cxx ../test/unittests/heap/cppgc/stats-collector-unittest.cc || obj/test/unittests/cppgc_unittests_sources.inputdeps.stamp
+  source_file_part = stats-collector-unittest.cc
+  source_name_part = stats-collector-unittest
+build obj/test/unittests/cppgc_unittests_sources/sweeper-unittest.o: cxx ../test/unittests/heap/cppgc/sweeper-unittest.cc || obj/test/unittests/cppgc_unittests_sources.inputdeps.stamp
+  source_file_part = sweeper-unittest.cc
+  source_name_part = sweeper-unittest
+build obj/test/unittests/cppgc_unittests_sources/test-platform.o: cxx ../test/unittests/heap/cppgc/test-platform.cc || obj/test/unittests/cppgc_unittests_sources.inputdeps.stamp
+  source_file_part = test-platform.cc
+  source_name_part = test-platform
+build obj/test/unittests/cppgc_unittests_sources/testing-unittest.o: cxx ../test/unittests/heap/cppgc/testing-unittest.cc || obj/test/unittests/cppgc_unittests_sources.inputdeps.stamp
+  source_file_part = testing-unittest.cc
+  source_name_part = testing-unittest
+build obj/test/unittests/cppgc_unittests_sources/tests.o: cxx ../test/unittests/heap/cppgc/tests.cc || obj/test/unittests/cppgc_unittests_sources.inputdeps.stamp
+  source_file_part = tests.cc
+  source_name_part = tests
+build obj/test/unittests/cppgc_unittests_sources/visitor-unittest.o: cxx ../test/unittests/heap/cppgc/visitor-unittest.cc || obj/test/unittests/cppgc_unittests_sources.inputdeps.stamp
+  source_file_part = visitor-unittest.cc
+  source_name_part = visitor-unittest
+build obj/test/unittests/cppgc_unittests_sources/weak-container-unittest.o: cxx ../test/unittests/heap/cppgc/weak-container-unittest.cc || obj/test/unittests/cppgc_unittests_sources.inputdeps.stamp
+  source_file_part = weak-container-unittest.cc
+  source_name_part = weak-container-unittest
+build obj/test/unittests/cppgc_unittests_sources/workloads-unittest.o: cxx ../test/unittests/heap/cppgc/workloads-unittest.cc || obj/test/unittests/cppgc_unittests_sources.inputdeps.stamp
+  source_file_part = workloads-unittest.cc
+  source_name_part = workloads-unittest
+build obj/test/unittests/cppgc_unittests_sources/write-barrier-unittest.o: cxx ../test/unittests/heap/cppgc/write-barrier-unittest.cc || obj/test/unittests/cppgc_unittests_sources.inputdeps.stamp
+  source_file_part = write-barrier-unittest.cc
+  source_name_part = write-barrier-unittest
+
+build obj/test/unittests/libcppgc_unittests_sources.a: alink obj/test/unittests/cppgc_unittests_sources/allocation-unittest.o obj/test/unittests/cppgc_unittests_sources/compactor-unittest.o obj/test/unittests/cppgc_unittests_sources/concurrent-marking-unittest.o obj/test/unittests/cppgc_unittests_sources/concurrent-sweeper-unittest.o obj/test/unittests/cppgc_unittests_sources/cross-thread-persistent-unittest.o obj/test/unittests/cppgc_unittests_sources/custom-spaces-unittest.o obj/test/unittests/cppgc_unittests_sources/ephemeron-pair-unittest.o obj/test/unittests/cppgc_unittests_sources/explicit-management-unittest.o obj/test/unittests/cppgc_unittests_sources/finalizer-trait-unittest.o obj/test/unittests/cppgc_unittests_sources/free-list-unittest.o obj/test/unittests/cppgc_unittests_sources/garbage-collected-unittest.o obj/test/unittests/cppgc_unittests_sources/gc-info-unittest.o obj/test/unittests/cppgc_unittests_sources/gc-invoker-unittest.o obj/test/unittests/cppgc_unittests_sources/heap-growing-unittest.o obj/test/unittests/cppgc_unittests_sources/heap-object-header-unittest.o obj/test/unittests/cppgc_unittests_sources/heap-page-unittest.o obj/test/unittests/cppgc_unittests_sources/heap-registry-unittest.o obj/test/unittests/cppgc_unittests_sources/heap-statistics-collector-unittest.o obj/test/unittests/cppgc_unittests_sources/heap-unittest.o obj/test/unittests/cppgc_unittests_sources/incremental-marking-schedule-unittest.o obj/test/unittests/cppgc_unittests_sources/liveness-broker-unittest.o obj/test/unittests/cppgc_unittests_sources/logging-unittest.o obj/test/unittests/cppgc_unittests_sources/marker-unittest.o obj/test/unittests/cppgc_unittests_sources/marking-verifier-unittest.o obj/test/unittests/cppgc_unittests_sources/marking-visitor-unittest.o obj/test/unittests/cppgc_unittests_sources/member-unittest.o obj/test/unittests/cppgc_unittests_sources/metric-recorder-unittest.o obj/test/unittests/cppgc_unittests_sources/minor-gc-unittest.o obj/test/unittests/cppgc_unittests_sources/name-trait-unittest.o obj/test/unittests/cppgc_unittests_sources/object-size-trait-unittest.o obj/test/unittests/cppgc_unittests_sources/object-start-bitmap-unittest.o obj/test/unittests/cppgc_unittests_sources/page-memory-unittest.o obj/test/unittests/cppgc_unittests_sources/persistent-family-unittest.o obj/test/unittests/cppgc_unittests_sources/platform-unittest.o obj/test/unittests/cppgc_unittests_sources/prefinalizer-unittest.o obj/test/unittests/cppgc_unittests_sources/sanitizer-unittest.o obj/test/unittests/cppgc_unittests_sources/source-location-unittest.o obj/test/unittests/cppgc_unittests_sources/stack-unittest.o obj/test/unittests/cppgc_unittests_sources/stats-collector-scopes-unittest.o obj/test/unittests/cppgc_unittests_sources/stats-collector-unittest.o obj/test/unittests/cppgc_unittests_sources/sweeper-unittest.o obj/test/unittests/cppgc_unittests_sources/test-platform.o obj/test/unittests/cppgc_unittests_sources/testing-unittest.o obj/test/unittests/cppgc_unittests_sources/tests.o obj/test/unittests/cppgc_unittests_sources/visitor-unittest.o obj/test/unittests/cppgc_unittests_sources/weak-container-unittest.o obj/test/unittests/cppgc_unittests_sources/workloads-unittest.o obj/test/unittests/cppgc_unittests_sources/write-barrier-unittest.o || obj/testing/gmock/gmock.stamp obj/testing/gtest/libgtest.a obj/v8_for_testing.stamp obj/v8_tracing.stamp obj/third_party/googletest/gmock.stamp obj/third_party/googletest/gtest.stamp obj/libtorque_base.a obj/libv8_libbase.a obj/v8_config_headers.stamp obj/v8_flags.stamp obj/v8_shared_internal_headers.stamp obj/v8_headers.stamp obj/cppgc_headers.stamp obj/libv8_libplatform.a obj/v8_version.stamp obj/libtorque_ls_base.a obj/libv8_base_without_compiler.a obj/libcppgc_base.a obj/libv8_heap_base.a obj/v8_heap_base_headers.stamp obj/v8_internal_headers.stamp obj/torque_runtime_support.stamp obj/libtorque_generated_definitions.a obj/libv8_bigint.a obj/src/inspector/libinspector.a obj/src/inspector/inspector_test_headers.stamp obj/src/inspector/libinspector_string_conversions.a obj/third_party/inspector_protocol/libcrdtp.a obj/third_party/inspector_protocol/libcrdtp_platform.a obj/third_party/zlib/libchrome_zlib.a obj/third_party/zlib/zlib_adler32_simd.stamp obj/third_party/zlib/zlib_common_headers.stamp obj/third_party/zlib/zlib_inflate_chunk_simd.stamp obj/third_party/zlib/zlib_slide_hash_simd.stamp obj/third_party/zlib/zlib_arm_crc32.stamp obj/third_party/android_ndk/cpu_features.stamp obj/third_party/zlib/google/libcompression_utils_portable.a obj/libv8_compiler.a obj/libv8_turboshaft.a obj/libv8_initializers.a obj/libtorque_generated_initializers.a obj/libv8_snapshot.a
+  arflags = -T
+  output_extension = .a
+  output_dir = obj/test/unittests

@@ -1,0 +1,16 @@
+defines = -DUSE_UDEV -DUSE_AURA=1 -DUSE_OZONE=1 -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_GNU_SOURCE -DCR_CLANG_REVISION=\"llvmorg-16-init-6084-g2f3d7c2c-1\" -DCOMPONENT_BUILD -DCR_LIBCXX_REVISION=2e919977e0030ce61bd19c40cefe31b995f1e2d4 -DCR_SYSROOT_HASH=af39443b6101f4c417bb83113a306fc028d2b665 -D_DEBUG -DDYNAMIC_ANNOTATIONS_ENABLED=1
+include_dirs = -I.. -Iclang_x86_v8_arm/gen -I../buildtools/third_party/libc++ -I../third_party/zlib
+cflags = -Wall -Werror -Wextra -Wimplicit-fallthrough -Wextra-semi -Wunreachable-code-aggressive -Wthread-safety -Wno-missing-field-initializers -Wno-unused-parameter -Wloop-analysis -Wno-unneeded-internal-declaration -Wenum-compare-conditional -Wno-psabi -Wno-ignored-pragma-optimize -Wno-deprecated-builtins -Wno-bitfield-constant-conversion -Wshadow -fno-delete-null-pointer-checks -fno-ident -fno-strict-aliasing --param=ssp-buffer-size=4 -fstack-protector -funwind-tables -fPIC -pthread -fcolor-diagnostics -fmerge-all-constants -fcrash-diagnostics-dir=../tools/clang/crashreports -mllvm -instcombine-lower-dbg-declare=0 -ffp-contract=off -fcomplete-member-pointers -m32 -mfpmath=sse -msse3 -Wno-builtin-macro-redefined -D__DATE__= -D__TIME__= -D__TIMESTAMP__= -ffile-compilation-dir=. -no-canonical-prefixes -ftrivial-auto-var-init=pattern -O0 -fno-omit-frame-pointer -momit-leaf-frame-pointer -gdwarf-4 -g2 -gdwarf-aranges -gsplit-dwarf -Xclang -fuse-ctor-homing -fvisibility=hidden -Xclang -add-plugin -Xclang find-bad-constructs -Xclang -plugin-arg-find-bad-constructs -Xclang raw-ref-template-as-trivial-member -Xclang -plugin-arg-find-bad-constructs -Xclang check-ipc -Wheader-hygiene -Wstring-conversion -Wtautological-overlap-compare
+cflags_cc = -Wno-undefined-bool-conversion -Wno-tautological-undefined-compare -std=c++17 -Wno-trigraphs -fno-exceptions -fno-rtti -nostdinc++ -isystem../buildtools/third_party/libc++/trunk/include -isystem../buildtools/third_party/libc++abi/trunk/include --sysroot=../build/linux/debian_bullseye_i386-sysroot -fvisibility-inlines-hidden
+label_name = compression_utils_portable
+target_out_dir = clang_x86_v8_arm/obj/third_party/zlib/google
+target_output_name = libcompression_utils_portable
+
+build clang_x86_v8_arm/obj/third_party/zlib/google/compression_utils_portable/compression_utils_portable.o: clang_x86_v8_arm_cxx ../third_party/zlib/google/compression_utils_portable.cc
+  source_file_part = compression_utils_portable.cc
+  source_name_part = compression_utils_portable
+
+build clang_x86_v8_arm/obj/third_party/zlib/google/libcompression_utils_portable.a: clang_x86_v8_arm_alink clang_x86_v8_arm/obj/third_party/zlib/google/compression_utils_portable/compression_utils_portable.o || clang_x86_v8_arm/libchrome_zlib.cr.so.TOC
+  arflags = -T
+  output_extension = .a
+  output_dir = clang_x86_v8_arm/obj/third_party/zlib/google

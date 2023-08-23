@@ -1,0 +1,17 @@
+defines = -DOFFICIAL_BUILD -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D_FORTIFY_SOURCE=2 -D_GNU_SOURCE -DANDROID -DHAVE_SYS_UIO_H -DANDROID_NDK_VERSION_ROLL=r23_1 -DCR_CLANG_REVISION=\"llvmorg-16-init-6084-g2f3d7c2c-1\" -DNDEBUG -DNVALGRIND -DDYNAMIC_ANNOTATIONS_ENABLED=0 -DGTEST_API_= -DGTEST_HAS_POSIX_RE=0 -DGTEST_LANG_CXX11=1 -DGTEST_HAS_TR1_TUPLE=0
+include_dirs = -I.. -Igen -I../third_party/googletest/custom -I../third_party/googletest/src/googletest/include -I../third_party/googletest/src/googlemock/include
+cflags = -Wall -Wextra -Wimplicit-fallthrough -Wextra-semi -Wunreachable-code-aggressive -Wthread-safety -Wno-missing-field-initializers -Wno-unused-parameter -Wloop-analysis -Wno-unneeded-internal-declaration -Wenum-compare-conditional -Wno-psabi -Wno-ignored-pragma-optimize -Wno-deprecated-builtins -Wno-bitfield-constant-conversion -Wshadow -fno-delete-null-pointer-checks -fno-ident -fno-strict-aliasing --param=ssp-buffer-size=4 -fstack-protector -funwind-tables -fPIC -fcolor-diagnostics -fmerge-all-constants -fcrash-diagnostics-dir=../tools/clang/crashreports -mllvm -instcombine-lower-dbg-declare=0 -ffp-contract=off -ffunction-sections -fno-short-enums --target=arm-linux-androideabi21 -march=armv7-a -mfloat-abi=softfp -ffile-compilation-dir=. -no-canonical-prefixes -mfpu=neon -mthumb -Oz -fdata-sections -ffunction-sections -fno-unique-section-names -fomit-frame-pointer -g0 -fvisibility=hidden -Wheader-hygiene -Wstring-conversion -Wtautological-overlap-compare
+cflags_cc = -std=c++17 -Wno-trigraphs -fno-exceptions -fno-rtti --sysroot=../../../opt/sdk-root/ndk/25.0.8775105/toolchains/llvm/prebuilt/linux-x86_64/sysroot -fvisibility-inlines-hidden
+label_name = gmock_main
+root_out_dir = .
+target_out_dir = obj/third_party/googletest
+target_output_name = libgmock_main
+
+build obj/third_party/googletest/gmock_main/gmock_main.o: cxx ../third_party/googletest/src/googlemock/src/gmock_main.cc
+  source_file_part = gmock_main.cc
+  source_name_part = gmock_main
+
+build obj/third_party/googletest/libgmock_main.a: alink obj/third_party/googletest/gmock_main/gmock_main.o || obj/third_party/googletest/gmock.stamp obj/third_party/googletest/gtest.stamp
+  arflags = -T
+  output_extension = .a
+  output_dir = obj/third_party/googletest

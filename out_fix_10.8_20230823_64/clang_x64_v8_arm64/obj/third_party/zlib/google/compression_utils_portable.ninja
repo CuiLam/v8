@@ -1,0 +1,16 @@
+defines = -DUSE_UDEV -DUSE_AURA=1 -DUSE_OZONE=1 -DOFFICIAL_BUILD -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D_FORTIFY_SOURCE=2 -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -DNO_UNWIND_TABLES -D_GNU_SOURCE -DCR_CLANG_REVISION=\"llvmorg-16-init-6084-g2f3d7c2c-1\" -DCR_SYSROOT_HASH=393193b824afacfcd2fb53cb47fc2023740f4995 -DNDEBUG -DNVALGRIND -DDYNAMIC_ANNOTATIONS_ENABLED=0
+include_dirs = -I.. -Iclang_x64_v8_arm64/gen -I../third_party/zlib
+cflags = -Wall -Wextra -Wimplicit-fallthrough -Wextra-semi -Wunreachable-code-aggressive -Wthread-safety -Wno-missing-field-initializers -Wno-unused-parameter -Wloop-analysis -Wno-unneeded-internal-declaration -Wenum-compare-conditional -Wno-psabi -Wno-ignored-pragma-optimize -Wno-deprecated-builtins -Wno-bitfield-constant-conversion -Wshadow -fno-delete-null-pointer-checks -fno-ident -fno-strict-aliasing --param=ssp-buffer-size=4 -fstack-protector -fno-unwind-tables -fno-asynchronous-unwind-tables -fPIC -pthread -fcolor-diagnostics -fmerge-all-constants -fcrash-diagnostics-dir=../tools/clang/crashreports -mllvm -instcombine-lower-dbg-declare=0 -ffp-contract=off -m64 -msse3 -ffile-compilation-dir=. -no-canonical-prefixes -ftrivial-auto-var-init=pattern -O2 -fdata-sections -ffunction-sections -fno-unique-section-names -fno-omit-frame-pointer -g0 -fvisibility=hidden -Wheader-hygiene -Wstring-conversion -Wtautological-overlap-compare
+cflags_cc = -std=c++17 -Wno-trigraphs -fno-exceptions -fno-rtti --sysroot=../build/linux/debian_bullseye_amd64-sysroot -fvisibility-inlines-hidden
+label_name = compression_utils_portable
+target_out_dir = clang_x64_v8_arm64/obj/third_party/zlib/google
+target_output_name = libcompression_utils_portable
+
+build clang_x64_v8_arm64/obj/third_party/zlib/google/compression_utils_portable/compression_utils_portable.o: clang_x64_v8_arm64_cxx ../third_party/zlib/google/compression_utils_portable.cc
+  source_file_part = compression_utils_portable.cc
+  source_name_part = compression_utils_portable
+
+build clang_x64_v8_arm64/obj/third_party/zlib/google/libcompression_utils_portable.a: clang_x64_v8_arm64_alink clang_x64_v8_arm64/obj/third_party/zlib/google/compression_utils_portable/compression_utils_portable.o || clang_x64_v8_arm64/obj/third_party/zlib/libchrome_zlib.a clang_x64_v8_arm64/obj/third_party/zlib/zlib_adler32_simd.stamp clang_x64_v8_arm64/obj/third_party/zlib/zlib_common_headers.stamp clang_x64_v8_arm64/obj/third_party/zlib/zlib_inflate_chunk_simd.stamp clang_x64_v8_arm64/obj/third_party/zlib/zlib_slide_hash_simd.stamp clang_x64_v8_arm64/obj/third_party/zlib/zlib_crc32_simd.stamp
+  arflags = -T
+  output_extension = .a
+  output_dir = clang_x64_v8_arm64/obj/third_party/zlib/google

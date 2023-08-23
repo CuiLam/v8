@@ -1,0 +1,26 @@
+defines = -DOFFICIAL_BUILD -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D_FORTIFY_SOURCE=2 -D_GNU_SOURCE -DANDROID -DHAVE_SYS_UIO_H -DANDROID_NDK_VERSION_ROLL=r23_1 -DCR_CLANG_REVISION=\"llvmorg-16-init-6084-g2f3d7c2c-1\" -DNDEBUG -DNVALGRIND -DDYNAMIC_ANNOTATIONS_ENABLED=0 -DGTEST_API_= -DGTEST_HAS_POSIX_RE=0 -DGTEST_LANG_CXX11=1 -DGTEST_HAS_TR1_TUPLE=0
+include_dirs = -I.. -Igen -I../third_party/googletest/src/googlemock/include -I../third_party/googletest/custom -I../third_party/googletest/src/googletest/include
+cflags = -Wall -Wextra -Wimplicit-fallthrough -Wextra-semi -Wunreachable-code-aggressive -Wthread-safety -Wno-missing-field-initializers -Wno-unused-parameter -Wloop-analysis -Wno-unneeded-internal-declaration -Wenum-compare-conditional -Wno-psabi -Wno-ignored-pragma-optimize -Wno-deprecated-builtins -Wno-bitfield-constant-conversion -Wshadow -fno-delete-null-pointer-checks -fno-ident -fno-strict-aliasing --param=ssp-buffer-size=4 -fstack-protector -funwind-tables -fPIC -fcolor-diagnostics -fmerge-all-constants -fcrash-diagnostics-dir=../tools/clang/crashreports -mllvm -instcombine-lower-dbg-declare=0 -ffp-contract=off -ffunction-sections -fno-short-enums -mbranch-protection=standard --target=aarch64-linux-android21 -mno-outline-atomics -mno-outline -ffile-compilation-dir=. -no-canonical-prefixes -Oz -fdata-sections -ffunction-sections -fno-unique-section-names -fno-omit-frame-pointer -g0 -Wheader-hygiene -Wstring-conversion -Wtautological-overlap-compare -fvisibility=default
+cflags_cc = -std=c++17 -Wno-trigraphs -fno-exceptions -fno-rtti --sysroot=../../../opt/sdk-root/ndk/25.0.8775105/toolchains/llvm/prebuilt/linux-x86_64/sysroot
+label_name = gmock
+root_out_dir = .
+target_out_dir = obj/third_party/googletest
+target_output_name = gmock
+
+build obj/third_party/googletest/gmock/gmock-cardinalities.o: cxx ../third_party/googletest/src/googlemock/src/gmock-cardinalities.cc
+  source_file_part = gmock-cardinalities.cc
+  source_name_part = gmock-cardinalities
+build obj/third_party/googletest/gmock/gmock-internal-utils.o: cxx ../third_party/googletest/src/googlemock/src/gmock-internal-utils.cc
+  source_file_part = gmock-internal-utils.cc
+  source_name_part = gmock-internal-utils
+build obj/third_party/googletest/gmock/gmock-matchers.o: cxx ../third_party/googletest/src/googlemock/src/gmock-matchers.cc
+  source_file_part = gmock-matchers.cc
+  source_name_part = gmock-matchers
+build obj/third_party/googletest/gmock/gmock-spec-builders.o: cxx ../third_party/googletest/src/googlemock/src/gmock-spec-builders.cc
+  source_file_part = gmock-spec-builders.cc
+  source_name_part = gmock-spec-builders
+build obj/third_party/googletest/gmock/gmock.o: cxx ../third_party/googletest/src/googlemock/src/gmock.cc
+  source_file_part = gmock.cc
+  source_name_part = gmock
+
+build obj/third_party/googletest/gmock.stamp: stamp obj/third_party/googletest/gmock/gmock-cardinalities.o obj/third_party/googletest/gmock/gmock-internal-utils.o obj/third_party/googletest/gmock/gmock-matchers.o obj/third_party/googletest/gmock/gmock-spec-builders.o obj/third_party/googletest/gmock/gmock.o || obj/third_party/googletest/gtest.stamp

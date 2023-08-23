@@ -1,0 +1,60 @@
+defines = -DOFFICIAL_BUILD -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D_FORTIFY_SOURCE=2 -D_GNU_SOURCE -DANDROID -DHAVE_SYS_UIO_H -DANDROID_NDK_VERSION_ROLL=r23_1 -DCR_CLANG_REVISION=\"llvmorg-16-init-6084-g2f3d7c2c-1\" -DNDEBUG -DNVALGRIND -DDYNAMIC_ANNOTATIONS_ENABLED=0 -DV8_TYPED_ARRAY_MAX_SIZE_IN_HEAP=64 -DV8_ATOMIC_OBJECT_FIELD_WRITES -DV8_ENABLE_LAZY_SOURCE_POSITIONS -DV8_SHARED_RO_HEAP -DV8_WIN64_UNWINDING_INFO -DV8_ENABLE_REGEXP_INTERPRETER_THREADED_DISPATCH -DV8_ENABLE_WEBASSEMBLY -DV8_ENABLE_JAVASCRIPT_PROMISE_HOOKS -DV8_ALLOCATION_FOLDING -DV8_ALLOCATION_SITE_TRACKING -DV8_USE_ZLIB -DV8_DEPRECATION_WARNINGS -DV8_IMMINENT_DEPRECATION_WARNINGS -DV8_TARGET_ARCH_ARM -DCAN_USE_ARMV7_INSTRUCTIONS -DCAN_USE_VFP3_INSTRUCTIONS -DCAN_USE_VFP32DREGS -DCAN_USE_NEON -DV8_HAVE_TARGET_OS -DV8_TARGET_OS_ANDROID -DGTEST_API_= -DGTEST_HAS_POSIX_RE=0 -DGTEST_LANG_CXX11=1 -DGTEST_HAS_TR1_TUPLE=0 -DUNIT_TEST
+include_dirs = -I.. -Igen -I../include -Igen/include -I../third_party/googletest/custom -I../third_party/googletest/src/googletest/include -I../third_party/googletest/src/googlemock/include
+cflags = -Wall -Wextra -Wimplicit-fallthrough -Wextra-semi -Wunreachable-code-aggressive -Wthread-safety -Wno-missing-field-initializers -Wno-unused-parameter -Wloop-analysis -Wno-unneeded-internal-declaration -Wenum-compare-conditional -Wno-psabi -Wno-ignored-pragma-optimize -Wno-deprecated-builtins -Wno-bitfield-constant-conversion -Wshadow -fno-delete-null-pointer-checks -fno-ident -fno-strict-aliasing --param=ssp-buffer-size=4 -fstack-protector -funwind-tables -fPIC -fcolor-diagnostics -fmerge-all-constants -fcrash-diagnostics-dir=../tools/clang/crashreports -mllvm -instcombine-lower-dbg-declare=0 -ffp-contract=off -ffunction-sections -fno-short-enums --target=arm-linux-androideabi21 -march=armv7-a -mfloat-abi=softfp -ffile-compilation-dir=. -no-canonical-prefixes -mfpu=neon -mthumb -fomit-frame-pointer -g0 -Wheader-hygiene -Wstring-conversion -Wtautological-overlap-compare -Wmissing-field-initializers -Wunreachable-code -Wctad-maybe-unsupported -Wno-shadow -O2 -fdata-sections -ffunction-sections -fno-unique-section-names -fvisibility=default
+cflags_cc = -std=c++17 -Wno-trigraphs -fno-exceptions -fno-rtti --sysroot=../../../opt/sdk-root/ndk/25.0.8775105/toolchains/llvm/prebuilt/linux-x86_64/sysroot
+label_name = wasm_api_tests
+root_out_dir = .
+target_out_dir = obj/test/wasm-api-tests
+target_output_name = wasm_api_tests
+
+build obj/test/wasm-api-tests/wasm_api_tests.inputdeps.stamp: stamp obj/generate_bytecode_builtins_list.stamp obj/run_torque.stamp obj/v8_dump_build_config.stamp obj/src/inspector/protocol_generated_sources.stamp
+build obj/test/wasm-api-tests/wasm_api_tests/callbacks.o: cxx ../test/wasm-api-tests/callbacks.cc || obj/test/wasm-api-tests/wasm_api_tests.inputdeps.stamp
+  source_file_part = callbacks.cc
+  source_name_part = callbacks
+build obj/test/wasm-api-tests/wasm_api_tests/finalize.o: cxx ../test/wasm-api-tests/finalize.cc || obj/test/wasm-api-tests/wasm_api_tests.inputdeps.stamp
+  source_file_part = finalize.cc
+  source_name_part = finalize
+build obj/test/wasm-api-tests/wasm_api_tests/globals.o: cxx ../test/wasm-api-tests/globals.cc || obj/test/wasm-api-tests/wasm_api_tests.inputdeps.stamp
+  source_file_part = globals.cc
+  source_name_part = globals
+build obj/test/wasm-api-tests/wasm_api_tests/hostref.o: cxx ../test/wasm-api-tests/hostref.cc || obj/test/wasm-api-tests/wasm_api_tests.inputdeps.stamp
+  source_file_part = hostref.cc
+  source_name_part = hostref
+build obj/test/wasm-api-tests/wasm_api_tests/memory.o: cxx ../test/wasm-api-tests/memory.cc || obj/test/wasm-api-tests/wasm_api_tests.inputdeps.stamp
+  source_file_part = memory.cc
+  source_name_part = memory
+build obj/test/wasm-api-tests/wasm_api_tests/multi-return.o: cxx ../test/wasm-api-tests/multi-return.cc || obj/test/wasm-api-tests/wasm_api_tests.inputdeps.stamp
+  source_file_part = multi-return.cc
+  source_name_part = multi-return
+build obj/test/wasm-api-tests/wasm_api_tests/reflect.o: cxx ../test/wasm-api-tests/reflect.cc || obj/test/wasm-api-tests/wasm_api_tests.inputdeps.stamp
+  source_file_part = reflect.cc
+  source_name_part = reflect
+build obj/test/wasm-api-tests/wasm_api_tests/regressions.o: cxx ../test/wasm-api-tests/regressions.cc || obj/test/wasm-api-tests/wasm_api_tests.inputdeps.stamp
+  source_file_part = regressions.cc
+  source_name_part = regressions
+build obj/test/wasm-api-tests/wasm_api_tests/run-all-wasm-api-tests.o: cxx ../test/wasm-api-tests/run-all-wasm-api-tests.cc || obj/test/wasm-api-tests/wasm_api_tests.inputdeps.stamp
+  source_file_part = run-all-wasm-api-tests.cc
+  source_name_part = run-all-wasm-api-tests
+build obj/test/wasm-api-tests/wasm_api_tests/serialize.o: cxx ../test/wasm-api-tests/serialize.cc || obj/test/wasm-api-tests/wasm_api_tests.inputdeps.stamp
+  source_file_part = serialize.cc
+  source_name_part = serialize
+build obj/test/wasm-api-tests/wasm_api_tests/startup-errors.o: cxx ../test/wasm-api-tests/startup-errors.cc || obj/test/wasm-api-tests/wasm_api_tests.inputdeps.stamp
+  source_file_part = startup-errors.cc
+  source_name_part = startup-errors
+build obj/test/wasm-api-tests/wasm_api_tests/table.o: cxx ../test/wasm-api-tests/table.cc || obj/test/wasm-api-tests/wasm_api_tests.inputdeps.stamp
+  source_file_part = table.cc
+  source_name_part = table
+build obj/test/wasm-api-tests/wasm_api_tests/threads.o: cxx ../test/wasm-api-tests/threads.cc || obj/test/wasm-api-tests/wasm_api_tests.inputdeps.stamp
+  source_file_part = threads.cc
+  source_name_part = threads
+build obj/test/wasm-api-tests/wasm_api_tests/traps.o: cxx ../test/wasm-api-tests/traps.cc || obj/test/wasm-api-tests/wasm_api_tests.inputdeps.stamp
+  source_file_part = traps.cc
+  source_name_part = traps
+
+build ./wasm_api_tests ./exe.unstripped/wasm_api_tests ./exe.unstripped/wasm_api_tests.map.gz: link obj/test/wasm-api-tests/wasm_api_tests/callbacks.o obj/test/wasm-api-tests/wasm_api_tests/finalize.o obj/test/wasm-api-tests/wasm_api_tests/globals.o obj/test/wasm-api-tests/wasm_api_tests/hostref.o obj/test/wasm-api-tests/wasm_api_tests/memory.o obj/test/wasm-api-tests/wasm_api_tests/multi-return.o obj/test/wasm-api-tests/wasm_api_tests/reflect.o obj/test/wasm-api-tests/wasm_api_tests/regressions.o obj/test/wasm-api-tests/wasm_api_tests/run-all-wasm-api-tests.o obj/test/wasm-api-tests/wasm_api_tests/serialize.o obj/test/wasm-api-tests/wasm_api_tests/startup-errors.o obj/test/wasm-api-tests/wasm_api_tests/table.o obj/test/wasm-api-tests/wasm_api_tests/threads.o obj/test/wasm-api-tests/wasm_api_tests/traps.o obj/third_party/googletest/gmock/gmock-cardinalities.o obj/third_party/googletest/gmock/gmock-internal-utils.o obj/third_party/googletest/gmock/gmock-matchers.o obj/third_party/googletest/gmock/gmock-spec-builders.o obj/third_party/googletest/gmock/gmock.o obj/third_party/googletest/gtest/gtest-assertion-result.o obj/third_party/googletest/gtest/gtest-death-test.o obj/third_party/googletest/gtest/gtest-filepath.o obj/third_party/googletest/gtest/gtest-matchers.o obj/third_party/googletest/gtest/gtest-port.o obj/third_party/googletest/gtest/gtest-printers.o obj/third_party/googletest/gtest/gtest-test-part.o obj/third_party/googletest/gtest/gtest-typed-test.o obj/third_party/googletest/gtest/gtest.o obj/libwee8.a obj/testing/gtest/libgtest.a obj/libv8_libbase.a obj/libv8_libplatform.a || obj/test/common_test_headers.stamp obj/v8_internal_headers.stamp obj/v8_maybe_icu.stamp obj/build/win/default_exe_manifest.stamp obj/testing/gmock/gmock.stamp obj/v8_dump_build_config.stamp obj/build/config/executable_deps.stamp obj/torque_runtime_support.stamp obj/v8_flags.stamp obj/v8_config_headers.stamp obj/v8_shared_internal_headers.stamp obj/v8_headers.stamp obj/cppgc_headers.stamp obj/v8_version.stamp obj/v8_heap_base_headers.stamp obj/third_party/googletest/gmock.stamp obj/third_party/googletest/gtest.stamp obj/tools/v8_testrunner.stamp
+  ldflags = -fuse-ld=lld -Wl,--fatal-warnings -Wl,--build-id=sha1 -fPIC -Wl,-z,noexecstack -Wl,-z,relro -Wl,-z,now -Wl,--icf=all -Wl,--color-diagnostics -Wl,--no-rosegment -Wl,--no-call-graph-profile-sort -Wl,--exclude-libs=libvpx_assembly_arm.a --unwindlib=none --target=arm-linux-androideabi21 -no-canonical-prefixes -Wl,-z,defs -Wl,--as-needed --sysroot=../../../opt/sdk-root/ndk/25.0.8775105/toolchains/llvm/prebuilt/linux-x86_64/sysroot -Wl,--warn-shared-textrel -pie -Bdynamic -Wl,-z,nocopyreloc -Wl,--warn-shared-textrel -Wl,-O2 -Wl,--gc-sections
+  libs = -landroid_support -ldl -lm -llog
+  frameworks =
+  swiftmodules =
+  output_extension = 
+  output_dir = .

@@ -1,0 +1,53 @@
+defines = -DBUILDING_V8_PLATFORM_SHARED -DUSE_UDEV -DUSE_AURA=1 -DUSE_OZONE=1 -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_GNU_SOURCE -DCR_CLANG_REVISION=\"llvmorg-16-init-6084-g2f3d7c2c-1\" -DCOMPONENT_BUILD -DCR_LIBCXX_REVISION=2e919977e0030ce61bd19c40cefe31b995f1e2d4 -DCR_SYSROOT_HASH=af39443b6101f4c417bb83113a306fc028d2b665 -D_DEBUG -DDYNAMIC_ANNOTATIONS_ENABLED=1 -DCPPGC_VERIFY_HEAP -DENABLE_DISASSEMBLER -DV8_TYPED_ARRAY_MAX_SIZE_IN_HEAP=64 -DOBJECT_PRINT -DVERIFY_HEAP -DV8_TRACE_MAPS -DV8_ENABLE_ALLOCATION_TIMEOUT -DV8_ENABLE_FORCE_SLOW_PATH -DV8_ENABLE_DOUBLE_CONST_STORE_CHECK -DV8_INTL_SUPPORT -DENABLE_HANDLE_ZAPPING -DV8_CODE_COMMENTS -DV8_ENABLE_DEBUG_CODE -DV8_ENABLE_HEAP_SNAPSHOT_VERIFY -DV8_SNAPSHOT_NATIVE_CODE_COUNTERS -DV8_USE_EXTERNAL_STARTUP_DATA -DV8_ATOMIC_OBJECT_FIELD_WRITES -DV8_ENABLE_LAZY_SOURCE_POSITIONS -DV8_SHARED_RO_HEAP -DV8_WIN64_UNWINDING_INFO -DV8_ENABLE_REGEXP_INTERPRETER_THREADED_DISPATCH -DV8_SNAPSHOT_COMPRESSION -DV8_ENABLE_WEBASSEMBLY -DV8_ALLOCATION_FOLDING -DV8_ALLOCATION_SITE_TRACKING -DV8_ADVANCED_BIGINT_ALGORITHMS -DV8_USE_ZLIB -DV8_ENABLE_CHECKS -DV8_DEPRECATION_WARNINGS -DV8_IMMINENT_DEPRECATION_WARNINGS -DV8_TARGET_ARCH_ARM -DCAN_USE_ARMV7_INSTRUCTIONS -DCAN_USE_VFP3_INSTRUCTIONS -DCAN_USE_VFP32DREGS -DCAN_USE_NEON -DUSE_EABI_HARDFLOAT=0 -DV8_HAVE_TARGET_OS -DV8_TARGET_OS_ANDROID -DDEBUG -DUSING_V8_PLATFORM_SHARED -DUSING_V8_BASE_SHARED
+include_dirs = -I.. -Iclang_x86_v8_arm/gen -I../buildtools/third_party/libc++ -I../include -Iclang_x86_v8_arm/gen/include
+cflags = -Wall -Werror -Wextra -Wimplicit-fallthrough -Wextra-semi -Wunreachable-code-aggressive -Wthread-safety -Wno-missing-field-initializers -Wno-unused-parameter -Wloop-analysis -Wno-unneeded-internal-declaration -Wenum-compare-conditional -Wno-psabi -Wno-ignored-pragma-optimize -Wno-deprecated-builtins -Wno-bitfield-constant-conversion -Wshadow -fno-delete-null-pointer-checks -fno-ident -fno-strict-aliasing --param=ssp-buffer-size=4 -fstack-protector -funwind-tables -fPIC -pthread -fcolor-diagnostics -fmerge-all-constants -fcrash-diagnostics-dir=../tools/clang/crashreports -mllvm -instcombine-lower-dbg-declare=0 -ffp-contract=off -fcomplete-member-pointers -m32 -mfpmath=sse -msse3 -Wno-builtin-macro-redefined -D__DATE__= -D__TIME__= -D__TIMESTAMP__= -ffile-compilation-dir=. -no-canonical-prefixes -ftrivial-auto-var-init=pattern -fno-omit-frame-pointer -momit-leaf-frame-pointer -gdwarf-4 -g2 -gdwarf-aranges -gsplit-dwarf -Xclang -fuse-ctor-homing -fvisibility=hidden -Wheader-hygiene -Wstring-conversion -Wtautological-overlap-compare -Wmissing-field-initializers -Wunreachable-code -Wctad-maybe-unsupported -Wno-shadow -O3 -fdata-sections -ffunction-sections -fno-unique-section-names
+cflags_cc = -Wno-undefined-bool-conversion -Wno-tautological-undefined-compare -std=c++17 -Wno-trigraphs -fno-exceptions -fno-rtti -nostdinc++ -isystem../buildtools/third_party/libc++/trunk/include -isystem../buildtools/third_party/libc++abi/trunk/include --sysroot=../build/linux/debian_bullseye_i386-sysroot -fvisibility-inlines-hidden
+label_name = v8_libplatform
+target_out_dir = clang_x86_v8_arm/obj
+target_output_name = libv8_libplatform
+
+build clang_x86_v8_arm/obj/v8_libplatform/default-foreground-task-runner.o: clang_x86_v8_arm_cxx ../src/libplatform/default-foreground-task-runner.cc
+  source_file_part = default-foreground-task-runner.cc
+  source_name_part = default-foreground-task-runner
+build clang_x86_v8_arm/obj/v8_libplatform/default-job.o: clang_x86_v8_arm_cxx ../src/libplatform/default-job.cc
+  source_file_part = default-job.cc
+  source_name_part = default-job
+build clang_x86_v8_arm/obj/v8_libplatform/default-platform.o: clang_x86_v8_arm_cxx ../src/libplatform/default-platform.cc
+  source_file_part = default-platform.cc
+  source_name_part = default-platform
+build clang_x86_v8_arm/obj/v8_libplatform/default-worker-threads-task-runner.o: clang_x86_v8_arm_cxx ../src/libplatform/default-worker-threads-task-runner.cc
+  source_file_part = default-worker-threads-task-runner.cc
+  source_name_part = default-worker-threads-task-runner
+build clang_x86_v8_arm/obj/v8_libplatform/delayed-task-queue.o: clang_x86_v8_arm_cxx ../src/libplatform/delayed-task-queue.cc
+  source_file_part = delayed-task-queue.cc
+  source_name_part = delayed-task-queue
+build clang_x86_v8_arm/obj/v8_libplatform/task-queue.o: clang_x86_v8_arm_cxx ../src/libplatform/task-queue.cc
+  source_file_part = task-queue.cc
+  source_name_part = task-queue
+build clang_x86_v8_arm/obj/v8_libplatform/trace-buffer.o: clang_x86_v8_arm_cxx ../src/libplatform/tracing/trace-buffer.cc
+  source_file_part = trace-buffer.cc
+  source_name_part = trace-buffer
+build clang_x86_v8_arm/obj/v8_libplatform/trace-config.o: clang_x86_v8_arm_cxx ../src/libplatform/tracing/trace-config.cc
+  source_file_part = trace-config.cc
+  source_name_part = trace-config
+build clang_x86_v8_arm/obj/v8_libplatform/trace-object.o: clang_x86_v8_arm_cxx ../src/libplatform/tracing/trace-object.cc
+  source_file_part = trace-object.cc
+  source_name_part = trace-object
+build clang_x86_v8_arm/obj/v8_libplatform/trace-writer.o: clang_x86_v8_arm_cxx ../src/libplatform/tracing/trace-writer.cc
+  source_file_part = trace-writer.cc
+  source_name_part = trace-writer
+build clang_x86_v8_arm/obj/v8_libplatform/tracing-controller.o: clang_x86_v8_arm_cxx ../src/libplatform/tracing/tracing-controller.cc
+  source_file_part = tracing-controller.cc
+  source_name_part = tracing-controller
+build clang_x86_v8_arm/obj/v8_libplatform/worker-thread.o: clang_x86_v8_arm_cxx ../src/libplatform/worker-thread.cc
+  source_file_part = worker-thread.cc
+  source_name_part = worker-thread
+
+build clang_x86_v8_arm/libv8_libplatform.cr.so clang_x86_v8_arm/libv8_libplatform.cr.so.TOC: clang_x86_v8_arm_solink clang_x86_v8_arm/obj/v8_libplatform/default-foreground-task-runner.o clang_x86_v8_arm/obj/v8_libplatform/default-job.o clang_x86_v8_arm/obj/v8_libplatform/default-platform.o clang_x86_v8_arm/obj/v8_libplatform/default-worker-threads-task-runner.o clang_x86_v8_arm/obj/v8_libplatform/delayed-task-queue.o clang_x86_v8_arm/obj/v8_libplatform/task-queue.o clang_x86_v8_arm/obj/v8_libplatform/trace-buffer.o clang_x86_v8_arm/obj/v8_libplatform/trace-config.o clang_x86_v8_arm/obj/v8_libplatform/trace-object.o clang_x86_v8_arm/obj/v8_libplatform/trace-writer.o clang_x86_v8_arm/obj/v8_libplatform/tracing-controller.o clang_x86_v8_arm/obj/v8_libplatform/worker-thread.o | clang_x86_v8_arm/libv8_libbase.cr.so.TOC clang_x86_v8_arm/libc++.cr.so.TOC || clang_x86_v8_arm/obj/v8_config_headers.stamp clang_x86_v8_arm/obj/v8_tracing.stamp clang_x86_v8_arm/obj/build/config/shared_library_deps.stamp
+  ldflags = -Werror -fuse-ld=lld -Wl,--fatal-warnings -Wl,--build-id -fPIC -Wl,-z,noexecstack -Wl,-z,relro -Wl,--color-diagnostics -Wl,--no-call-graph-profile-sort -m32 -no-canonical-prefixes -rdynamic -Wl,-z,defs -Wl,--as-needed -nostdlib++ --sysroot=../build/linux/debian_bullseye_i386-sysroot -Wl,-rpath=\$$ORIGIN -Wl,-O2 -Wl,--gc-sections
+  libs = -ldl -lpthread -lrt
+  frameworks =
+  swiftmodules =
+  output_extension = .cr.so
+  output_dir = clang_x86_v8_arm
+  solibs = clang_x86_v8_arm/libv8_libbase.cr.so clang_x86_v8_arm/libc++.cr.so
