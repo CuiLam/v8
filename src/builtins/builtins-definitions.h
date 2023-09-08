@@ -681,12 +681,15 @@ namespace internal {
                                                                                \
   /* IterableToList */                                                         \
   /* ES #sec-iterabletolist */                                                 \
-  TFS(IterableToList, kIterable, kIteratorFn)                                  \
-  TFS(IterableToFixedArray, kIterable, kIteratorFn)                            \
-  TFS(IterableToListWithSymbolLookup, kIterable)                               \
-  TFS(IterableToFixedArrayWithSymbolLookupSlow, kIterable)                     \
-  TFS(IterableToListMayPreserveHoles, kIterable, kIteratorFn)                  \
-  IF_WASM(TFS, IterableToFixedArrayForWasm, kIterable, kExpectedLength)        \
+  TFS(IterableToList, NeedsContext::kYes, kIterable, kIteratorFn)              \
+  TFS(IterableToFixedArray, NeedsContext::kYes, kIterable, kIteratorFn)        \
+  TFS(IterableToListWithSymbolLookup, NeedsContext::kYes, kIterable)           \
+  TFS(IterableToFixedArrayWithSymbolLookupSlow, NeedsContext::kYes, kIterable) \
+  TFS(IterableToListMayPreserveHoles, NeedsContext::kYes, kIterable,           \
+      kIteratorFn)                                                             \
+  TFS(IterableToListConvertHoles, NeedsContext::kYes, kIterable, kIteratorFn)  \
+  IF_WASM(TFS, IterableToFixedArrayForWasm, NeedsContext::kYes, kIterable,     \
+          kExpectedLength)                                                     \
                                                                                \
   /* #sec-createstringlistfromiterable */                                      \
   TFS(StringListFromIterable, kIterable)                                       \
