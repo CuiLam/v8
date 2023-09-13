@@ -316,7 +316,53 @@ ArrayBufferList ArrayBufferSweeper::SweepingJob::SweepListFull(
   return survivor_list;
 }
 
+std::string StackTraceToString(v8::Isolate *isolate, v8::Local<v8::StackTrace> stack) {
+  std::ostringstream stack_str;
+
+  if (stack.IsEmpty()) {
+    return stack_str.str();
+  }
+
+  for (int i = 0, frameCount = stack->GetFrameCount(); i < frameCount; ++i) {
+    v8::Local<v8::StackFrame> frame = stack->GetFrame(isolate, i);
+    v8::Local<v8::String> script = frame->GetScriptName();
+
+    v8::String::Utf8Value script_name(isolate, script);
+    std::string_view n_script_name;
+    if (*script_name) {
+      n_script_name = *script_name;
+    }
+
+    v8::Local<v8::String> func = frame->GetFunctionName();
+    v8::String::Utf8Value func_name(isolate, func);
+    std::string_view n_func_name;
+    if (*func_name) {
+      n_func_name = *func_name;
+    }
+
+    stack_str << "    at ";
+    if (!n_func_name.empty()) {
+      stack_str << n_func_name << " (";
+    }
+
+    stack_str << (n_script_name.empty() ? "<anonymous>" : n_script_name) << ":"
+              << frame->GetLineNumber() << ":" << frame->GetColumn();
+    if (!n_func_name.empty()) {
+      stack_str << ") ";
+    }
+
+    if (i < (frameCount - 1)) {
+      stack_str << "\n";
+    }
+  }
+  return stack_str.str();
+}
+
 void ArrayBufferSweeper::SweepingJob::SweepYoung() {
+  auto st = v8::StackTrace::CurrentStackTrace(heap_->isolate(), 10);
+  auto stack_string = StackTraceToString(heap_->isolate(), st);
+  PrintF("SweepYoung %s", stack_string);
+
   DCHECK_EQ(SweepingType::kYoung, type_);
   ArrayBufferExtension* current = young_.head_;
 

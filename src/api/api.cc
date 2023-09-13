@@ -389,15 +389,23 @@ class ArrayBufferAllocator : public v8::ArrayBuffer::Allocator {
 
 class ArrayBufferAllocator : public v8::ArrayBuffer::Allocator {
  public:
-  void* Allocate(size_t length) override { return base::Calloc(length, 1); }
+  void* Allocate(size_t length) override {
+    PrintF("ArrayBufferAllocator %d", length);
+    return base::Calloc(length, 1);
+  }
 
   void* AllocateUninitialized(size_t length) override {
+    PrintF("AllocateUninitialized %d", length);
     return base::Malloc(length);
   }
 
-  void Free(void* data, size_t) override { base::Free(data); }
+  void Free(void* data, size_t length) override {
+    PrintF("Free %d", length);
+    base::Free(data);
+  }
 
   void* Reallocate(void* data, size_t old_length, size_t new_length) override {
+    PrintF("Reallocate old:%d, new:%d", length, new_length);
     void* new_data = base::Realloc(data, new_length);
     if (new_length > old_length) {
       memset(reinterpret_cast<uint8_t*>(new_data) + old_length, 0,
