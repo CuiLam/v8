@@ -367,16 +367,19 @@ class ArrayBufferAllocator : public v8::ArrayBuffer::Allocator {
   ArrayBufferAllocator() { CHECK(page_allocator_); }
 
   void* Allocate(size_t length) override {
+    internal::PrintF("ArrayBufferAllocator %d", length);
     return page_allocator_->AllocatePages(nullptr, RoundUp(length, page_size_),
                                           page_size_,
                                           PageAllocator::kReadWrite);
   }
 
   void* AllocateUninitialized(size_t length) override {
+    internal::PrintF("AllocateUninitialized %d", length);
     return Allocate(length);
   }
 
   void Free(void* data, size_t length) override {
+    internal::PrintF("Free l:%d, s:%s", length, data);
     page_allocator_->FreePages(data, RoundUp(length, page_size_));
   }
 

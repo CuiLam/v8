@@ -359,9 +359,9 @@ std::string StackTraceToString(v8::Isolate *isolate, v8::Local<v8::StackTrace> s
 }
 
 void ArrayBufferSweeper::SweepingJob::SweepYoung() {
-  auto st = v8::StackTrace::CurrentStackTrace(heap_->isolate(), 10);
-  auto stack_string = StackTraceToString(heap_->isolate(), st);
-  PrintF("SweepYoung %s", stack_string);
+  //auto st = v8::StackTrace::CurrentStackTrace(v8::Isolate::GetCurrent(), 10);
+  //auto stack_string = StackTraceToString(v8::Isolate::GetCurrent(), st);
+  PrintF("SweepYoung");
 
   DCHECK_EQ(SweepingType::kYoung, type_);
   ArrayBufferExtension* current = young_.head_;
@@ -373,15 +373,23 @@ void ArrayBufferSweeper::SweepingJob::SweepYoung() {
     ArrayBufferExtension* next = current->next();
 
     if (!current->IsYoungMarked()) {
+      PrintF("SweepYoung !IsYoungMarked start");
       size_t bytes = current->accounting_length();
+      PrintF("SweepYoung !IsYoungMarked before delete");
       delete current;
+      PrintF("SweepYoung !IsYoungMarked after delete");
       if (bytes) freed_bytes_.fetch_add(bytes, std::memory_order_relaxed);
+      PrintF("SweepYoung !IsYoungMarked end");
     } else if (current->IsYoungPromoted()) {
+      PrintF("SweepYoung IsYoungPromoted start");
       current->YoungUnmark();
       new_old.Append(current);
+      PrintF("SweepYoung IsYoungPromoted end");
     } else {
+      PrintF("SweepYoung else start");
       current->YoungUnmark();
       new_young.Append(current);
+      PrintF("SweepYoung else end");
     }
 
     current = next;

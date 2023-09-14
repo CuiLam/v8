@@ -788,6 +788,7 @@ bool BackingStore::Reallocate(Isolate* isolate, size_t new_byte_length) {
 
 v8::ArrayBuffer::Allocator* BackingStore::get_v8_api_array_buffer_allocator() {
   CHECK(!is_wasm_memory_);
+  TRACE_BS("get_v8_api_array_buffer_allocator  holds_shared_ptr_to_allocator_:%d", holds_shared_ptr_to_allocator_);
   auto array_buffer_allocator =
       holds_shared_ptr_to_allocator_
           ? type_specific_data_.v8_api_array_buffer_allocator_shared.get()

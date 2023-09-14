@@ -578,7 +578,14 @@ bool OS::DecommitPages(void* address, size_t size) {
   // zero-initialized on next access.
   void* ptr = mmap(address, size, PROT_NONE,
                    MAP_FIXED | MAP_ANONYMOUS | MAP_PRIVATE, -1, 0);
-  return ptr == address;
+  if (ptr == MAP_FAILED) {
+    OS::Print("mmap error: %d", errno);
+  }
+  bool success = (ptr == address);
+  if (!success) {
+    OS::Print("mmap failed size:%zu, %p", size, address);
+  }
+  return success;
 }
 #endif  // !defined(_AIX)
 

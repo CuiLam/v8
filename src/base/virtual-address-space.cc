@@ -254,6 +254,7 @@ Address VirtualAddressSubspace::AllocatePages(Address hint, size_t size,
 }
 
 void VirtualAddressSubspace::FreePages(Address address, size_t size) {
+  OS::Print("VirtualAddressSubspace::FreePages start freepages %p, size:%zu", address, size);
   DCHECK(IsAligned(address, allocation_granularity()));
   DCHECK(IsAligned(size, allocation_granularity()));
 
@@ -261,7 +262,18 @@ void VirtualAddressSubspace::FreePages(Address address, size_t size) {
   // The order here is important: on Windows, the allocation first has to be
   // freed to a placeholder before the placeholder can be merged (during the
   // merge_callback) with any surrounding placeholder mappings.
-  CHECK(reservation_.Free(reinterpret_cast<void*>(address), size));
+  bool is_free = reservation_.Free(reinterpret_cast<void*>(address), size);
+  OS::Print("VirtualAddressSubspace::FreePages is_free:%d", static_cast<int>(is_free));
+  CHECK(is_free);
+  //size_t free_region_size = region_allocator_.FreeRegion(address);
+  //OS::Print("VirtualAddressSubspace::FreePages end freeRegion>A< size:%d, free_region_size:%d, %p", size, free_region_size, address);
+  //if (size != free_region_size) {
+  //OS::Print("VirtualAddressSubspace::FreePages>A< !!!!not eq size:%d, free_region_size:%d, %p", size, free_region_size, address);
+  //} else {
+  //OS::Print("VirtualAddressSubspace::FreePages>A< eq size %p", address);
+  //}
+  //CHECK_EQ(size, free_region_size);
+  //OS::Print("VirtualAddressSubspace::FreePages end freepages>A< %p", address);
   CHECK_EQ(size, region_allocator_.FreeRegion(address));
 }
 

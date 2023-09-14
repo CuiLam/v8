@@ -8,6 +8,8 @@
 #include "src/base/logging.h"
 #include "src/base/macros.h"
 
+#include <ostream>
+
 namespace v8 {
 namespace base {
 
@@ -259,7 +261,7 @@ RegionAllocator::Address RegionAllocator::AllocateRegion(Address hint,
   return address;
 }
 
-size_t RegionAllocator::TrimRegion(Address address, size_t new_size) {
+/*size_t RegionAllocator::TrimRegion(Address address, size_t new_size) {
   DCHECK(IsAligned(new_size, page_size_));
 
   AllRegionsSet::iterator region_iter = FindRegion(address);
@@ -308,6 +310,66 @@ size_t RegionAllocator::TrimRegion(Address address, size_t new_size) {
     }
   }
   FreeListAddRegion(region);
+  return size;
+}*/
+size_t RegionAllocator::TrimRegion(Address address, size_t new_size) {
+  std::cout << "RegionAllocator::TrimRegion start address: " << address << ", newSize" << new_size << std::endl;
+  DCHECK(IsAligned(new_size, page_size_));
+
+  std::cout << "RegionAllocator::TrimRegion start FindRegion get region_iter address: " << address << std::endl;
+  AllRegionsSet::iterator region_iter = FindRegion(address);
+  std::cout << "RegionAllocator::TrimRegion after FindRegion get region_iter address: " << address << std::endl;
+  if (region_iter == all_regions_.end()) {
+    std::cout << "RegionAllocator::TrimRegion address:" << address << ", region_iter == all_regions_.end(), return 0" << std::endl;
+    return 0;
+  }
+  Region* region = *region_iter;
+  if (region->begin() != address || !region->is_allocated()) {
+  std::cout << "RegionAllocator::TrimRegion address:" << address << ", region->begin() != address || !region->is_allocated(), return 0" << std::endl;
+    return 0;
+  }
+
+  // The region must not be in the free list.
+  DCHECK_EQ(free_regions_.find(*region_iter), free_regions_.end());
+  std::cout << "RegionAllocator::TrimRegion address:" << address << ", after dcheck in free list" << std::endl;
+
+  if (new_size > 0) {
+    region = Split(region, new_size);
+    ++region_iter;
+  }
+  size_t size = region->size();
+  region->set_state(RegionState::kFree);
+
+  // Merge current region with the surrounding ones if they are free.
+  std::cout << "RegionAllocator::TrimRegion address:" << address << ", ready to merge current region" << std::endl;
+  if (region->end() != whole_region_.end()) {
+    // There must be a range after the current one.
+    AllRegionsSet::iterator next_iter = std::next(region_iter);
+    DCHECK_NE(next_iter, all_regions_.end());
+    if ((*next_iter)->is_free()) {
+      // |next| region object will be deleted during merge, remove it from
+      // the free list.
+      FreeListRemoveRegion(*next_iter);
+      Merge(region_iter, next_iter);
+    }
+  }
+  if (new_size == 0 && region->begin() != whole_region_.begin()) {
+    // There must be a range before the current one.
+    AllRegionsSet::iterator prev_iter = std::prev(region_iter);
+    DCHECK_NE(prev_iter, all_regions_.end());
+    if ((*prev_iter)->is_free()) {
+      // |prev| region's size will change, we'll have to re-insert it into
+      // the proper place of the free list.
+      FreeListRemoveRegion(*prev_iter);
+      Merge(prev_iter, region_iter);
+      // |prev| region becomes the current region.
+      region_iter = prev_iter;
+      region = *region_iter;
+    }
+  }
+  std::cout << "RegionAllocator::TrimRegion address:" << address << ", ready FreeListAddRegion" << std::endl;
+  FreeListAddRegion(region);
+  std::cout << "RegionAllocator::TrimRegion end address:" << size << ", return size:" << size << std::endl;
   return size;
 }
 
