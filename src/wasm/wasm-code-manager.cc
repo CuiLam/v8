@@ -1884,6 +1884,8 @@ NativeModule::~NativeModule() {
   // reference counts on the {WasmCode} objects.
   import_wrapper_cache_.clear();
 
+  GetWasmEngine()->FreeNativeModule(this);
+
   // If experimental PGO support is enabled, serialize the PGO data now.
   if (V8_UNLIKELY(FLAG_experimental_wasm_pgo_to_file)) {
     DumpProfileToFile(module_.get(), wire_bytes());
