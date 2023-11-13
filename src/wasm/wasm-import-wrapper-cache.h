@@ -70,6 +70,11 @@ class WasmImportWrapperCache {
     base::MutexGuard guard_;
   };
 
+  ~WasmImportWrapperCache() { clear(); }
+
+  // Clear this cache, dropping all reference counts.
+  void clear();
+
   // Not thread-safe, use ModificationScope to get exclusive write access to the
   // cache.
   V8_EXPORT_PRIVATE WasmCode*& operator[](const CacheKey& key);
@@ -84,6 +89,8 @@ class WasmImportWrapperCache {
                      Suspend suspend) const;
 
   ~WasmImportWrapperCache();
+
+  size_t EstimateCurrentMemoryConsumption() const;
 
  private:
   mutable base::Mutex mutex_;

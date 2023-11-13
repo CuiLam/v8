@@ -982,10 +982,7 @@ NativeModule::NativeModule(const WasmFeatures& enabled,
           GetWasmEngine()->GetBarrierForBackgroundCompile()->TryLock()),
       code_allocator_(async_counters),
       enabled_features_(enabled),
-      module_(std::move(module)),
-      import_wrapper_cache_(std::unique_ptr<WasmImportWrapperCache>(
-          new WasmImportWrapperCache())),
-      bounds_checks_(GetBoundsChecks(module_.get())) {
+      module_(std::move(module)) {
   DCHECK(engine_scope_);
   // We receive a pointer to an empty {std::shared_ptr}, and install ourselve
   // there.
@@ -1880,11 +1877,11 @@ NativeModule::~NativeModule() {
   // Cancel all background compilation before resetting any field of the
   // NativeModule or freeing anything.
   compilation_state_->CancelCompilation();
-  GetWasmEngine()->FreeNativeModule(this);
-  // Free the import wrapper cache before releasing the {WasmCode} objects in
-  // {owned_code_}. The destructor of {WasmImportWrapperCache} still needs to
-  // decrease reference counts on the {WasmCode} objects.
-  import_wrapper_cache_.reset();
+
+  // Clear the import wrapper cache before releasing the {WasmCode} objects in
+  // {owned_code_}. The {WasmImportWrapperCache} still needs to decrement
+  // reference counts on the {WasmCode} objects.
+  import_wrapper_cache_.clear();
 
   // If experimental PGO support is enabled, serialize the PGO data now.
   if (V8_UNLIKELY(FLAG_experimental_wasm_pgo_to_file)) {
@@ -2498,6 +2495,49 @@ NamesProvider* NativeModule::GetNamesProvider() {
         std::make_unique<NamesProvider>(module_.get(), wire_bytes());
   }
   return names_provider_.get();
+}
+
+size_t NativeModule::EstimateCurrentMemoryConsumption() const {
+  UPDATE_WHEN_CLASS_CHANGES(NativeModule, 520);
+  size_t result = sizeof(NativeModule);
+  result += module_->EstimateCurrentMemoryConsumption();
+
+  std::shared_ptr<base::OwnedVector<const uint8_t>> wire_bytes =
+      std::atomic_load(&wire_bytes_);
+  size_t wire_bytes_size = wire_bytes ? wire_bytes->size() : 0;
+  result += wire_bytes_size;
+
+  if (source_map_) {
+    result += source_map_->EstimateCurrentMemoryConsumption();
+  }
+  result += compilation_state_->EstimateCurrentMemoryConsumption();
+  result += import_wrapper_cache_.EstimateCurrentMemoryConsumption();
+  // For {tiering_budgets_}.
+  result += module_->num_declared_functions * sizeof(uint32_t);
+
+  {
+    base::RecursiveMutexGuard lock(&allocation_mutex_);
+    result += ContentSize(owned_code_);
+    result += ContentSize(new_owned_code_);
+    // For {code_table_}.
+    result += module_->num_declared_functions * sizeof(void*);
+    result += ContentSize(code_space_data_);
+    if (debug_info_) {
+      result += debug_info_->EstimateCurrentMemoryConsumption();
+    }
+    if (names_provider_) {
+      result += names_provider_->EstimateCurrentMemoryConsumption();
+    }
+    if (cached_code_) {
+      result += ContentSize(*cached_code_.get());
+    }
+  }
+
+  if (v8_flags.trace_wasm_offheap_memory) {
+    PrintF("NativeModule wire bytes: %zu\n", wire_bytes_size);
+    PrintF("NativeModule: %zu\n", result);
+  }
+  return result;
 }
 
 void WasmCodeManager::FreeNativeModule(
