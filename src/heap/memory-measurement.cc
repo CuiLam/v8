@@ -160,8 +160,10 @@ void MeasureMemoryDelegate::MeasurementComplete(
     }
   }
 
-  Handle<JSObject> result = result_builder.Build();
-  JSPromise::Resolve(promise_, result).ToHandleChecked();
+  Handle<JSObject> jsresult = result_builder.Build();
+  if (JSPromise::Resolve(promise_, jsresult).is_null()) {
+    CHECK(isolate_->is_execution_termination_pending());
+  }
 }
 
 MemoryMeasurement::MemoryMeasurement(Isolate* isolate)
