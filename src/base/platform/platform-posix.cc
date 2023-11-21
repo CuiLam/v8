@@ -576,9 +576,12 @@ bool OS::DecommitPages(void* address, size_t size) {
   // shall be removed, as if by an appropriate call to munmap(), before the new
   // mapping is established." As a consequence, the memory will be
   // zero-initialized on next access.
-  void* ptr = mmap(address, size, PROT_NONE,
-                   MAP_FIXED | MAP_ANONYMOUS | MAP_PRIVATE, -1, 0);
-  return ptr == address;
+//  void* ptr = mmap(address, size, PROT_NONE,
+//                   MAP_FIXED | MAP_ANONYMOUS | MAP_PRIVATE, -1, 0);
+//  return ptr == address;
+  // TODO QQ小游戏mmap导致部分游戏必现crash，看了下源码，commit对应recommit，灰度过一部分没有发现其他问题影响。
+  //      如后续有发现其他影响可以回退
+  return OS::RecommitPages(address, size, base::OS::MemoryPermission::kNoAccess);
 }
 #endif  // !defined(_AIX)
 
