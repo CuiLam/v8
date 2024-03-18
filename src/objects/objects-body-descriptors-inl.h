@@ -774,8 +774,17 @@ class WasmInternalFunction::BodyDescriptor final : public BodyDescriptorBase {
                                  ObjectVisitor* v) {
     IteratePointers(obj, kStartOfStrongFieldsOffset, kEndOfStrongFieldsOffset,
                     v);
-    v->VisitExternalPointer(obj, obj.RawExternalPointerField(kCallTargetOffset),
-                            kWasmInternalFunctionCallTargetTag);
+    IterateTrustedPointer(obj, kIndirectRefOffset, v,
+                          IndirectPointerMode::kStrong,
+                          kUnknownIndirectPointerTag);
+    v->VisitExternalPointer(
+        obj, obj.RawExternalPointerField(kCallTargetOffset,
+                                          kWasmInternalFunctionCallTargetTag));
+    IterateCodePointer(obj, kCodeOffset, v, IndirectPointerMode::kStrong);
+  }
+
+  static inline int SizeOf(Tagged<Map> map, Tagged<HeapObject> object) {
+    return kSize;
   }
 
   static inline int SizeOf(Map map, HeapObject object) { return kSize; }
