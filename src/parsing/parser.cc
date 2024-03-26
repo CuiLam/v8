@@ -3118,7 +3118,7 @@ void Parser::DeclareClassVariable(ClassScope* scope, const AstRawString* name,
   scope->SetScopeName(name);
 #endif
 
-  DCHECK_IMPLIES(name == nullptr, class_info->is_anonymous);
+  DCHECK_IMPLIES(IsEmptyIdentifier(name), class_info->is_anonymous);
   // Declare a special class variable for anonymous classes with the dot
   // if we need to save it for static private method access.
   Variable* class_variable =
@@ -3275,7 +3275,7 @@ Expression* Parser::RewriteClassLiteral(ClassScope* block_scope,
         DefaultConstructor(name, has_extends, pos, end_pos);
   }
 
-  if (name != nullptr) {
+  if (!IsEmptyIdentifier(name)) {
     DCHECK_NOT_NULL(block_scope->class_variable());
     block_scope->class_variable()->set_initializer_position(end_pos);
   }
