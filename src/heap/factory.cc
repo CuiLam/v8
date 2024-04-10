@@ -68,6 +68,7 @@
 #include "src/objects/struct-inl.h"
 #include "src/objects/synthetic-module-inl.h"
 #include "src/objects/template-objects-inl.h"
+#include "src/objects/templates.h"
 #include "src/objects/transitions-inl.h"
 #include "src/roots/roots.h"
 #include "src/strings/unicode-inl.h"
@@ -4026,6 +4027,85 @@ Handle<JSAtomicsCondition> Factory::NewJSAtomicsCondition() {
       NewJSObjectFromMap(map, AllocationType::kSharedOld));
   cond->set_state(JSAtomicsCondition::kEmptyState);
   return cond;
+}
+
+namespace {
+
+inline void InitializeTemplate(Tagged<TemplateInfo> that, ReadOnlyRoots roots,
+                               bool do_not_cache) {
+  that->set_number_of_properties(0);
+  int serial_number =
+      do_not_cache ? TemplateInfo::kDoNotCache : TemplateInfo::kUncached;
+  that->set_serial_number(serial_number);
+  that->set_property_list(roots.undefined_value(), SKIP_WRITE_BARRIER);
+  that->set_property_accessors(roots.undefined_value(), SKIP_WRITE_BARRIER);
+}
+
+}  // namespace
+
+Handle<FunctionTemplateInfo> Factory::NewFunctionTemplateInfo(
+    int length, bool do_not_cache) {
+  const int size = FunctionTemplateInfo::SizeFor();
+  Tagged<FunctionTemplateInfo> obj =
+      FunctionTemplateInfo::cast(AllocateRawWithImmortalMap(
+          size, AllocationType::kOld,
+          read_only_roots().function_template_info_map()));
+  {
+    // Disallow GC until all fields of obj have acceptable types.
+    DisallowGarbageCollection no_gc;
+    Tagged<FunctionTemplateInfo> raw = *obj;
+    ReadOnlyRoots roots(isolate());
+    InitializeTemplate(raw, roots, do_not_cache);
+    raw->set_class_name(roots.undefined_value(), SKIP_WRITE_BARRIER);
+    raw->set_signature(roots.undefined_value(), SKIP_WRITE_BARRIER);
+    raw->set_rare_data(roots.undefined_value(), kReleaseStore,
+                       SKIP_WRITE_BARRIER);
+    raw->set_shared_function_info(roots.undefined_value(), SKIP_WRITE_BARRIER);
+    raw->set_cached_property_name(roots.the_hole_value(), SKIP_WRITE_BARRIER);
+
+    raw->set_flag(0, kRelaxedStore);
+    raw->set_undetectable(false);
+    raw->set_needs_access_check(false);
+    raw->set_accept_any_receiver(true);
+
+    raw->set_length(length);
+    raw->SetInstanceType(0);
+    raw->init_callback(isolate(), kNullAddress);
+    raw->set_callback_data(roots.the_hole_value(), kReleaseStore,
+                           SKIP_WRITE_BARRIER);
+  }
+  return handle(obj, isolate());
+}
+
+Handle<ObjectTemplateInfo> Factory::NewObjectTemplateInfo(
+    DirectHandle<FunctionTemplateInfo> constructor, bool do_not_cache) {
+  const int size = ObjectTemplateInfo::SizeFor();
+  Tagged<ObjectTemplateInfo> obj = ObjectTemplateInfo::cast(
+      AllocateRawWithImmortalMap(size, AllocationType::kOld,
+                                 read_only_roots().object_template_info_map()));
+  {
+    // Disallow GC until all fields of obj have acceptable types.
+    DisallowGarbageCollection no_gc;
+    Tagged<ObjectTemplateInfo> raw = *obj;
+    ReadOnlyRoots roots(isolate());
+    InitializeTemplate(raw, roots, do_not_cache);
+    raw->set_constructor(!constructor.is_null()
+                             ? *constructor
+                             : HeapObject::cast(roots.undefined_value()));
+    raw->set_data(0);
+  }
+  return handle(obj, isolate());
+}
+
+Handle<DictionaryTemplateInfo> Factory::NewDictionaryTemplateInfo(
+    Handle<FixedArray> property_names) {
+  const int size = DictionaryTemplateInfo::SizeFor();
+  Handle<Map> map = read_only_roots().dictionary_template_info_map_handle();
+  Tagged<DictionaryTemplateInfo> obj = DictionaryTemplateInfo::cast(
+      AllocateRawWithImmortalMap(size, AllocationType::kOld, *map));
+  obj->set_property_names(*property_names);
+  obj->set_serial_number(TemplateInfo::kUncached);
+  return handle(obj, isolate());
 }
 
 Factory::JSFunctionBuilder::JSFunctionBuilder(Isolate* isolate,
