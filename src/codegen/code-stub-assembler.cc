@@ -11907,6 +11907,7 @@ TNode<TIndex> CodeStubAssembler::BuildFastLoop(
     TNode<TIndex> start_index, TNode<TIndex> end_index,
     const FastLoopBody<TIndex>& body, int increment,
     IndexAdvanceMode advance_mode) {
+  TVARIABLE(TIndex, var, start_index);
   var_index = start_index;
   VariableList vars_copy(vars.begin(), vars.end(), zone());
   vars_copy.push_back(&var);
