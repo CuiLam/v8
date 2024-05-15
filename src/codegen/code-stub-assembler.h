@@ -3607,7 +3607,6 @@ class V8_EXPORT_PRIVATE CodeStubAssembler
   TNode<TIndex> BuildFastLoop(
       TVariable<TIndex>& var_index, TNode<TIndex> start_index,
       TNode<TIndex> end_index, const FastLoopBody<TIndex>& body, int increment,
-      LoopUnrollingMode unrolling_mode,
       IndexAdvanceMode advance_mode = IndexAdvanceMode::kPre) {
     return BuildFastLoop(VariableList(0, zone()), var_index, start_index,
                          end_index, body, increment, unrolling_mode,
@@ -3619,7 +3618,6 @@ class V8_EXPORT_PRIVATE CodeStubAssembler
                               TNode<TIndex> start_index,
                               TNode<TIndex> end_index,
                               const FastLoopBody<TIndex>& body, int increment,
-                              LoopUnrollingMode unrolling_mode,
                               IndexAdvanceMode advance_mode) {
     TVARIABLE(TIndex, var_index);
     return BuildFastLoop(vars, var_index, start_index, end_index, body,
