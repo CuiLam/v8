@@ -5,7 +5,8 @@
 #include 'src/builtins/builtins-constructor-gen.h'
 
 namespace typed_array {
-extern builtin IterableToListConvertHoles(Context, Object, Callable): JSArray;
+extern builtin IterableToListMayPreserveHoles(
+    Context, Object, Callable): JSArray;
 
 extern macro TypedArrayBuiltinsAssembler::AllocateEmptyOnHeapBuffer(
     implicit context: Context)(): JSArrayBuffer;
@@ -198,7 +199,7 @@ transitioning macro ConstructByIterable(implicit context: Context)(
     iterable: JSReceiver, iteratorFn: Callable): never
     labels IfConstructByArrayLike(JSArray, uintptr) {
   const array: JSArray =
-      IterableToListConvertHoles(context, iterable, iteratorFn);
+      IterableToListMayPreserveHoles(context, iterable, iteratorFn);
   // Max JSArray length is a valid JSTypedArray length so we just use it.
   goto IfConstructByArrayLike(array, array.length_uintptr);
 }
