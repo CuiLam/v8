@@ -68,8 +68,7 @@ void BaseCollectionsAssembler::AddConstructorEntries(
   }
   BIND(&fast_loop);
   {
-    Label if_exception_during_fast_iteration(this, Label::kDeferred);
-    TVARIABLE(IntPtrT, var_index, IntPtrConstant(0));
+    Label if_exception_during_fast_iteration(this);
     TNode<JSArray> initial_entries_jsarray =
         UncheckedCast<JSArray>(initial_entries);
 #if DEBUG
@@ -82,9 +81,9 @@ void BaseCollectionsAssembler::AddConstructorEntries(
     {
       compiler::ScopedExceptionHandler handler(
           this, &if_exception_during_fast_iteration, &var_exception);
-      AddConstructorEntriesFromFastJSArray(
-          variant, context, native_context, collection, initial_entries_jsarray,
-          &if_may_have_side_effects, var_index);
+      AddConstructorEntriesFromFastJSArray(variant, context, native_context,
+                                           collection, initial_entries_jsarray,
+                                           &if_may_have_side_effects);
     }
     Goto(&exit);
 
@@ -114,11 +113,9 @@ void BaseCollectionsAssembler::AddConstructorEntries(
       // non-trivial in case "return" callback is added somewhere in the
       // iterator's prototype chain.
       TNode<NativeContext> native_context = LoadNativeContext(context);
-      TNode<IntPtrT> next_index =
-          IntPtrAdd(var_index.value(), IntPtrConstant(1));
       var_iterator_object = CreateArrayIterator(
           native_context, UncheckedCast<JSArray>(initial_entries),
-          IterationKind::kValues, SmiTag(next_index));
+          IterationKind::kEntries);
       Goto(&if_exception);
     }
   }
@@ -146,7 +143,7 @@ void BaseCollectionsAssembler::AddConstructorEntries(
 void BaseCollectionsAssembler::AddConstructorEntriesFromFastJSArray(
     Variant variant, TNode<Context> context, TNode<Context> native_context,
     TNode<Object> collection, TNode<JSArray> fast_jsarray,
-    Label* if_may_have_side_effects, TVariable<IntPtrT>& var_current_index) {
+    Label* if_may_have_side_effects) {
   TNode<FixedArrayBase> elements = LoadElements(fast_jsarray);
   TNode<Int32T> elements_kind = LoadElementsKind(fast_jsarray);
   TNode<JSFunction> add_func = GetInitialAddFunction(variant, native_context);
@@ -170,8 +167,8 @@ void BaseCollectionsAssembler::AddConstructorEntriesFromFastJSArray(
   BIND(&if_smiorobjects);
   {
     auto set_entry = [&](TNode<IntPtrT> index) {
-      TNode<Object> element =
-          LoadAndNormalizeFixedArrayElement(CAST(elements), index);
+      TNode<Object> element = LoadAndNormalizeFixedArrayElement(
+          CAST(elements), UncheckedCast<IntPtrT>(index));
       AddConstructorEntry(variant, context, collection, add_func, element,
                           if_may_have_side_effects);
     };
@@ -180,8 +177,7 @@ void BaseCollectionsAssembler::AddConstructorEntriesFromFastJSArray(
     // elements, a fast loop is used.  This assumes that adding an element
     // to the collection does not call user code that could mutate the elements
     // or collection.
-    BuildFastLoop<IntPtrT>(var_current_index, IntPtrConstant(0), length,
-                           set_entry, 1, LoopUnrollingMode::kNo,
+    BuildFastLoop<IntPtrT>(IntPtrConstant(0), length, set_entry, 1,
                            IndexAdvanceMode::kPost);
     Goto(&exit);
   }
@@ -202,8 +198,7 @@ void BaseCollectionsAssembler::AddConstructorEntriesFromFastJSArray(
             elements, UncheckedCast<IntPtrT>(index));
         AddConstructorEntry(variant, context, collection, add_func, entry);
       };
-      BuildFastLoop<IntPtrT>(var_current_index, IntPtrConstant(0), length,
-                             set_entry, 1, LoopUnrollingMode::kNo,
+      BuildFastLoop<IntPtrT>(IntPtrConstant(0), length, set_entry, 1,
                              IndexAdvanceMode::kPost);
       Goto(&exit);
     }
