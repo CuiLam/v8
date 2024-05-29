@@ -185,7 +185,7 @@ MaybeHandle<ReturnType> TemplateInfo::ProbeInstantiationsCache(
   }
 
   if (serial_number < TemplateInfo::kFastTemplateInstantiationsCacheSize) {
-    Tagged<FixedArray> fast_cache =
+    FixedArray fast_cache =
         native_context->fast_template_instantiations_cache();
     Handle<Object> object{fast_cache->get(serial_number), isolate};
     if (IsTheHole(*object, isolate)) {
@@ -195,7 +195,7 @@ MaybeHandle<ReturnType> TemplateInfo::ProbeInstantiationsCache(
   }
   if (caching_mode == CachingMode::kUnlimited ||
       (serial_number < TemplateInfo::kSlowTemplateInstantiationsCacheSize)) {
-    Tagged<SimpleNumberDictionary> slow_cache =
+    SimpleNumberDictionary slow_cache =
         native_context->slow_template_instantiations_cache();
     InternalIndex entry = slow_cache->FindEntry(isolate, serial_number);
     if (entry.is_found()) {
@@ -253,7 +253,7 @@ void TemplateInfo::UncacheTemplateInstantiation(
   if (serial_number < 0) return;
 
   if (serial_number < TemplateInfo::kFastTemplateInstantiationsCacheSize) {
-    Tagged<FixedArray> fast_cache =
+    FixedArray fast_cache =
         native_context->fast_template_instantiations_cache();
     DCHECK(!IsUndefined(fast_cache->get(serial_number), isolate));
     fast_cache->set(serial_number, ReadOnlyRoots{isolate}.the_hole_value(),
