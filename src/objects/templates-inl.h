@@ -187,7 +187,7 @@ MaybeHandle<ReturnType> TemplateInfo::ProbeInstantiationsCache(
   if (serial_number < TemplateInfo::kFastTemplateInstantiationsCacheSize) {
     FixedArray fast_cache =
         native_context->fast_template_instantiations_cache();
-    Handle<Object> object{fast_cache->get(serial_number), isolate};
+    Handle<Object> object{fast_cache.get(serial_number), isolate};
     if (IsTheHole(*object, isolate)) {
       return {};
     }
@@ -256,7 +256,7 @@ void TemplateInfo::UncacheTemplateInstantiation(
     FixedArray fast_cache =
         native_context->fast_template_instantiations_cache();
     DCHECK(!IsUndefined(fast_cache->get(serial_number), isolate));
-    fast_cache->set(serial_number, ReadOnlyRoots{isolate}.the_hole_value(),
+    fast_cache.set(serial_number, ReadOnlyRoots{isolate}.the_hole_value(),
                     SKIP_WRITE_BARRIER);
     data->set_serial_number(TemplateInfo::kUncached);
   } else if (caching_mode == CachingMode::kUnlimited ||
