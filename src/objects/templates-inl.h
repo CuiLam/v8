@@ -188,7 +188,7 @@ MaybeHandle<ReturnType> TemplateInfo::ProbeInstantiationsCache(
     FixedArray fast_cache =
         native_context->fast_template_instantiations_cache();
     Handle<Object> object{fast_cache.get(serial_number), isolate};
-    if (object.IsTheHole(isolate)) {
+    if ((*object).IsTheHole(isolate)) {
       return {};
     }
     return Handle<ReturnType>::cast(object);
