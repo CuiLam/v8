@@ -197,9 +197,9 @@ MaybeHandle<ReturnType> TemplateInfo::ProbeInstantiationsCache(
       (serial_number < TemplateInfo::kSlowTemplateInstantiationsCacheSize)) {
     SimpleNumberDictionary slow_cache =
         native_context->slow_template_instantiations_cache();
-    InternalIndex entry = slow_cache->FindEntry(isolate, serial_number);
+    InternalIndex entry = slow_cache.FindEntry(isolate, serial_number);
     if (entry.is_found()) {
-      return handle(ReturnType::cast(slow_cache->ValueAt(entry)), isolate);
+      return handle(ReturnType::cast(slow_cache.ValueAt(entry)), isolate);
     }
   }
   return {};
