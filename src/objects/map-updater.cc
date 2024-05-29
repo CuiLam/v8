@@ -1036,7 +1036,7 @@ MapUpdater::State MapUpdater::ConstructNewMap() {
               .enum_cache()
               .keys()
               .length() > 0 ||
-      old_descriptors_.enum_cache().keys().length() > 0;
+      old_descriptors_->enum_cache().keys().length() > 0;
 
   // Deprecated part of the transition tree is no longer reachable, so replace
   // current instance descriptors in the "survived" part of the tree with
