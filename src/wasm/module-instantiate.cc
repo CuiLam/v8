@@ -1756,7 +1756,7 @@ bool InstanceBuilder::AllocateMemory() {
 
   int max_mem32_pages = static_cast<int>(wasm::max_mem32_pages());
   auto memory_bit = module_->is_memory64 ? "memoryIs64-" : "memoryIs32-";
-  auto arch;
+  auto arch = "";
 #ifdef V8_TARGET_ARCH_32_BIT
   arch = "V8_TARGET_ARCH_32_BIT";
 #else
