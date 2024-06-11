@@ -1754,20 +1754,21 @@ bool InstanceBuilder::AllocateMemory() {
   auto mem_type = module_->is_memory64 ? WasmMemoryFlag::kWasmMemory64
                                        : WasmMemoryFlag::kWasmMemory32;
 
-  int max_mem32_pages = static_cast<int>(wasm::max_mem32_pages();
+  int max_mem32_pages = static_cast<int>(wasm::max_mem32_pages());
   auto arch = module_->is_memory64 ? "memoryIs64-" : "memoryIs32-";
-  #ifdef V8_TARGET_ARCH_32_BIT
-    arch += "V8_TARGET_ARCH_32_BIT";
-  #else
-    arch += "else";
-  #endif
-    auto sharedString = (module_->has_shared_memory && enabled_.has_threads())
-        ? "is shared" : "not shared";
+#ifdef V8_TARGET_ARCH_32_BIT
+  arch += "V8_TARGET_ARCH_32_BIT";
+#else
+  arch += "else";
+#endif
+  auto sharedString = (module_->has_shared_memory && enabled_.has_threads())
+                          ? "is shared"
+                          : "not shared";
   if (!WasmMemoryObject::New(isolate_, initial_pages, maximum_pages, shared,
                              mem_type)
            .ToHandle(&memory_object_)) {
     thrower_->RangeError(
-        "Out of memory: 1Cannot allocate Wasm memory for new instance, initial_pages:%d, maximum_pages:%d, wasm::kWasmPageSize:%d, max_mem32_pages:%d, arch:%s", initial_pages, maximum_pages, wasm::kWasmPageSize, max_mem32_pages, arch);
+        "Out of memory: 1Cannot allocate Wasm memory for new instance, initial_pages:%d, maximum_pages:%d, wasm::kWasmPageSize:%d, max_mem32_pages:%d, arch:%s, sharedString:%s", initial_pages, maximum_pages, wasm::kWasmPageSize, max_mem32_pages, arch, sharedString);
     return false;
   }
   memory_buffer_ =
