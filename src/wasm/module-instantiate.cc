@@ -1766,15 +1766,15 @@ bool InstanceBuilder::AllocateMemory() {
   if (!WasmMemoryObject::New(isolate_, initial_pages, maximum_pages, shared,
                              mem_type)
            .ToHandle(&memory_object_)) {
-    thrower_->RangeError(
-        "Out of memory: Cannot allocate Wasm memory for new instance"
-        + ", initial_pages_string:" + std::to_string(initial_pages)
-        + ", maximum_pages:" + std::to_string(maximum_pages)
-        + ", wasmPageSize: " + wasmPageSize
-        + ", max_mem32_pages: " + std::to_string(static_cast<int>(wasm::max_mem32_pages()))
-        + ", test1: " + test1
-        + ", test2: " + test2
-        + ", sharedString: " + sharedString);
+    const char * aa = "Out of memory: Cannot allocate Wasm memory for new instance"
+              + ", initial_pages_string:" + std::to_string(initial_pages)
+              + ", maximum_pages:" + std::to_string(maximum_pages)
+              + ", wasmPageSize: " + wasmPageSize
+              + ", max_mem32_pages: " + std::to_string(static_cast<int>(wasm::max_mem32_pages()))
+              + ", test1: " + test1
+              + ", test2: " + test2
+              + ", sharedString: " + sharedString;
+    thrower_->RangeError(aa);
     return false;
   }
   memory_buffer_ =
