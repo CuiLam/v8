@@ -1763,7 +1763,7 @@ bool InstanceBuilder::AllocateMemory() {
   test2 = "else";
 #endif
   auto sharedString = (module_->has_shared_memory && enabled_.has_threads())
-      ? "is shared" : "not shared"
+      ? "is shared" : "not shared";
   if (!WasmMemoryObject::New(isolate_, initial_pages, maximum_pages, shared,
                              mem_type)
            .ToHandle(&memory_object_)) {
