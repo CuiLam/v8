@@ -49,7 +49,7 @@ let kSig_v_w = makeSig([kWasmStringRef], []);
   } catch (e) {
     // 32-bit builds don't have enough virtual memory, that's OK.
     assertInstanceof(e, RangeError);
-    assertMatches(/Cannot allocate Wasm memory for new instance/, e.message,
+    assertMatches(/Cannot allocate Wasm memory for new instance22/, e.message,
       'Error message');
     return;
   }

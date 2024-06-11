@@ -1770,7 +1770,7 @@ bool InstanceBuilder::AllocateMemory() {
 //        initial_pages, maximum_pages, wasm::kWasmPageSize, static_cast<int>(wasm::max_mem32_pages()),
 //        test1, test2, sharedString);
     thrower_->RangeError(
-        "CuilamTest Out of memory: Cannot allocate Wasm memory for new instance");
+        "CuilamTest Out of memory: Cannot allocate Wasm memory for new instance11");
     return false;
   }
   memory_buffer_ =
