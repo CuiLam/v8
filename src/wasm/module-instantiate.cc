@@ -1753,8 +1753,8 @@ bool InstanceBuilder::AllocateMemory() {
 
   auto mem_type = module_->is_memory64 ? WasmMemoryFlag::kWasmMemory64
                                        : WasmMemoryFlag::kWasmMemory32;
-  std::string initial_pages_string = initial_pages;
-  std::string wasmPageSize = wasm::kWasmPageSize;
+  auto initial_pages_string = std::to_string(initial_pages).c_str();
+  auto wasmPageSize = std::to_string(wasm::kWasmPageSize).c_str();
   auto test1 = module_->is_memory64 ? "is64" : "is32";
   auto test2 = "";
 #ifdef V8_TARGET_ARCH_32_BIT
