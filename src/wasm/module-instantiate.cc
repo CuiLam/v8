@@ -1753,24 +1753,11 @@ bool InstanceBuilder::AllocateMemory() {
 
   auto mem_type = module_->is_memory64 ? WasmMemoryFlag::kWasmMemory64
                                        : WasmMemoryFlag::kWasmMemory32;
-  auto test1 = module_->is_memory64 ? "is64" : "is32";
-  auto test2 = "";
-#ifdef V8_TARGET_ARCH_32_BIT
-  test2 = "V8_TARGET_ARCH_32_BIT";
-#else
-  test2 = "else";
-#endif
-  auto sharedString = (module_->has_shared_memory && enabled_.has_threads())
-      ? "is shared" : "not shared";
   if (!WasmMemoryObject::New(isolate_, initial_pages, maximum_pages, shared,
                              mem_type)
            .ToHandle(&memory_object_)) {
-//    thrower_->RangeError(
-//        "Out of memory: Cannot allocate Wasm memory for new instance, initial_pages_string:%d, wasmPageSize:%d, max_mem32_pages:%d, test1: %s, test2: %s, sharedString: %s",
-//        initial_pages, maximum_pages, wasm::kWasmPageSize, static_cast<int>(wasm::max_mem32_pages()),
-//        test1, test2, sharedString);
     thrower_->RangeError(
-        "CuilamTest Out of memory: Cannot allocate Wasm memory for new instance11");
+        "Out of memory: 111Cannot allocate Wasm memory for new instance");
     return false;
   }
   memory_buffer_ =
