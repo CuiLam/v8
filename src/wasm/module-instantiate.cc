@@ -1753,11 +1753,13 @@ bool InstanceBuilder::AllocateMemory() {
 
   auto mem_type = module_->is_memory64 ? WasmMemoryFlag::kWasmMemory64
                                        : WasmMemoryFlag::kWasmMemory32;
+  auto test1 = module_->is_memory64 ? "is64" : "is32";
+  auto test2 = initial_pages->is_shared() ? "isShared" : "no shared";
   if (!WasmMemoryObject::New(isolate_, initial_pages, maximum_pages, shared,
                              mem_type)
            .ToHandle(&memory_object_)) {
     thrower_->RangeError(
-        "Out of memory: Cannot allocate Wasm memory for new instance, module_->is_memory64:" + module_->is_memory64 + ", buffer is shared:" + initial_pages->is_shared());
+        "Out of memory: Cannot allocate Wasm memory for new instance, " + test1 + ", "+ test2);
     return false;
   }
   memory_buffer_ =
