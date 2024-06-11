@@ -1765,10 +1765,12 @@ bool InstanceBuilder::AllocateMemory() {
   if (!WasmMemoryObject::New(isolate_, initial_pages, maximum_pages, shared,
                              mem_type)
            .ToHandle(&memory_object_)) {
+//    thrower_->RangeError(
+//        "Out of memory: Cannot allocate Wasm memory for new instance, initial_pages_string:%d, wasmPageSize:%d, max_mem32_pages:%d, test1: %s, test2: %s, sharedString: %s",
+//        initial_pages, maximum_pages, wasm::kWasmPageSize, static_cast<int>(wasm::max_mem32_pages()),
+//        test1, test2, sharedString);
     thrower_->RangeError(
-        "Out of memory: Cannot allocate Wasm memory for new instance, initial_pages_string:%d, wasmPageSize:%d, max_mem32_pages:%d, test1: %s, test2: %s, sharedString: %s",
-        initial_pages, maximum_pages, wasm::kWasmPageSize, static_cast<int>(wasm::max_mem32_pages()),
-        test1, test2, sharedString);
+        "CuilamTest Out of memory: Cannot allocate Wasm memory for new instance");
     return false;
   }
   memory_buffer_ =
