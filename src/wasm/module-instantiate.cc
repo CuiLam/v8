@@ -1766,13 +1766,7 @@ bool InstanceBuilder::AllocateMemory() {
                              mem_type)
            .ToHandle(&memory_object_)) {
     thrower_->RangeError(
-        "Out of memory: Cannot allocate Wasm memory for new instance"
-        + ", initial_pages_string:%d"
-        + ", wasmPageSize:%d"
-        + ", max_mem32_pages:%d"
-        + ", test1: %s"
-        + ", test2: %s"
-        + ", sharedString: %s",
+        "Out of memory: Cannot allocate Wasm memory for new instance, initial_pages_string:%d, wasmPageSize:%d, max_mem32_pages:%d, test1: %s, test2: %s, sharedString: %s",
         initial_pages, maximum_pages, wasm::kWasmPageSize, static_cast<int>(wasm::max_mem32_pages()),
         test1, test2, sharedString);
     return false;
