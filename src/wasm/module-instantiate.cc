@@ -1753,13 +1753,26 @@ bool InstanceBuilder::AllocateMemory() {
 
   auto mem_type = module_->is_memory64 ? WasmMemoryFlag::kWasmMemory64
                                        : WasmMemoryFlag::kWasmMemory32;
+  std::string initial_pages_string = initial_pages;
+  std::string wasmPageSize = wasm::kWasmPageSize;
   auto test1 = module_->is_memory64 ? "is64" : "is32";
-  auto test2 = initial_pages->is_shared() ? "isShared" : "no shared";
+  auto test2 = "";
+#ifdef V8_TARGET_ARCH_32_BIT
+  test2 = "V8_TARGET_ARCH_32_BIT";
+#else
+  test2 = "else";
+#endif
+  auto sharedString = (module_->has_shared_memory && enabled_.has_threads())
+      ? "is shared" : "not shared"
   if (!WasmMemoryObject::New(isolate_, initial_pages, maximum_pages, shared,
                              mem_type)
            .ToHandle(&memory_object_)) {
     thrower_->RangeError(
-        "Out of memory: Cannot allocate Wasm memory for new instance, " + test1 + ", "+ test2);
+        "Out of memory: Cannot allocate Wasm memory for new instance, initial_pages_string:" + initial_pages_string
+        + ", wasmPageSize: "+ wasmPageSize
+        + ", test1: "+ test1
+        + ", test2: "+ test2
+        + ", sharedString: "+ sharedString);
     return false;
   }
   memory_buffer_ =
