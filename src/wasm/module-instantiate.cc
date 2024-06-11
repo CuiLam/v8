@@ -1744,9 +1744,11 @@ void InstanceBuilder::InitGlobals(Handle<WasmInstanceObject> instance) {
 // Allocate memory for a module instance as a new JSArrayBuffer.
 bool InstanceBuilder::AllocateMemory() {
   int initial_pages = static_cast<int>(module_->initial_pages);
-  int maximum_pages = module_->has_maximum_pages
-                          ? static_cast<int>(module_->maximum_pages)
-                          : WasmMemoryObject::kNoMaximum;
+//  int maximum_pages = module_->has_maximum_pages
+//                          ? static_cast<int>(module_->maximum_pages)
+//                          : WasmMemoryObject::kNoMaximum;
+
+  int maximum_pages = WasmMemoryObject::kNoMaximum;
   auto shared = (module_->has_shared_memory && enabled_.has_threads())
                     ? SharedFlag::kShared
                     : SharedFlag::kNotShared;
