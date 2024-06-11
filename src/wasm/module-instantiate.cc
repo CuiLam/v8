@@ -1753,7 +1753,6 @@ bool InstanceBuilder::AllocateMemory() {
 
   auto mem_type = module_->is_memory64 ? WasmMemoryFlag::kWasmMemory64
                                        : WasmMemoryFlag::kWasmMemory32;
-  auto wasmPageSize = std::to_string(wasm::kWasmPageSize).c_str();
   auto test1 = module_->is_memory64 ? "is64" : "is32";
   auto test2 = "";
 #ifdef V8_TARGET_ARCH_32_BIT
@@ -1766,15 +1765,16 @@ bool InstanceBuilder::AllocateMemory() {
   if (!WasmMemoryObject::New(isolate_, initial_pages, maximum_pages, shared,
                              mem_type)
            .ToHandle(&memory_object_)) {
-    const char * aa = "Out of memory: Cannot allocate Wasm memory for new instance"
-              + ", initial_pages_string:" + std::to_string(initial_pages)
-              + ", maximum_pages:" + std::to_string(maximum_pages)
-              + ", wasmPageSize: " + wasmPageSize
-              + ", max_mem32_pages: " + std::to_string(static_cast<int>(wasm::max_mem32_pages()))
-              + ", test1: " + test1
-              + ", test2: " + test2
-              + ", sharedString: " + sharedString;
-    thrower_->RangeError(aa);
+    thrower_->RangeError(
+        "Out of memory: Cannot allocate Wasm memory for new instance"
+        + ", initial_pages_string:%d"
+        + ", wasmPageSize:%d"
+        + ", max_mem32_pages:%d"
+        + ", test1: %s"
+        + ", test2: %s"
+        + ", sharedString: %s",
+        initial_pages, maximum_pages, wasm::kWasmPageSize, static_cast<int>(wasm::max_mem32_pages()),
+        test1, test2, sharedString);
     return false;
   }
   memory_buffer_ =
