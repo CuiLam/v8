@@ -1757,7 +1757,7 @@ bool InstanceBuilder::AllocateMemory() {
                              mem_type)
            .ToHandle(&memory_object_)) {
     thrower_->RangeError(
-        "Out of memory: Cannot allocate Wasm memory for new instance");
+        "Out of memory: Cannot allocate Wasm memory for new instance, module_->is_memory64:" + module_->is_memory64 + ", buffer is shared:" + initial_pages->is_shared());
     return false;
   }
   memory_buffer_ =
