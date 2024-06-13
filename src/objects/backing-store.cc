@@ -78,6 +78,7 @@ base::AddressRegion GetReservedRegion(bool has_guard_regions,
                              byte_capacity);
 }
 
+// 1,073,741,824
 size_t GetReservationSize(bool has_guard_regions, size_t byte_capacity) {
 #if V8_TARGET_ARCH_64_BIT && V8_ENABLE_WEBASSEMBLY
   if (has_guard_regions) {
@@ -322,6 +323,7 @@ void BackingStore::SetAllocatorFromIsolate(Isolate* isolate) {
 // max_byte_length: maximum_pages * wasm::kWasmPageSize
 // page_size: 65536
 // initial_pages: 12288
+// 12288 pages, 16384 max
 std::unique_ptr<BackingStore> BackingStore::TryAllocateAndPartiallyCommitMemory(
     Isolate* isolate, size_t byte_length, size_t max_byte_length,
     size_t page_size, size_t initial_pages, size_t maximum_pages,
@@ -363,13 +365,22 @@ std::unique_ptr<BackingStore> BackingStore::TryAllocateAndPartiallyCommitMemory(
     return false;
   };
 
+  // 1,073,741,824
   size_t byte_capacity = maximum_pages * page_size;
   size_t reservation_size = GetReservationSize(guards, byte_capacity);
+
+  TRACE_BS("BSw:AllocatePages byte_capacity: %zu, reservation_size: %zu, guards:%d\n", byte_capacity, reservation_size, guards);
 
   //--------------------------------------------------------------------------
   // Allocate pages (inaccessible by default).
   //--------------------------------------------------------------------------
   void* allocation_base = nullptr;
+  // GetProcessWideSandbox()->page_allocator()
+  // VirtualAddressSpacePageAllocator
+  // VirtualAddressSpace::AllocatePages
+  // reinterpret_cast<Address>(
+  //      OS::Allocate(reinterpret_cast<void*>(hint), size, alignment,
+  //                   static_cast<OS::MemoryPermission>(permissions)));
   PageAllocator* page_allocator = GetArrayBufferPageAllocator();
   auto allocate_pages = [&] {
     allocation_base = AllocatePages(page_allocator, nullptr, reservation_size,
