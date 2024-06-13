@@ -21,7 +21,7 @@
 
 #define TRACE_BS(...)                                      \
   do {                                                     \
-    if (v8_flags.trace_backing_store) PrintF(__VA_ARGS__); \
+    PrintF(__VA_ARGS__); \
   } while (false)
 
 namespace v8 {
@@ -314,6 +314,7 @@ void BackingStore::SetAllocatorFromIsolate(Isolate* isolate) {
   }
 }
 
+// initial_pages: 12288 maximum_pages:16384 shared:false wasm::kWasmPageSize:65536
 std::unique_ptr<BackingStore> BackingStore::TryAllocateAndPartiallyCommitMemory(
     Isolate* isolate, size_t byte_length, size_t max_byte_length,
     size_t page_size, size_t initial_pages, size_t maximum_pages,
@@ -433,6 +434,7 @@ std::unique_ptr<BackingStore> BackingStore::TryAllocateAndPartiallyCommitMemory(
 #if V8_ENABLE_WEBASSEMBLY
 // Allocate a backing store for a Wasm memory. Always use the page allocator
 // and add guard regions.
+// initial_pages: 12288 maximum_pages:16384 shared:false wasm::kWasmPageSize:65536
 std::unique_ptr<BackingStore> BackingStore::AllocateWasmMemory(
     Isolate* isolate, size_t initial_pages, size_t maximum_pages,
     WasmMemoryFlag wasm_memory, SharedFlag shared) {
