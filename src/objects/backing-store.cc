@@ -362,7 +362,7 @@ std::unique_ptr<BackingStore> BackingStore::TryAllocateAndPartiallyCommitMemory(
           MemoryPressureLevel::kCritical, true);
     }
     TRACE_BS("cuilamTest: gc retry return false\n");
-    return true;
+    return false;
   };
 
   // 1,073,741,824
