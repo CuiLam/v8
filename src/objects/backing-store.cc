@@ -276,6 +276,7 @@ std::unique_ptr<BackingStore> BackingStore::Allocate(
       return {};
     }
 #ifdef V8_ENABLE_SANDBOX
+    TRACE_BS("BS:alloc  V8_ENABLE_SANDBOX\n");
     // Check to catch use of a non-sandbox-compatible ArrayBufferAllocator.
     CHECK_WITH_MSG(GetProcessWideSandbox()->Contains(buffer_start),
                    "When the V8 Sandbox is enabled, ArrayBuffer backing stores "
