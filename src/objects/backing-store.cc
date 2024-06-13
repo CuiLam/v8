@@ -314,13 +314,21 @@ void BackingStore::SetAllocatorFromIsolate(Isolate* isolate) {
   }
 }
 
+// TryAllocateAndPartiallyCommitMemory(
+//        isolate, initial_pages * wasm::kWasmPageSize,
+//        maximum_pages * wasm::kWasmPageSize, wasm::kWasmPageSize, initial_pages, maximum_pages, wasm_memory, shared)
 // initial_pages: 12288 maximum_pages:16384 shared:false wasm::kWasmPageSize:65536
+// byte_length:initial_pages * wasm::kWasmPageSize =
+// max_byte_length: maximum_pages * wasm::kWasmPageSize
+// page_size: 65536
+// initial_pages: 12288
 std::unique_ptr<BackingStore> BackingStore::TryAllocateAndPartiallyCommitMemory(
     Isolate* isolate, size_t byte_length, size_t max_byte_length,
     size_t page_size, size_t initial_pages, size_t maximum_pages,
     WasmMemoryFlag wasm_memory, SharedFlag shared) {
   // Enforce engine limitation on the maximum number of pages.
   if (maximum_pages > std::numeric_limits<size_t>::max() / page_size) {
+    TRACE_BS("cuilamTest:limitation maximum_pages: %zu, limits_max: %zu, page_size: %zu\n", maximum_pages, std::numeric_limits<size_t>::max(), page_size);
     return nullptr;
   }
 
@@ -351,6 +359,7 @@ std::unique_ptr<BackingStore> BackingStore::TryAllocateAndPartiallyCommitMemory(
       isolate->heap()->MemoryPressureNotification(
           MemoryPressureLevel::kCritical, true);
     }
+    TRACE_BS("cuilamTest: gc retry return false\n");
     return false;
   };
 

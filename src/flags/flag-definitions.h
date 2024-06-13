@@ -1378,7 +1378,7 @@ DEFINE_GENERIC_IMPLICATION(
         v8::tracing::TracingCategoryObserver::ENABLED_BY_NATIVE))
 DEFINE_BOOL(track_retaining_path, false,
             "enable support for tracking retaining path")
-DEFINE_DEBUG_BOOL(trace_backing_store, false, "trace backing store events")
+DEFINE_DEBUG_BOOL(trace_backing_store, true, "trace backing store events")
 DEFINE_INT(gc_stats, 0, "Used by tracing internally to enable gc statistics")
 DEFINE_IMPLICATION(trace_gc_object_stats, track_gc_object_stats)
 DEFINE_GENERIC_IMPLICATION(
