@@ -6,7 +6,6 @@
 
 #include "src/init/v8.h"
 #include "src/utils/utils.h"
-#include "src/wasm/std-object-sizes.h"
 #include "src/wasm/wasm-engine.h"
 
 namespace v8 {
