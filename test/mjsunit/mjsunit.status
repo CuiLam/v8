@@ -1909,6 +1909,8 @@
   # Stack switching is only supported on x64/arm64.
   'wasm/stack-switching': [SKIP],
   'wasm/stack-switching-export': [SKIP],
+  'regress/wasm/regress-361123483': [SKIP],
+  'regress/wasm/regress-361717714': [SKIP]
 }],  # (arch != x64 and arch != arm64)
 
 ##############################################################################
