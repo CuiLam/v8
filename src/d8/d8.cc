@@ -5212,6 +5212,7 @@ bool ProcessMessages(
       ran_tasks = v8::platform::PumpMessageLoop(g_default_platform, isolate,
                                                 behavior());
       if (ran_tasks) MicrotasksScope::PerformCheckpoint(isolate);
+      if (isolate->IsExecutionTerminating()) return true;
 
       // In predictable mode we push all background tasks into the foreground
       // task queue of the {kProcessGlobalPredictablePlatformWorkerTaskQueue}
