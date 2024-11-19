@@ -1996,6 +1996,9 @@ void BytecodeGenerator::VisitSwitchStatement(SwitchStatement* stmt) {
   // Are we still using any if-else bytecodes to evaluate the switch?
   bool use_jumps = n_comp_cases != 0;
 
+  // Does the comparison for non-jump table jumps need an elision scope?
+  bool jump_comparison_needs_hole_check_elision_scope = false;
+
   SwitchBuilder switch_builder(builder(), block_coverage_builder_, stmt,
                                n_comp_cases, jump_table);
   ControlScopeForBreakable scope(this, stmt, &switch_builder);
@@ -2053,6 +2056,10 @@ void BytecodeGenerator::VisitSwitchStatement(SwitchStatement* stmt) {
                                          info.covered_cases);
 
     if (use_jumps) {
+      // When using a jump table, the first jump comparison is conditionally
+      // executed if the discriminant wasn't matched by anything in the jump
+      // table, and so needs its own elision scope.
+      jump_comparison_needs_hole_check_elision_scope = true;
       builder()->LoadAccumulatorWithRegister(r1);
     }
   }
@@ -2069,20 +2076,35 @@ void BytecodeGenerator::VisitSwitchStatement(SwitchStatement* stmt) {
                             : FeedbackSlot::Invalid();
     builder()->StoreAccumulatorInRegister(tag_holder);
 
-    for (int i = 0; i < clauses->length(); ++i) {
-      CaseClause* clause = clauses->at(i);
-      if (clause->is_default()) {
-        info.default_case = i;
-      } else if (!info.CaseExists(clause->label())) {
-        // Perform label comparison as if via '===' with tag.
-        VisitForAccumulatorValue(clause->label());
-        builder()->CompareOperation(Token::Value::EQ_STRICT, tag_holder,
-                                    feedback_index(slot));
+    {
+      // The comparisons linearly dominate, so no need to open a new elision
+      // scope for each one.
+//      std::optional<HoleCheckElisionScope> elider;
+//      bool first_jump_emitted = false;
+      for (int i = 0; i < clauses->length(); ++i) {
+        CaseClause* clause = clauses->at(i);
+        if (clause->is_default()) {
+          info.default_case = i;
+        } else if (!info.CaseExists(clause->label())) {
+          // The first non-default label is
+          // unconditionally executed, so we only need to emplace it before
+          // visiting the second non-default label.
+//          if (first_jump_emitted) elider.emplace(this);
+
+          // Perform label comparison as if via '===' with tag.
+          VisitForAccumulatorValue(clause->label());
+          builder()->CompareOperation(Token::kEqStrict, tag_holder,
+                                      feedback_index(slot));
+//          builder()->CompareOperation(Token::Value::EQ_STRICT, tag_holder,
+//                                      feedback_index(slot));
 #ifdef DEBUG
         case_ctr_checker[i] = case_compare_ctr;
 #endif
-        switch_builder.JumpToCaseIfTrue(ToBooleanMode::kAlreadyBoolean,
-                                        case_compare_ctr++);
+          switch_builder.JumpToCaseIfTrue(ToBooleanMode::kAlreadyBoolean,
+                                          case_compare_ctr++);
+//          first_jump_emitted = true;
+          jump_comparison_needs_hole_check_elision_scope = true;
+        }
       }
     }
     register_allocator()->ReleaseRegister(tag_holder);
