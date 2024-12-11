@@ -59,7 +59,7 @@ bool JSFinalizationRegistry::Unregister(
   // key. Each WeakCell will be in the "active_cells" or "cleared_cells" list of
   // its FinalizationRegistry; remove it from there.
   return finalization_registry->RemoveUnregisterToken(
-      *unregister_token, isolate, kRemoveMatchedCellsFromRegistry,
+      JSReceiver::cast(*unregister_token), isolate, kRemoveMatchedCellsFromRegistry,
       [](HeapObject, ObjectSlot, Object) {});
 }
 
