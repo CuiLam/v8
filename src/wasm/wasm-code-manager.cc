@@ -2498,49 +2498,6 @@ NamesProvider* NativeModule::GetNamesProvider() {
   return names_provider_.get();
 }
 
-size_t NativeModule::EstimateCurrentMemoryConsumption() const {
-  UPDATE_WHEN_CLASS_CHANGES(NativeModule, 520);
-  size_t result = sizeof(NativeModule);
-  result += module_->EstimateCurrentMemoryConsumption();
-
-  std::shared_ptr<base::OwnedVector<const uint8_t>> wire_bytes =
-      std::atomic_load(&wire_bytes_);
-  size_t wire_bytes_size = wire_bytes ? wire_bytes->size() : 0;
-  result += wire_bytes_size;
-
-  if (source_map_) {
-    result += source_map_->EstimateCurrentMemoryConsumption();
-  }
-  result += compilation_state_->EstimateCurrentMemoryConsumption();
-  result += import_wrapper_cache_.EstimateCurrentMemoryConsumption();
-  // For {tiering_budgets_}.
-  result += module_->num_declared_functions * sizeof(uint32_t);
-
-  {
-    base::RecursiveMutexGuard lock(&allocation_mutex_);
-    result += ContentSize(owned_code_);
-    result += ContentSize(new_owned_code_);
-    // For {code_table_}.
-    result += module_->num_declared_functions * sizeof(void*);
-    result += ContentSize(code_space_data_);
-    if (debug_info_) {
-      result += debug_info_->EstimateCurrentMemoryConsumption();
-    }
-    if (names_provider_) {
-      result += names_provider_->EstimateCurrentMemoryConsumption();
-    }
-    if (cached_code_) {
-      result += ContentSize(*cached_code_.get());
-    }
-  }
-
-  if (v8_flags.trace_wasm_offheap_memory) {
-    PrintF("NativeModule wire bytes: %zu\n", wire_bytes_size);
-    PrintF("NativeModule: %zu\n", result);
-  }
-  return result;
-}
-
 void WasmCodeManager::FreeNativeModule(
     base::Vector<VirtualMemory> owned_code_space, size_t committed_size) {
   base::MutexGuard lock(&native_modules_mutex_);
