@@ -1967,6 +1967,14 @@ Object Isolate::UnwindAndFindHandler() {
     return exception;
   };
 
+#if V8_ENABLE_WEBASSEMBLY
+  Tagged<Object> maybe_continuation = root(RootIndex::kActiveContinuation);
+  Tagged<WasmContinuationObject> continuation;
+  if (!IsUndefined(maybe_continuation)) {
+    continuation = WasmContinuationObject::cast(maybe_continuation);
+  }
+#endif
+
   // Special handling of termination exceptions, uncatchable by JavaScript and
   // Wasm code, we unwind the handlers until the top ENTRY handler is found.
   bool catchable_by_js = is_catchable_by_javascript(exception);
