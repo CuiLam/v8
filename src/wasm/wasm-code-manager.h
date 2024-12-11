@@ -887,6 +887,8 @@ class V8_EXPORT_PRIVATE NativeModule final {
   // Get or create the NamesProvider. Requires {HasWireBytes()}.
   NamesProvider* GetNamesProvider();
 
+  size_t EstimateCurrentMemoryConsumption();
+
   uint32_t* tiering_budget_array() { return tiering_budgets_.get(); }
 
   Counters* counters() const { return code_allocator_.counters(); }
