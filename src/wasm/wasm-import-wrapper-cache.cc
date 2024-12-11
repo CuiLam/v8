@@ -17,18 +17,6 @@ WasmCode*& WasmImportWrapperCache::ModificationScope::operator[](
   return cache_->entry_map_[key];
 }
 
-void WasmImportWrapperCache::clear() {
-  if (entry_map_.empty()) return;
-  std::vector<WasmCode*> ptrs;
-  ptrs.reserve(entry_map_.size());
-  for (auto& [key, code] : entry_map_) {
-    if (code) ptrs.push_back(code);
-  }
-  entry_map_.clear();
-  if (ptrs.empty()) return;
-  WasmCode::DecrementRefCount(base::VectorOf(ptrs));
-}
-
 WasmCode*& WasmImportWrapperCache::operator[](
     const WasmImportWrapperCache::CacheKey& key) {
   return entry_map_[key];
@@ -58,14 +46,15 @@ WasmCode* WasmImportWrapperCache::MaybeGet(compiler::WasmImportCallKind kind,
   return it->second;
 }
 
-WasmImportWrapperCache::~WasmImportWrapperCache() {
+void WasmImportWrapperCache::clear() {
+  if (entry_map_.empty()) return;
   std::vector<WasmCode*> ptrs;
   ptrs.reserve(entry_map_.size());
-  for (auto& e : entry_map_) {
-    if (e.second) {
-      ptrs.push_back(e.second);
-    }
+  for (auto& [key, code] : entry_map_) {
+    if (code) ptrs.push_back(code);
   }
+  entry_map_.clear();
+  if (ptrs.empty()) return;
   WasmCode::DecrementRefCount(base::VectorOf(ptrs));
 }
 
