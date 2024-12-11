@@ -982,7 +982,8 @@ NativeModule::NativeModule(const WasmFeatures& enabled,
           GetWasmEngine()->GetBarrierForBackgroundCompile()->TryLock()),
       code_allocator_(async_counters),
       enabled_features_(enabled),
-      module_(std::move(module)) {
+      module_(std::move(module)),
+      bounds_checks_(GetBoundsChecks(module_.get())) {
   DCHECK(engine_scope_);
   // We receive a pointer to an empty {std::shared_ptr}, and install ourselve
   // there.
