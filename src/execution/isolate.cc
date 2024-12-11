@@ -1022,7 +1022,7 @@ void CaptureAsyncStackTrace(Isolate* isolate, Handle<JSPromise> promise,
                                     isolate);
       builder->AppendPromiseCombinatorFrame(function, combinator);
 
-      if (IsNativeContext(*context)) {
+      if (context->IsNativeContext()) {
         // NativeContext is used as a marker that the closure was already
         // called. We can't access the reject element context any more.
         return;
@@ -1047,7 +1047,7 @@ void CaptureAsyncStackTrace(Isolate* isolate, Handle<JSPromise> promise,
           context->native_context().promise_all_settled(), isolate);
       builder->AppendPromiseCombinatorFrame(function, combinator);
 
-      if (IsNativeContext(*context)) {
+      if (context->IsNativeContext()) {
         // NativeContext is used as a marker that the closure was already
         // called. We can't access the reject element context any more.
         return;
@@ -1071,7 +1071,7 @@ void CaptureAsyncStackTrace(Isolate* isolate, Handle<JSPromise> promise,
                                     isolate);
       builder->AppendPromiseCombinatorFrame(function, combinator);
 
-      if (IsNativeContext(*context)) {
+      if (context->IsNativeContext()) {
         // NativeContext is used as a marker that the closure was already
         // called. We can't access the reject element context any more.
         return;
