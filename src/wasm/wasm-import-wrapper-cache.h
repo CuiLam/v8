@@ -88,8 +88,6 @@ class WasmImportWrapperCache {
                      uint32_t canonical_type_index, int expected_arity,
                      Suspend suspend) const;
 
-  size_t EstimateCurrentMemoryConsumption() const;
-
  private:
   mutable base::Mutex mutex_;
   std::unordered_map<CacheKey, WasmCode*, CacheKeyHash> entry_map_;

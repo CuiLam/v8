@@ -58,11 +58,6 @@ void WasmImportWrapperCache::clear() {
   WasmCode::DecrementRefCount(base::VectorOf(ptrs));
 }
 
-size_t WasmImportWrapperCache::EstimateCurrentMemoryConsumption() const {
-  UPDATE_WHEN_CLASS_CHANGES(WasmImportWrapperCache, 88);
-  return sizeof(WasmImportWrapperCache) + ContentSize(entry_map_);
-}
-
 }  // namespace wasm
 }  // namespace internal
 }  // namespace v8
