@@ -102,9 +102,9 @@ class V8_EXPORT StackFrame {
    */
   bool IsUserJavaScript() const;
 
-  static void TestDCheck();
+  void TestDCheck() const;
 
-  static void TestCheck();
+  void TestCheck() const;
 };
 
 /**
