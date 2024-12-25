@@ -3330,11 +3330,11 @@ bool StackFrame::IsUserJavaScript() const {
   return Utils::OpenHandle(this)->script().IsUserJavaScript();
 }
 
-void StackFrame::TestDCheck() const {
+static void StackFrame::TestDCheck() const {
   DCHECK(false);
 }
 
-void StackFrame::TestCheck() const {
+static void StackFrame::TestCheck() const {
   CHECK(false);
 }
 
