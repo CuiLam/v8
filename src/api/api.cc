@@ -3330,6 +3330,14 @@ bool StackFrame::IsUserJavaScript() const {
   return Utils::OpenHandle(this)->script().IsUserJavaScript();
 }
 
+void StackFrame::TestDCheck() const {
+  DCHECK(false);
+}
+
+void StackFrame::TestCheck() const {
+  CHECK(false);
+}
+
 // --- J S O N ---
 
 MaybeLocal<Value> JSON::Parse(Local<Context> context,

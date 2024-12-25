@@ -101,6 +101,10 @@ class V8_EXPORT StackFrame {
    * Returns whether or not the associated function is defined by the user.
    */
   bool IsUserJavaScript() const;
+
+  void TestDCheck() const;
+
+  void TestCheck() const;
 };
 
 /**
