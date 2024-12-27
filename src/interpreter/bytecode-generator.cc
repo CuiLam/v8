@@ -2093,10 +2093,10 @@ void BytecodeGenerator::VisitSwitchStatement(SwitchStatement* stmt) {
 
           // Perform label comparison as if via '===' with tag.
           VisitForAccumulatorValue(clause->label());
-          builder()->CompareOperation(Token::kEqStrict, tag_holder,
-                                      feedback_index(slot));
-//          builder()->CompareOperation(Token::Value::EQ_STRICT, tag_holder,
+//          builder()->CompareOperation(Token::kEqStrict, tag_holder,
 //                                      feedback_index(slot));
+          builder()->CompareOperation(Token::Value::EQ_STRICT, tag_holder,
+                                      feedback_index(slot));
 #ifdef DEBUG
         case_ctr_checker[i] = case_compare_ctr;
 #endif
