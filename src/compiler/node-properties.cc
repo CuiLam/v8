@@ -406,6 +406,9 @@ NodeProperties::InferMapsResult NodeProperties::InferMapsUnsafe(
               ToRefSet(broker, CheckMapsParametersOf(effect->op()).maps());
           return result;
         }
+        // `receiver` and `object` might alias, so
+        // TransitionElementsKindOrCheckMaps might change receiver's map.
+        result = kUnreliableMaps;
         break;
       }
       case IrOpcode::kJSCreate: {
