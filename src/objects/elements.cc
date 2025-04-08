@@ -2175,6 +2175,7 @@ class FastElementsAccessor : public ElementsAccessorBase<Subclass, KindTraits> {
     BackingStore backing_store = BackingStore::cast(elements);
     DCHECK(length <= std::numeric_limits<int>::max());
     int length_int = static_cast<int>(length);
+    int capacity_int = static_cast<int>(backing_store->length());
     if (IsSmiElementsKind(KindTraits::Kind)) {
       HandleScope scope(isolate);
       for (int i = 0; i < length_int; i++) {
@@ -2189,6 +2190,12 @@ class FastElementsAccessor : public ElementsAccessorBase<Subclass, KindTraits> {
       }
     } else {
       DCHECK(IsHoleyElementsKind(KindTraits::Kind));
+    }
+    // Any values in the backing store outside of the length have to be holes,
+    // even if it is PACKED, in case it is extended (and made HOLEY as part of
+    // that extension).
+    for (int i = length_int; i < capacity_int; i++) {
+      DCHECK(backing_store->is_the_hole(isolate, i));
     }
 #endif
 #endif

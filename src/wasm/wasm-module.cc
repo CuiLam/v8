@@ -448,6 +448,12 @@ Handle<JSArray> GetImports(Isolate* isolate,
     storage->set(index, *entry);
   }
 
+  array_object->set_length(Smi::FromInt(cursor));
+  // Make sure that values after the cursor are holes.
+  for (int index = cursor; index < num_imports; ++index) {
+    storage->set_the_hole(isolate, cursor++);
+  }
+  JSObject::ValidateElements(*array_object);
   return array_object;
 }
 
@@ -472,7 +478,7 @@ Handle<JSArray> GetExports(Isolate* isolate,
   Handle<JSArray> array_object = factory->NewJSArray(PACKED_ELEMENTS, 0, 0);
   Handle<FixedArray> storage = factory->NewFixedArray(num_exports);
   JSArray::SetContent(array_object, storage);
-  array_object->set_length(Smi::FromInt(num_exports));
+  DCHECK_EQ(array_object->length(), Smi::FromInt(num_exports));
 
   Handle<JSFunction> object_function =
       Handle<JSFunction>(isolate->native_context()->object_function(), isolate);
@@ -544,6 +550,7 @@ Handle<JSArray> GetExports(Isolate* isolate,
     storage->set(index, *entry);
   }
 
+  JSObject::ValidateElements(*array_object);
   return array_object;
 }
 
@@ -588,12 +595,13 @@ Handle<JSArray> GetCustomSections(Isolate* isolate,
   Handle<JSArray> array_object = factory->NewJSArray(PACKED_ELEMENTS, 0, 0);
   Handle<FixedArray> storage = factory->NewFixedArray(num_custom_sections);
   JSArray::SetContent(array_object, storage);
-  array_object->set_length(Smi::FromInt(num_custom_sections));
+  DCHECK_EQ(array_object->length(), Smi::FromInt(num_custom_sections));
 
   for (int i = 0; i < num_custom_sections; i++) {
     storage->set(i, *matching_sections[i]);
   }
 
+  JSObject::ValidateElements(*array_object);
   return array_object;
 }
 
