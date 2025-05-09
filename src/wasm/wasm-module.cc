@@ -378,6 +378,7 @@ Handle<JSArray> GetImports(Isolate* isolate,
       Handle<JSFunction>(isolate->native_context()->object_function(), isolate);
 
   // Populate the result array.
+  int cursor = 0;
   for (int index = 0; index < num_imports; ++index) {
     const WasmImport& import = module->import_table[index];
 
@@ -445,7 +446,7 @@ Handle<JSArray> GetImports(Isolate* isolate,
       JSObject::AddProperty(isolate, entry, type_string, type_value, NONE);
     }
 
-    storage->set(index, *entry);
+    storage->set(cursor++, *entry);
   }
 
   array_object->set_length(Smi::FromInt(cursor));
